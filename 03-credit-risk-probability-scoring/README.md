@@ -7,7 +7,7 @@
 
 > An end-to-end credit analytics portfolio project that converts applicant data into a probability of default, operational risk category, and review recommendation using a deep neural network.
 
-**Live demo:** `https://<your-app-name>.streamlit.app`  
+**Live demo:** [`https://<your-app-name>.streamlit.app` ](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/) 
 **Notebook:** [`notebooks/credit_risk_probability_scoring.ipynb`](notebooks/credit_risk_probability_scoring.ipynb)
 
 ## Business problem
