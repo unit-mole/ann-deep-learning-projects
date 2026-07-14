@@ -11,8 +11,10 @@ reproducible preprocessing and training code, imbalance-aware evaluation,
 probability-based predictions, threshold controls, saved model artifacts, and a
 Streamlit batch-scoring application.
 
-> **Live demo:** Replace this placeholder after deployment:  
-> [`https://<your-custom-subdomain>.streamlit.app`](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)
+**Status:** Portfolio-ready  
+**Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)  
+**Primary stack:** Python · Keras · TensorFlow · scikit-learn · Streamlit
 
 ---
 
