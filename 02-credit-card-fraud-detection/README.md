@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange.svg)](https://www.tensorflow.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://<your-custom-subdomain>.streamlit.app)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An end-to-end fraud-risk scoring project that uses an Artificial Neural Network
