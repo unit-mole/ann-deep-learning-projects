@@ -1,0 +1,16 @@
+feature,importance_mean,importance_std
+num__loan_to_income,0.059443,0.008366
+cat__grade_A,0.022919,0.006611
+num__dti,0.015539,0.00591
+num__monthly_income,0.01336,0.009369
+cat__grade_B,0.013145,0.006149
+num__delinquency_count,0.010943,0.007001
+cat__grade_G,0.00821,0.002556
+num__revolving_utilization,0.005571,0.009541
+cat__home_ownership_RENT,0.004572,0.003853
+num__collateral_value,0.004276,0.003985
+cat__grade_F,0.003759,0.003433
+cat__purpose_education,0.003034,0.001214
+cat__home_ownership_MORTGAGE,0.002665,0.002262
+cat__purpose_medical,0.002377,0.003261
+cat__region_West,0.002143,0.002801

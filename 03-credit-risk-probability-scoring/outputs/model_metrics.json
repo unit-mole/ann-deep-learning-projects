@@ -1,0 +1,50 @@
+{
+  "classification_threshold": 0.58,
+  "accuracy": 0.773867,
+  "precision": 0.47698,
+  "recall": 0.649123,
+  "f1": 0.549894,
+  "roc_auc": 0.812988,
+  "pr_auc": 0.609769,
+  "log_loss": 0.517768,
+  "brier_score": 0.173938,
+  "confusion_matrix": [
+    [
+      2384,
+      568
+    ],
+    [
+      280,
+      518
+    ]
+  ],
+  "test_support": {
+    "non_default": 2952,
+    "default": 798
+  },
+  "class_distribution": {
+    "non_default": 19682,
+    "default": 5318
+  },
+  "class_weights": {
+    "0": 0.6350704020902889,
+    "1": 2.350886620096722
+  },
+  "risk_band_summary": {
+    "Low": {
+      "count": 1125,
+      "average_probability": 0.094435,
+      "actual_default_rate": 0.046222
+    },
+    "Medium": {
+      "count": 1257,
+      "average_probability": 0.340833,
+      "actual_default_rate": 0.125696
+    },
+    "High": {
+      "count": 1368,
+      "average_probability": 0.718851,
+      "actual_default_rate": 0.429825
+    }
+  }
+}

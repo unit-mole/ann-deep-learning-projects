@@ -1,0 +1,194 @@
+[
+  {
+    "path": ".github/workflows/ci.yml",
+    "bytes": 663
+  },
+  {
+    "path": ".gitignore",
+    "bytes": 407
+  },
+  {
+    "path": ".streamlit/config.toml",
+    "bytes": 181
+  },
+  {
+    "path": "Dockerfile",
+    "bytes": 356
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 1071
+  },
+  {
+    "path": "MODEL_CARD.md",
+    "bytes": 1148
+  },
+  {
+    "path": "PROJECT_FILE_INVENTORY.json",
+    "bytes": 3586
+  },
+  {
+    "path": "README.md",
+    "bytes": 10450
+  },
+  {
+    "path": "README_HOSTING.md",
+    "bytes": 2080
+  },
+  {
+    "path": "app/streamlit_app.py",
+    "bytes": 6501
+  },
+  {
+    "path": "data/README_data.md",
+    "bytes": 1083
+  },
+  {
+    "path": "data/sample_input.csv",
+    "bytes": 925
+  },
+  {
+    "path": "images/README.md",
+    "bytes": 165
+  },
+  {
+    "path": "models/best_credit_risk_ann_model.keras",
+    "bytes": 725816
+  },
+  {
+    "path": "models/final_credit_risk_ann_model.keras",
+    "bytes": 725816
+  },
+  {
+    "path": "models/preprocessing_schema.json",
+    "bytes": 4885
+  },
+  {
+    "path": "models/preprocessor.joblib",
+    "bytes": 5771
+  },
+  {
+    "path": "models/project_metadata.json",
+    "bytes": 1448
+  },
+  {
+    "path": "notebooks/credit_risk_probability_scoring.ipynb",
+    "bytes": 6974
+  },
+  {
+    "path": "outputs/actual_default_rate_by_risk_band.png",
+    "bytes": 24788
+  },
+  {
+    "path": "outputs/calibration_curve.png",
+    "bytes": 31726
+  },
+  {
+    "path": "outputs/confusion_matrix.png",
+    "bytes": 20043
+  },
+  {
+    "path": "outputs/feature_importance.csv",
+    "bytes": 594
+  },
+  {
+    "path": "outputs/model_metrics.json",
+    "bytes": 934
+  },
+  {
+    "path": "outputs/permutation_importance.png",
+    "bytes": 40104
+  },
+  {
+    "path": "outputs/precision_recall_curve.png",
+    "bytes": 22494
+  },
+  {
+    "path": "outputs/risk_category_distribution.png",
+    "bytes": 14234
+  },
+  {
+    "path": "outputs/risk_score_distribution.png",
+    "bytes": 40786
+  },
+  {
+    "path": "outputs/roc_curve.png",
+    "bytes": 24847
+  },
+  {
+    "path": "outputs/threshold_vs_f1.png",
+    "bytes": 26448
+  },
+  {
+    "path": "outputs/training_accuracy.png",
+    "bytes": 59118
+  },
+  {
+    "path": "outputs/training_auc.png",
+    "bytes": 25851
+  },
+  {
+    "path": "outputs/training_logs.csv",
+    "bytes": 2876
+  },
+  {
+    "path": "outputs/training_loss.png",
+    "bytes": 32489
+  },
+  {
+    "path": "outputs/training_pr_auc.png",
+    "bytes": 28719
+  },
+  {
+    "path": "requirements-dev.txt",
+    "bytes": 67
+  },
+  {
+    "path": "requirements.txt",
+    "bytes": 157
+  },
+  {
+    "path": "src/__init__.py",
+    "bytes": 66
+  },
+  {
+    "path": "src/config.py",
+    "bytes": 1182
+  },
+  {
+    "path": "src/data_preprocessing.py",
+    "bytes": 8554
+  },
+  {
+    "path": "src/feature_engineering.py",
+    "bytes": 1790
+  },
+  {
+    "path": "src/model_evaluation.py",
+    "bytes": 4734
+  },
+  {
+    "path": "src/model_training.py",
+    "bytes": 4552
+  },
+  {
+    "path": "src/prediction_pipeline.py",
+    "bytes": 3449
+  },
+  {
+    "path": "src/risk_scoring.py",
+    "bytes": 2057
+  },
+  {
+    "path": "tests/conftest.py",
+    "bytes": 168
+  },
+  {
+    "path": "tests/test_preprocessing.py",
+    "bytes": 393
+  },
+  {
+    "path": "tests/test_risk_scoring.py",
+    "bytes": 524
+  }
+]
