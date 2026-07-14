@@ -3,7 +3,8 @@
 > An end-to-end artificial neural network project that estimates customer churn probability and provides an interactive Streamlit demonstration for individual and batch prediction.
 
 **Status:** Portfolio-ready  
-**Live demo:** Add the Streamlit URL after deployment  
+**Live demo:** [Open the Streamlit application](https://churn-risk-ann.streamlit.app)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://churn-risk-ann.streamlit.app)
 **Primary stack:** Python · Keras · TensorFlow · scikit-learn · Streamlit
 
 ---
