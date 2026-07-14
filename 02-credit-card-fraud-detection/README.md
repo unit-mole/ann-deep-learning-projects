@@ -12,7 +12,7 @@ probability-based predictions, threshold controls, saved model artifacts, and a
 Streamlit batch-scoring application.
 
 > **Live demo:** Replace this placeholder after deployment:  
-> `https://<your-custom-subdomain>.streamlit.app`
+> [`https://<your-custom-subdomain>.streamlit.app`](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)
 
 ---
 
