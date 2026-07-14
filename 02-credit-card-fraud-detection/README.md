@@ -396,21 +396,22 @@ Training saves or updates:
 
 ## Deploy
 
-Streamlit Community Cloud is recommended for this project because the
-application is already written in Streamlit and can deploy directly from a
-GitHub repository without a Dockerfile.
+The application is deployed through Streamlit Community Cloud directly from
+the public ANN portfolio repository.
 
-See the complete instructions in
+- **Repository:** `unit-mole/ann-deep-learning-projects`
+- **Branch:** `main`
+- **Entrypoint:** `02-credit-card-fraud-detection/app/streamlit_app.py`
+- **Python:** `3.12`
+- **Live application:**  
+  https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/
+
+The `app/requirements.txt` file contains the complete deployment dependency
+list beside the Streamlit entrypoint. This allows Community Cloud to resolve
+the environment reliably within the monorepo.
+
+See the complete deployment and maintenance instructions in
 [`README_HOSTING.md`](README_HOSTING.md).
-
-For the planned ANN monorepo, select this entrypoint during deployment:
-
-```text
-02-credit-card-fraud-detection/app/streamlit_app.py
-```
-
-The `app/requirements.txt` file points to the project-level dependency file so
-Community Cloud can resolve dependencies correctly inside the monorepo.
 
 ## Testing
 

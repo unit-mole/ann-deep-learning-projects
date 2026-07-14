@@ -1,240 +1,217 @@
 # Hosting Guide
 
-## Recommended Option: Streamlit Community Cloud
+## Recommended Platform: Streamlit Community Cloud
 
-Streamlit Community Cloud is the best fit for this project because:
+Streamlit Community Cloud is the preferred hosting option because this project
+is already built with Streamlit and deploys directly from GitHub without a
+Dockerfile.
 
-- the application is already built with Streamlit;
-- it deploys directly from GitHub;
-- no Dockerfile is required;
-- commits pushed to GitHub are reflected in the deployed application;
-- the final public link uses a shareable `streamlit.app` subdomain;
-- it is simpler than Hugging Face Spaces for a Streamlit application.
+### Current deployment
 
-Hugging Face Spaces remains a valid option, but Streamlit is no longer offered
-as a default built-in Spaces SDK. A new Streamlit deployment on Hugging Face
-generally requires a Docker Space, which adds a Dockerfile and more deployment
-configuration.
-
-Official references:
-
-- https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app
-- https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies
-- https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/file-organization
-- https://huggingface.co/docs/hub/spaces-changelog
-- https://huggingface.co/docs/hub/spaces-sdks-docker
+- **GitHub repository:** `unit-mole/ann-deep-learning-projects`
+- **Branch:** `main`
+- **Application entrypoint:** `02-credit-card-fraud-detection/app/streamlit_app.py`
+- **Python version:** `3.12`
+- **Live application:**  
+  https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/
 
 ---
 
 ## Files Required for Deployment
 
-The following files must be committed:
-
 ```text
-ANN/
-├── .streamlit/
-│   └── config.toml
-└── Credit_Card_Fraud_Detection/
+ann-deep-learning-projects/
+├── .github/
+│   └── workflows/
+│       └── credit-card-fraud-ci.yml
+└── 02-credit-card-fraud-detection/
     ├── app/
     │   ├── requirements.txt
     │   └── streamlit_app.py
     ├── data/
+    │   ├── README_data.md
     │   └── sample_input.csv
     ├── models/
     │   ├── credit_card_fraud_ann.keras
     │   ├── credit_card_scaler.pkl
-    │   ├── feature_schema.json
-    │   └── decision_threshold.json
+    │   ├── decision_threshold.json
+    │   └── feature_schema.json
     ├── src/
     │   ├── __init__.py
     │   ├── config.py
     │   └── prediction_pipeline.py
-    └── requirements.txt
+    ├── README.md
+    ├── README_HOSTING.md
+    ├── requirements.txt
+    └── requirements-dev.txt
 ```
 
-The full `data/creditcard.csv` file is not required for inference and should not
-be pushed to GitHub.
-
-### Why `app/requirements.txt` Exists
-
-In the planned ANN monorepo, the Streamlit entrypoint is:
+The full source dataset is not required for inference and must remain excluded:
 
 ```text
-Credit_Card_Fraud_Detection/app/streamlit_app.py
+02-credit-card-fraud-detection/data/creditcard.csv
 ```
 
-Community Cloud looks for a dependency file in the entrypoint directory and
-then at the repository root. The file:
+The small demonstration file must remain committed:
 
 ```text
-Credit_Card_Fraud_Detection/app/requirements.txt
+02-credit-card-fraud-detection/data/sample_input.csv
 ```
 
-contains:
+## Why `app/requirements.txt` Exists
+
+The Streamlit entrypoint is inside a project subfolder:
 
 ```text
--r ../requirements.txt
+02-credit-card-fraud-detection/app/streamlit_app.py
 ```
 
-This allows the app to use the project-level dependencies while keeping a clean
-project structure.
+A complete dependency file is kept beside the entrypoint so Streamlit Community
+Cloud can install the required packages reliably within the monorepo.
+
+Keep `app/requirements.txt` synchronized with the project-level
+`requirements.txt`.
 
 ---
 
 ## Step 1: Test Locally
 
-From the project folder:
-
-```bash
-cd ANN/Credit_Card_Fraud_Detection
+```bat
+cd /d "C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\ann-deep-learning-projects\02-credit-card-fraud-detection"
 ```
 
-Create and activate a Python 3.11 virtual environment.
+Create and activate a Python 3.12 environment when needed:
 
-Windows PowerShell:
-
-```powershell
-py -3.11 -m venv .venv
-.venv\Scripts\Activate.ps1
+```bat
+py -3.12 -m venv .venv
+.venv\Scripts\activate
 ```
 
-Install dependencies:
+Install dependencies and run checks:
 
-```bash
+```bat
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m compileall app src tests
 ```
 
 Launch the app:
 
-```bash
-streamlit run app/streamlit_app.py
+```bat
+python -m streamlit run app\streamlit_app.py
 ```
 
-Verify all three modes:
-
-1. Use demo sample.
-2. Upload `data/sample_input.csv`.
-3. Enter a manual row.
-
-Also verify:
-
-- the model loads without errors;
-- the sample preview appears;
-- probabilities and labels are produced;
-- threshold changes affect the number of fraud alerts;
-- the CSV download works.
+Verify the demo sample, CSV upload, manual scoring, threshold control, and CSV
+download. Stop the app with `Ctrl + C`.
 
 ---
 
-## Step 2: Create the GitHub Repository
+## Step 2: Publish Updates to GitHub
 
-Recommended repository name:
+This project belongs inside the existing monorepo. Do not create a separate
+repository.
 
-```text
-ANN
-```
-
-Recommended visibility:
-
-```text
-Public
-```
-
-A public repository is easiest to present to recruiters and deploy as a public
-portfolio application. Do not commit credentials, API keys, private data, or
-customer information.
-
-From the folder containing `ANN`:
-
-```bash
-cd ANN
-git init
-git branch -M main
-git add .
-git commit -m "Add ANN credit card fraud detection portfolio project"
-git remote add origin https://github.com/<your-github-username>/ANN.git
-git push -u origin main
-```
-
-Before pushing, confirm the full dataset is excluded:
-
-```bash
+```bat
+cd /d "C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\ann-deep-learning-projects"
 git status
+git add "02-credit-card-fraud-detection"
+git add ".github\workflows\credit-card-fraud-ci.yml"
+git commit -m "Update Credit Card Fraud Detection project"
+git push origin main
 ```
 
-You should not see:
+Before pushing, confirm these are not staged:
 
 ```text
-Credit_Card_Fraud_Detection/data/creditcard.csv
+02-credit-card-fraud-detection/data/creditcard.csv
+02-credit-card-fraud-detection/.venv/
+02-credit-card-fraud-detection/.pytest_cache/
 ```
-
-You should see the sample file and model artifacts.
 
 ---
 
-## Step 3: Connect GitHub to Streamlit Community Cloud
+## Step 3: Verify GitHub Actions
 
-1. Sign in to Streamlit Community Cloud using your GitHub account.
-2. Open the Community Cloud workspace.
-3. Choose **Create app**.
-4. Select the GitHub repository:
-   ```text
-   <your-github-username>/ANN
-   ```
-5. Select the branch:
-   ```text
-   main
-   ```
-6. Enter the app file path:
-   ```text
-   Credit_Card_Fraud_Detection/app/streamlit_app.py
-   ```
-7. Open **Advanced settings**.
-8. Select **Python 3.11** for consistent TensorFlow compatibility.
-9. Choose an available app URL, for example:
-   ```text
-   anmol-credit-card-fraud-ann
-   ```
-10. Click **Deploy**.
-
-A possible final URL will look like:
+Open the repository **Actions** tab and select:
 
 ```text
-https://anmol-credit-card-fraud-ann.streamlit.app
+Credit Card Fraud Project CI
 ```
 
-The exact URL depends on the subdomain you select and its availability.
+Confirm green checks for checkout, Python setup, dependency installation,
+compilation, and unit tests.
 
 ---
 
-## Step 4: Test the Deployed App
+## Step 4: Streamlit Deployment Coordinates
 
-After the build completes:
+```text
+Repository:
+unit-mole/ann-deep-learning-projects
 
-1. Open the public URL in a private/incognito browser window.
-2. Use the preloaded demo sample.
-3. Upload `sample_input.csv`.
-4. Change the decision threshold.
-5. Download the predictions.
-6. Confirm the app works without requiring GitHub sign-in.
-7. Open **Manage app** and review logs if an error occurs.
+Branch:
+main
 
-Common deployment issues:
+Main file path:
+02-credit-card-fraud-detection/app/streamlit_app.py
+
+Python:
+3.12
+```
+
+No secrets are required.
+
+Current live URL:
+
+```text
+https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/
+```
+
+Commits pushed to `main` are automatically picked up by Streamlit Community
+Cloud.
+
+---
+
+## Step 5: Test the Public App
+
+Open the live URL in an incognito/private window and confirm it does not require
+an invitation.
+
+Test:
+
+1. Use demo sample
+2. Upload CSV
+3. Manual single transaction
+4. Threshold adjustment
+5. Prediction CSV download
+
+For the supplied reference model, the demonstration sample should show:
+
+```text
+Default threshold: 0.50
+Transactions scored: 50
+SAFE: 43
+FRAUD / RISK: 7
+Predicted fraud rate: 14.00%
+```
+
+---
+
+## Troubleshooting
 
 ### Dependency installation fails
 
 Confirm:
 
 - `app/requirements.txt` exists;
-- it contains `-r ../requirements.txt`;
-- only one active dependency chain is used;
-- Python 3.11 was selected;
-- package names are spelled correctly.
+- it contains the complete dependency list;
+- Python 3.12 is selected;
+- versions match the tested local environment.
 
 ### Model file not found
 
-Confirm these files were committed:
+Confirm these files are committed:
 
 ```text
 models/credit_card_fraud_ann.keras
@@ -243,41 +220,45 @@ models/feature_schema.json
 models/decision_threshold.json
 ```
 
-The application resolves paths relative to the project, not the terminal
-working directory.
+### Demo sample not found
 
-### TensorFlow build is slow or memory-constrained
+Confirm:
 
-- keep the full dataset out of the deployment;
-- do not train the model inside the Streamlit application;
-- use the small saved inference model;
-- restart the app after a dependency or artifact change.
+```text
+data/sample_input.csv
+```
 
-### Pickle compatibility warning
+### TensorFlow startup is slow
 
-The project pins scikit-learn to the version used for the audited package.
-Retrain and resave the scaler if you intentionally change major scikit-learn
-versions.
+The first deployment or restart may take several minutes. The hosted app loads
+saved artifacts for inference and does not retrain the model.
+
+### Git push is rejected with `fetch first`
+
+```bat
+git status
+git pull --rebase origin main
+git push origin main
+```
+
+Preserve or commit local edits before pulling. Do not force-push unless
+intentionally replacing remote history.
 
 ---
 
-## Step 5: Add the Live Link to GitHub
+## Live Links to Maintain
 
-Replace the placeholder in `README.md`:
-
-```text
-https://<your-custom-subdomain>.streamlit.app
-```
-
-with the deployed link.
-
-Add a Streamlit badge:
+Project README:
 
 ```markdown
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://<your-custom-subdomain>.streamlit.app)
+**Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)
 ```
 
-Also add the URL to the GitHub repository **About** section.
+Root portfolio README:
+
+```markdown
+| 2 | [Credit Card Fraud Detection](02-credit-card-fraud-detection/) | Imbalanced binary classification | [Live Demo](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/) |
+```
 
 Suggested repository topics:
 
@@ -296,51 +277,27 @@ risk-analytics
 
 ---
 
-## Step 6: Share the Project
+## Sharing the Project
 
 ### Resume
 
 ```text
 Credit Card Fraud Detection | TensorFlow, Keras, scikit-learn, Streamlit
-Built an ANN fraud-risk scoring pipeline for a 0.17%-fraud dataset, using
-imbalance-aware evaluation, probability scoring, threshold controls, and a
-deployed batch-prediction application.
+Built an ANN fraud-risk scoring pipeline for a 0.17%-fraud dataset using
+imbalance-aware evaluation, probability scoring, threshold controls, automated
+tests, and a deployed batch-prediction application.
 ```
 
 ### LinkedIn
 
-Share:
-
-- a clear app screenshot;
-- the live Streamlit URL;
-- the GitHub repository;
-- the business reason accuracy is misleading;
-- the precision, recall, F1, ROC-AUC, and PR-AUC results;
-- the technical improvements made for deployment.
+Share the live URL, GitHub link, a clear app screenshot, fraud-specific metrics,
+and the reason accuracy alone is misleading for rare-event detection.
 
 ### Portfolio Website
 
-Include two buttons:
+Use two buttons:
 
 ```text
 View Source Code
 Open Live Demo
 ```
-
----
-
-## Optional: Hugging Face Spaces
-
-Use Hugging Face only when you specifically want the application displayed on
-your Hugging Face profile. For a new Streamlit app, create a **Docker Space**
-and provide:
-
-- a Dockerfile;
-- the application code;
-- model artifacts;
-- requirements;
-- port `7860`;
-- `sdk: docker` and `app_port: 7860` in the Space metadata.
-
-For this project, the Docker route adds complexity without improving the
-portfolio demo, so Streamlit Community Cloud remains the recommended option.
