@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Logs and generated training outputs
+logs/
+outputs/
+*.log
+tensorboard/
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Temporary files
+*.tmp
+*.bak
+
+# Dataset excluded until source and license are confirmed
+01-churn-classification/data/raw/Churn_Modelling.csv
+
+# Projects not yet ready for public release
+02-credit-card-fraud-detection/

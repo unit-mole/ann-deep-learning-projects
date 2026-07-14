@@ -1,0 +1,52 @@
+{
+  "project_name": "ANN Churn Classification",
+  "artifact_mode": "modern_pipeline",
+  "model_format": "Keras v3",
+  "default_threshold": 0.58,
+  "dataset": {
+    "rows": 10000,
+    "target": "Exited",
+    "churn_rate": 0.2037
+  },
+  "split": {
+    "train_rows": 7000,
+    "validation_rows": 1500,
+    "test_rows": 1500,
+    "stratified": true,
+    "random_seed": 42
+  },
+  "model": {
+    "architecture": [
+      "Dense(64, ReLU)",
+      "Dropout(0.20)",
+      "Dense(16, ReLU)",
+      "Dense(1, Sigmoid)"
+    ],
+    "class_weights": {
+      "0": 0.6279153211338356,
+      "1": 2.4544179523141656
+    },
+    "epochs_requested": 150,
+    "epochs_completed": 42,
+    "batch_size": 64
+  },
+  "evaluation": {
+    "accuracy": 0.8173333333333334,
+    "precision_churn": 0.5423280423280423,
+    "recall_churn": 0.6699346405228758,
+    "f1_churn": 0.5994152046783626,
+    "roc_auc": 0.853589844648077,
+    "pr_auc": 0.6814635247994776,
+    "confusion_matrix": [
+      [
+        1021,
+        173
+      ],
+      [
+        101,
+        205
+      ]
+    ]
+  },
+  "threshold_selection": "Threshold selected on the validation set by maximum churn-class F1."
+}
