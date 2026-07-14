@@ -1,0 +1,108 @@
+{
+  "artifact_status": "Audited supplied pretrained model",
+  "dataset_rows": 284807,
+  "dataset_features": 30,
+  "fraud_transactions": 492,
+  "legitimate_transactions": 284315,
+  "fraud_rate": 0.001727485630620034,
+  "split": {
+    "train_rows": 199364,
+    "validation_rows": 42721,
+    "test_rows": 42722,
+    "random_state": 42,
+    "stratified": true
+  },
+  "reference_test_metrics_at_threshold_0_5": {
+    "threshold": 0.5,
+    "accuracy": 0.9994148214034924,
+    "precision": 0.8769230769230769,
+    "recall": 0.7702702702702703,
+    "f1_score": 0.8201438848920863,
+    "roc_auc": 0.974227111185468,
+    "pr_auc": 0.7779638015415702,
+    "confusion_matrix": [
+      [
+        42640,
+        8
+      ],
+      [
+        17,
+        57
+      ]
+    ],
+    "true_negatives": 42640,
+    "false_positives": 8,
+    "false_negatives": 17,
+    "true_positives": 57,
+    "actual_fraud": 74,
+    "predicted_fraud": 65,
+    "test_rows": 42722
+  },
+  "test_metrics_at_validation_f1_threshold": {
+    "threshold": 0.590212345123291,
+    "accuracy": 0.9993445999719114,
+    "precision": 0.896551724137931,
+    "recall": 0.7027027027027027,
+    "f1_score": 0.7878787878787878,
+    "roc_auc": 0.974227111185468,
+    "pr_auc": 0.7779638015415702,
+    "confusion_matrix": [
+      [
+        42642,
+        6
+      ],
+      [
+        22,
+        52
+      ]
+    ],
+    "true_negatives": 42642,
+    "false_positives": 6,
+    "false_negatives": 22,
+    "true_positives": 52,
+    "actual_fraud": 74,
+    "predicted_fraud": 58,
+    "test_rows": 42722
+  },
+  "test_metrics_at_recall_oriented_threshold": {
+    "threshold": 0.013510206714272499,
+    "accuracy": 0.9980806142034548,
+    "precision": 0.4696969696969697,
+    "recall": 0.8378378378378378,
+    "f1_score": 0.6019417475728155,
+    "roc_auc": 0.974227111185468,
+    "pr_auc": 0.7779638015415702,
+    "confusion_matrix": [
+      [
+        42578,
+        70
+      ],
+      [
+        12,
+        62
+      ]
+    ],
+    "true_negatives": 42578,
+    "false_positives": 70,
+    "false_negatives": 12,
+    "true_positives": 62,
+    "actual_fraud": 74,
+    "predicted_fraud": 132,
+    "test_rows": 42722
+  },
+  "validation_threshold_selection": {
+    "best_f1_threshold": 0.590212345123291,
+    "validation_precision": 0.7746478873239436,
+    "validation_recall": 0.7432432432432432,
+    "validation_f1": 0.7586206896546726,
+    "recall_target_threshold": 0.013510206714272499,
+    "recall_target_validation_precision": 0.45652173913043476,
+    "recall_target_validation_recall": 0.8513513513513513,
+    "recall_target_validation_f1": 0.5943396226410549
+  },
+  "notes": [
+    "Accuracy is reported for completeness but is not a sufficient metric for this imbalanced problem.",
+    "PR-AUC is average precision.",
+    "The improved training pipeline in src/model_training.py applies class weights and tunes the decision threshold using validation data."
+  ]
+}

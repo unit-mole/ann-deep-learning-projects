@@ -1,0 +1,9 @@
+{
+  "default_threshold": 0.5,
+  "default_reason": "Preserves the supplied model's documented reference performance.",
+  "validation_selected_threshold": 0.590212345123291,
+  "validation_selection_objective": "Maximum F1-score on the validation split",
+  "recall_oriented_threshold": 0.013510206714272499,
+  "recall_oriented_target": "Validation recall >= 0.85 with highest available precision",
+  "app_allows_threshold_override": true
+}

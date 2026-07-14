@@ -1,43 +1,43 @@
-# Python
-__pycache__/
+# Python compiled files and caches
+**/__pycache__/
 *.py[cod]
 *.so
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
 
-# Environments
-.venv/
-venv/
-env/
+# Virtual environments
+**/.venv/
+**/venv/
+**/env/
 
 # Jupyter
-.ipynb_checkpoints/
+**/.ipynb_checkpoints/
 
-# IDE
+# IDE settings
 .vscode/
 .idea/
 
-# Operating system
+# Operating system files
 .DS_Store
 Thumbs.db
 
-# Logs and generated training outputs
-logs/
-outputs/
+# Logs and local training logs
+**/logs/
+**/tensorboard/
 *.log
-tensorboard/
 
-# Secrets
+# Secrets and environment variables
 .env
-.streamlit/secrets.toml
+**/.streamlit/secrets.toml
 
 # Temporary files
 *.tmp
 *.bak
 
-# Dataset excluded until source and license are confirmed
+# Large local datasets
 01-churn-classification/data/raw/Churn_Modelling.csv
+**/data/creditcard.csv
 
-# Projects not yet ready for public release
-02-credit-card-fraud-detection/
+# Locally downloaded prediction results
+fraud_predictions.csv

@@ -1,0 +1,47 @@
+ANN Credit Card Fraud Detection Package Manifest
+Generated: 2026-07-13
+
+SHA256  SIZE_BYTES  PATH
+bf85053db08939371adec90cc45c7603d4a410bae08c4ca075c8d062ac6ddd87         918  .github/workflows/credit-card-fraud-ci.yml
+91c173459110acec30c309ad1616cfb36fb7541a18b94af0f58d5f0ce5c48626         181  .streamlit/config.toml
+6beb924eecbe8b2e29c5c02fdb76705ee3db2eebbe69d69bf29c30968925cdc9         526  Credit_Card_Fraud_Detection/.gitignore
+49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93           5  Credit_Card_Fraud_Detection/.python-version
+37726dca6123d42742d5a917e060c302dda27e849b01a400674cf56ef8c6a74e        1194  Credit_Card_Fraud_Detection/LICENSE
+fbf5fca244f524aef5f62cde2455eafd9e1c44c4e9ddefe87182ab88aaec41d0        5452  Credit_Card_Fraud_Detection/PORTFOLIO_POSITIONING.md
+2a91a7b6e3b9b40b94c2069dcc0fe75c0f90584003ff723849620353e6f5cd2a        5080  Credit_Card_Fraud_Detection/PROJECT_AUDIT.md
+99d502c1dff0fd5fa5dacbb96704d0232103ba0719f79b56fd845d769a4120bd       13357  Credit_Card_Fraud_Detection/README.md
+0da379e46c5e39aebe1854c7044019e17da36f25046ae920826094e9be069725        7866  Credit_Card_Fraud_Detection/README_HOSTING.md
+69c65f7998ef21ec2b7edc38a7362e1d41478293410311c4617ab2b4d61d8bf4          23  Credit_Card_Fraud_Detection/app/requirements.txt
+a2e8aca867c6e457cb889dee68612dff71df42acfd23e194de794139c6d6087b        9365  Credit_Card_Fraud_Detection/app/streamlit_app.py
+e239917e88fa6ea261080c51faf0259d54c6f2aa0d005116df46b6b71627e7dd        2065  Credit_Card_Fraud_Detection/data/README_data.md
+17a9f7ab1df0430fbd5a1453cc1fe24f9dd0689045d3adf02c01b64ada834d6a       26538  Credit_Card_Fraud_Detection/data/sample_input.csv
+9da8f529f7dcf7a481ff64f6be65a2b5ce22b238219346025f0518956b8962c0         661  Credit_Card_Fraud_Detection/images/README_images.md
+ff6a8caa394c8278f3586b59ecddfa89c62709278c67bec89df254fd190e60ba        1186  Credit_Card_Fraud_Detection/models/README_models.md
+d81eff7c4cf638fa40f0308981146be26da3f004e221538e2fda58cce8e7105a          84  Credit_Card_Fraud_Detection/models/credit_card_best_params.json
+65e9320685cac312096bde3dad2ff9993ebbe9e3b33e6bff4e97abb2b2e9ef1b       79667  Credit_Card_Fraud_Detection/models/credit_card_fraud_ann.keras
+0c9f2e4bc2345390245cdd77ba754a0b3a244418af3cc372886852ecce03adab        1397  Credit_Card_Fraud_Detection/models/credit_card_scaler.pkl
+b3db7148b9663214008bcdbe31cbac65d6798b85c1b00ff5483ba889ebca8a32         436  Credit_Card_Fraud_Detection/models/decision_threshold.json
+c0395a7c59454edb99976902d5c627bf7f0d6751f56bfc57bd6cd38f39b283a0         758  Credit_Card_Fraud_Detection/models/feature_schema.json
+c20a493d1f7d9fb0a66b35019a23225ba84233b7e6e2fa9633c5d7f81bb8c458      265923  Credit_Card_Fraud_Detection/notebooks/archive/original_credit_card_fraud_detection.ipynb
+f92ce23d847e9bafbc2bb87ed4698af03bfbe9d99b5c48aed8f009151a501cf6       10527  Credit_Card_Fraud_Detection/notebooks/credit_card_fraud_detection.ipynb
+af94694acc89cce29b7de31533969ef3c2e35f89b27439f5908c8274046f985a         753  Credit_Card_Fraud_Detection/outputs/README_outputs.md
+8fcb520ebfffe74a74d36a3e82b56683bf5e12b7e7d3b60a5875a62024897d1c       35766  Credit_Card_Fraud_Detection/outputs/class_distribution.png
+ca171c95c3fbc94c3eedeb1ffb837182c0b68a1e2a4e09a5e4a591800ffeea87         403  Credit_Card_Fraud_Detection/outputs/classification_report.csv
+289cafd14816cba36b5e1ada0b93f973e58d2d46b8ebd26279febaa7aed3cb34       55271  Credit_Card_Fraud_Detection/outputs/confusion_matrix.png
+54ad84ec1a6613081c00bb531a6ba3ee84ad4866a26bee58abedd5cb19869c07       41520  Credit_Card_Fraud_Detection/outputs/model_architecture.png
+1bee7b8dae83cd10602e8ead8919d34f8842f5b57a8f92db72580a0b10452f4b        2888  Credit_Card_Fraud_Detection/outputs/model_metrics.json
+1398eba0634b0d1eb3e30f4453e0055e105a9dc84b2ade9ba78679b336508e11       48190  Credit_Card_Fraud_Detection/outputs/precision_recall_curve.png
+0329f825bb321239ec119c22d34d284c5eb0d4be0b5fee9726ae5df93fe3adac       56619  Credit_Card_Fraud_Detection/outputs/roc_curve.png
+f6817cf1b9a54f25ad956613996873bf543d41c9bb4826b475eefb246ff6780c       14686  Credit_Card_Fraud_Detection/outputs/threshold_analysis.csv
+62243e79892e84488aab1d7873a0f6c2b310f76ea20783a68017b5e0d63dc0dd          82  Credit_Card_Fraud_Detection/requirements-dev.txt
+bb117ae17eb6dbbc59000a73e39bb57a76098b7a82f351876bab1a33c0eb919b         129  Credit_Card_Fraud_Detection/requirements.txt
+423e14a3161698fa0b390224bf26e26792b478da1d8501f640b565984c9f2fb2         157  Credit_Card_Fraud_Detection/src/__init__.py
+df069d58a1be7a72c8a2d547d54da8ca8244f02a32143dcf76c321f9a92c62c7         599  Credit_Card_Fraud_Detection/src/config.py
+fe0295e001d0d3886e5c8b544ca51d1c985efb0c80e6d563c42c8bd82cc3dbe4        7922  Credit_Card_Fraud_Detection/src/data_preprocessing.py
+c7c1d0bd963762e9c35072a7f83214e4d5ad9a88cfb1cef66d65773f5de674e9        7704  Credit_Card_Fraud_Detection/src/model_evaluation.py
+370bad3d8cc8c4d92c5f93fee30abf36f3ac6bfdba24507bfec07c3f4573ba6c       10166  Credit_Card_Fraud_Detection/src/model_training.py
+f1bdc2670e9b1dafb65aa0e22b3b5e2f254db5482b2c95a7bfb7b4ae6bffcea3        8250  Credit_Card_Fraud_Detection/src/prediction_pipeline.py
+199116e78d29e7cf7bda72f28d183e874e346eb780bd39b7d89dcc7d6394a541         244  Credit_Card_Fraud_Detection/tests/conftest.py
+cf389ead5efa4c9412fbd428e829048d51afa26cb9a7b8d420c48bf6b019f7d4        1722  Credit_Card_Fraud_Detection/tests/test_data_preprocessing.py
+6cc86765472920e82a051f79dde8426b5da8e38559fedf556567a5e98032c978        1209  Credit_Card_Fraud_Detection/tests/test_model_evaluation.py
+e704eb6624c2d26991f6623eede15a52f894343ae93619b43e01be504fc7b7e1        1875  README.md
