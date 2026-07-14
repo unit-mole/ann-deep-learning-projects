@@ -9,7 +9,7 @@ https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
 After downloading the archive, place the full CSV at:
 
 ```text
-ANN/Credit_Card_Fraud_Detection/data/creditcard.csv
+02-credit-card-fraud-detection/data/creditcard.csv
 ```
 
 The supplied local file audited for this project had:
