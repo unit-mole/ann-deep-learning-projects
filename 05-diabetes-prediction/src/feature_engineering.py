@@ -2,8 +2,8 @@
 
 No speculative clinical features are created. The module preserves the eight
 source indicators, validates uploaded values, converts them to numeric form,
-and converts documented zero markers to missing values for downstream
-train-only imputation.
+converts documented zero markers to missing values for downstream train-only
+imputation, and identifies values outside the ranges observed during training.
 """
 from __future__ import annotations
 
@@ -11,6 +11,9 @@ import numpy as np
 import pandas as pd
 
 from .config import FEATURE_COLUMNS, ZERO_AS_MISSING_COLUMNS
+
+
+ReferenceRanges = dict[str, tuple[float, float]]
 
 
 def validate_feature_columns(data: pd.DataFrame) -> None:
@@ -99,3 +102,68 @@ def invalid_zero_counts(data: pd.DataFrame) -> dict[str, int]:
         column: int((numeric[column] == 0).sum())
         for column in ZERO_AS_MISSING_COLUMNS
     }
+
+
+def calculate_reference_ranges(data: pd.DataFrame) -> ReferenceRanges:
+    """Calculate min/max ranges observed in the reference training dataset.
+
+    Documented zero-as-missing markers are excluded so they do not become the
+    lower bounds for glucose, blood pressure, skin thickness, insulin, or BMI.
+    """
+    numeric = validate_feature_values(data)
+    ranges: ReferenceRanges = {}
+
+    for column in FEATURE_COLUMNS:
+        values = numeric[column]
+        if column in ZERO_AS_MISSING_COLUMNS:
+            values = values.mask(values == 0)
+        values = values.dropna()
+
+        if values.empty:
+            raise ValueError(
+                f"Cannot calculate a reference range for {column}: no valid values."
+            )
+
+        ranges[column] = (float(values.min()), float(values.max()))
+
+    return ranges
+
+
+def find_out_of_range_warnings(
+    data: pd.DataFrame,
+    reference_ranges: ReferenceRanges,
+) -> list[str]:
+    """Return warnings for values outside ranges seen in the training data.
+
+    These warnings do not block scoring. They flag model extrapolation risk so
+    users can review unusual values before interpreting the generated output.
+    """
+    numeric = validate_feature_values(data)
+    missing_ranges = [
+        column for column in FEATURE_COLUMNS if column not in reference_ranges
+    ]
+    if missing_ranges:
+        raise ValueError(
+            "Reference ranges are missing for: " + ", ".join(missing_ranges)
+        )
+
+    warnings: list[str] = []
+    for column in FEATURE_COLUMNS:
+        lower, upper = reference_ranges[column]
+        values = numeric[column]
+        if column in ZERO_AS_MISSING_COLUMNS:
+            values = values.mask(values == 0)
+
+        outside = values.notna() & ((values < lower) | (values > upper))
+        if not outside.any():
+            continue
+
+        examples = values.loc[outside].drop_duplicates().tolist()[:3]
+        formatted_examples = ", ".join(f"{float(value):g}" for value in examples)
+        warnings.append(
+            f"{column}: {int(outside.sum())} value(s) outside the training range "
+            f"{lower:g}–{upper:g}; row index(es) {_row_labels(outside)}; "
+            f"example(s): {formatted_examples}."
+        )
+
+    return warnings

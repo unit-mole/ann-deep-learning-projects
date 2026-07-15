@@ -13,6 +13,11 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import FEATURE_COLUMNS, MODEL_DIR, OUTPUT_DIR  # noqa: E402
+from src.feature_engineering import (  # noqa: E402
+    ReferenceRanges,
+    calculate_reference_ranges,
+    find_out_of_range_warnings,
+)
 from src.prediction_pipeline import DiabetesPredictionPipeline  # noqa: E402
 
 st.set_page_config(
@@ -38,6 +43,13 @@ def load_sample_data() -> pd.DataFrame:
     return pd.read_csv(PROJECT_ROOT / "data" / "sample_input.csv")
 
 
+@st.cache_data
+def load_reference_ranges() -> ReferenceRanges:
+    """Load model-development data and calculate observed feature ranges."""
+    reference_data = pd.read_csv(PROJECT_ROOT / "data" / "diabetes.csv")
+    return calculate_reference_ranges(reference_data)
+
+
 def read_uploaded_csv(uploaded_file) -> pd.DataFrame | None:
     """Read an uploaded CSV and show a friendly parsing error when needed."""
     try:
@@ -55,6 +67,20 @@ def load_model_card() -> tuple[dict, pd.DataFrame]:
     metrics = json.loads((OUTPUT_DIR / "model_metrics.json").read_text())
     importance = pd.read_csv(OUTPUT_DIR / "feature_importance.csv")
     return metrics, importance
+
+
+def display_range_warnings(warnings: list[str]) -> None:
+    """Show non-blocking warnings for values outside training-data ranges."""
+    if not warnings:
+        return
+
+    details = "\n".join(f"- {warning}" for warning in warnings)
+    st.warning(
+        "Some values fall outside the ranges observed in the model-development "
+        "dataset. Predictions will still be generated, but they involve model "
+        "extrapolation and may be less reliable. Review these values before "
+        f"interpreting the output.\n\n{details}"
+    )
 
 
 def display_score(result: pd.Series) -> None:
@@ -82,8 +108,9 @@ st.warning(DISCLAIMER)
 
 try:
     pipeline = load_pipeline()
+    reference_ranges = load_reference_ranges()
 except Exception as error:
-    st.error(f"The trained artifacts could not be loaded: {error}")
+    st.error(f"The trained artifacts or reference ranges could not be loaded: {error}")
     st.stop()
 
 manual_tab, batch_tab, model_tab = st.tabs(
@@ -99,31 +126,78 @@ with manual_tab:
     with st.form("manual_prediction"):
         left, right = st.columns(2)
         with left:
-            pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=2, step=1)
-            glucose = st.number_input("Glucose (mg/dL)", min_value=0.0, max_value=300.0, value=120.0, step=1.0)
-            blood_pressure = st.number_input("Blood pressure (mm Hg)", min_value=0.0, max_value=160.0, value=72.0, step=1.0)
-            skin_thickness = st.number_input("Skin thickness (mm)", min_value=0.0, max_value=100.0, value=25.0, step=1.0)
+            pregnancies = st.number_input(
+                "Pregnancies", min_value=0, max_value=20, value=2, step=1
+            )
+            glucose = st.number_input(
+                "Glucose (mg/dL)",
+                min_value=0.0,
+                max_value=300.0,
+                value=120.0,
+                step=1.0,
+            )
+            blood_pressure = st.number_input(
+                "Blood pressure (mm Hg)",
+                min_value=0.0,
+                max_value=160.0,
+                value=72.0,
+                step=1.0,
+            )
+            skin_thickness = st.number_input(
+                "Skin thickness (mm)",
+                min_value=0.0,
+                max_value=100.0,
+                value=25.0,
+                step=1.0,
+            )
         with right:
-            insulin = st.number_input("Insulin (mu U/ml)", min_value=0.0, max_value=900.0, value=80.0, step=1.0)
-            bmi = st.number_input("BMI", min_value=0.0, max_value=70.0, value=30.0, step=0.1)
-            pedigree = st.number_input("Diabetes pedigree function", min_value=0.0, max_value=3.0, value=0.47, step=0.01)
-            age = st.number_input("Age", min_value=18, max_value=100, value=35, step=1)
+            insulin = st.number_input(
+                "Insulin (mu U/ml)",
+                min_value=0.0,
+                max_value=900.0,
+                value=80.0,
+                step=1.0,
+            )
+            bmi = st.number_input(
+                "BMI", min_value=0.0, max_value=70.0, value=30.0, step=0.1
+            )
+            pedigree = st.number_input(
+                "Diabetes pedigree function",
+                min_value=0.0,
+                max_value=3.0,
+                value=0.47,
+                step=0.01,
+            )
+            age = st.number_input(
+                "Age", min_value=18, max_value=100, value=35, step=1
+            )
         submitted = st.form_submit_button("Estimate risk", type="primary")
 
     if submitted:
-        patient = pd.DataFrame([{
-            "Pregnancies": pregnancies,
-            "Glucose": glucose,
-            "BloodPressure": blood_pressure,
-            "SkinThickness": skin_thickness,
-            "Insulin": insulin,
-            "BMI": bmi,
-            "DiabetesPedigreeFunction": pedigree,
-            "Age": age,
-        }])
-        display_score(pipeline.score(patient).iloc[0])
-        with st.expander("Input used for scoring"):
-            st.dataframe(patient, width="stretch", hide_index=True)
+        patient = pd.DataFrame(
+            [
+                {
+                    "Pregnancies": pregnancies,
+                    "Glucose": glucose,
+                    "BloodPressure": blood_pressure,
+                    "SkinThickness": skin_thickness,
+                    "Insulin": insulin,
+                    "BMI": bmi,
+                    "DiabetesPedigreeFunction": pedigree,
+                    "Age": age,
+                }
+            ]
+        )
+        try:
+            range_warnings = find_out_of_range_warnings(patient, reference_ranges)
+            scored_patient = pipeline.score(patient).iloc[0]
+        except (ValueError, KeyError) as error:
+            st.error(str(error))
+        else:
+            display_range_warnings(range_warnings)
+            display_score(scored_patient)
+            with st.expander("Input used for scoring"):
+                st.dataframe(patient, width="stretch", hide_index=True)
 
 with batch_tab:
     st.markdown("### Score multiple records")
@@ -136,7 +210,9 @@ with batch_tab:
     if source == "Use included sample":
         batch_data = load_sample_data()
     else:
-        uploaded = st.file_uploader("Upload a CSV with the required eight columns", type=["csv"])
+        uploaded = st.file_uploader(
+            "Upload a CSV with the required eight columns", type=["csv"]
+        )
         if uploaded is not None:
             batch_data = read_uploaded_csv(uploaded)
 
@@ -145,15 +221,21 @@ with batch_tab:
         st.dataframe(batch_data.head(20), width="stretch", hide_index=True)
         if st.button("Run batch scoring", type="primary"):
             try:
+                range_warnings = find_out_of_range_warnings(
+                    batch_data, reference_ranges
+                )
                 scored = pipeline.score(batch_data)
             except (ValueError, KeyError) as error:
                 st.error(str(error))
             else:
+                display_range_warnings(range_warnings)
                 st.success(f"Scored {len(scored):,} records.")
                 summary = (
                     scored["RiskCategory"]
                     .value_counts()
-                    .reindex(["Low Risk", "Medium Risk", "High Risk"], fill_value=0)
+                    .reindex(
+                        ["Low Risk", "Medium Risk", "High Risk"], fill_value=0
+                    )
                 )
                 st.bar_chart(summary)
                 st.dataframe(scored, width="stretch", hide_index=True)
