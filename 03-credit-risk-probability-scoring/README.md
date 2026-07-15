@@ -4,6 +4,7 @@
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.21-orange.svg)](https://www.tensorflow.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Credit Risk ANN CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/credit-risk-ann-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/credit-risk-ann-ci.yml)
 
 An end-to-end credit-risk probability scoring project that uses an Artificial Neural Network
 to estimate applicant default risk and assign operational risk categories. The repository
