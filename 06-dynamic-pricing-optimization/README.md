@@ -100,13 +100,24 @@ Only variables available at decision time are used. See [`data/README_data.md`](
 
 ```mermaid
 flowchart TB
-    A["1. Data Preparation<br/>Validate and clean pricing inputs<br/>Engineer leakage-safe decision-time features<br/>Scale numerical fields and encode categories"]
-    B["2. ANN Demand Forecasting<br/>Create a constrained candidate-price grid<br/>Forecast demand at every candidate price<br/>Estimate supporting high-demand probability"]
-    C["3. Scenario Optimization<br/>Calculate predicted revenue and gross margin<br/>Compare margin, revenue, or balanced objectives<br/>Select the strongest feasible price scenario"]
-    D["4. Business Recommendation<br/>Apply cost, inventory, competitor, and change guardrails<br/>Return recommended price, pricing action, and segment<br/>Generate single-product or downloadable batch output"]
+    A["1. Prepare Pricing<br/>Data"]
+    B["2. Generate Candidate<br/>Price Scenarios"]
+    C["3. Forecast Demand<br/>for Each Price"]
+    D["4. Optimize Revenue<br/>or Gross Margin"]
+    E["5. Apply Business<br/>Guardrails"]
+    F["6. Recommend Price<br/>and Pricing Action"]
 
-    A --> B --> C --> D
+    A --> B --> C --> D --> E --> F
 ```
+
+The workflow follows the deployable pricing sequence used by the application:
+
+1. **Prepare Pricing Data**
+2. **Generate Candidate Price Scenarios**
+3. **Forecast Demand for Each Price**
+4. **Optimize Revenue or Gross Margin**
+5. **Apply Business Guardrails**
+6. **Recommend Price and Pricing Action**
 
 ## ANN Architecture
 
