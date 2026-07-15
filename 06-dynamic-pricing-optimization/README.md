@@ -98,33 +98,14 @@ Only variables available at decision time are used. See [`data/README_data.md`](
 
 ## End-to-End Workflow
 
-The workflow is arranged in four compact stages so every step remains readable at normal GitHub zoom.
-
 ```mermaid
 flowchart TB
-    subgraph S1["1. Data Preparation"]
-        direction LR
-        A[Pricing and product inputs] --> B[Validation and cleaning] --> C[Leakage-safe feature engineering]
-    end
+    A["1. Data Preparation<br/>Validate and clean pricing inputs<br/>Engineer leakage-safe decision-time features<br/>Scale numerical fields and encode categories"]
+    B["2. ANN Demand Forecasting<br/>Create a constrained candidate-price grid<br/>Forecast demand at every candidate price<br/>Estimate supporting high-demand probability"]
+    C["3. Scenario Optimization<br/>Calculate predicted revenue and gross margin<br/>Compare margin, revenue, or balanced objectives<br/>Select the strongest feasible price scenario"]
+    D["4. Business Recommendation<br/>Apply cost, inventory, competitor, and change guardrails<br/>Return recommended price, pricing action, and segment<br/>Generate single-product or downloadable batch output"]
 
-    subgraph S2["2. ANN Demand Forecasting"]
-        direction LR
-        D[Scaling and categorical embeddings] --> E[ANN demand forecast] --> F[Candidate price grid]
-    end
-
-    subgraph S3["3. Scenario Optimization"]
-        direction LR
-        G[Predict demand for every price] --> H[Calculate revenue and margin] --> I[Select business objective]
-    end
-
-    subgraph S4["4. Business Recommendation"]
-        direction LR
-        J[Apply pricing guardrails] --> K[Recommend price and action] --> L[Single-product and batch output]
-    end
-
-    C --> D
-    F --> G
-    I --> J
+    A --> B --> C --> D
 ```
 
 ## ANN Architecture
