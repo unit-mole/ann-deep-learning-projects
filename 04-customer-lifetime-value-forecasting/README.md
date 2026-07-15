@@ -1,13 +1,24 @@
-# Customer Lifetime Value Forecasting with ANN
+# Customer Lifetime Value Forecasting using Artificial Neural Networks
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Demo--ready-red.svg)](https://streamlit.io/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange.svg)](https://www.tensorflow.org/)
 [![Keras](https://img.shields.io/badge/Keras-3.14.0-red.svg)](https://keras.io/)
-[![CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/clv-ann-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/clv-ann-ci.yml)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![CLV ANN CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/clv-ann-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/clv-ann-ci.yml)
 
-> A multi-task artificial neural network that forecasts **next-90-day customer value** and **retention probability** from RFM, cohort, engagement, diversity, and customer-profile features, then converts those predictions into business-friendly value segments and recommended actions.
+An end-to-end customer analytics project that uses a multi-task Artificial Neural Network
+to forecast next-90-day customer value and retention probability. The project combines
+RFM, cohort, engagement, customer-diversity, and profile features to generate predicted
+customer value, assign business-friendly value segments, and recommend targeted retention
+and growth actions. The repository includes reproducible preprocessing and training code,
+saved model artifacts, regression and retention evaluation, manual and batch scoring,
+automated testing, and a Streamlit application.
 
-**Live demo:** _Deployment pending — the Streamlit Community Cloud link will be added after deployment._
+**Status:** Portfolio-ready  
+**Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/)  
+**Primary stack:** Python · Keras · TensorFlow · scikit-learn · pandas · Streamlit
 
 ---
 
