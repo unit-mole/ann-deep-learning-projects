@@ -1,14 +1,19 @@
 # ANN Dynamic Pricing Optimization System
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB.svg)](https://www.python.org/)
-[![Keras 3](https://img.shields.io/badge/Keras-3-D00000.svg)](https://keras.io/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Demo-FF4B4B.svg)](https://streamlit.io/)
-[![CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/dynamic-pricing-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/dynamic-pricing-ci.yml)
+[![Keras 3.15.0](https://img.shields.io/badge/Keras-3.15.0-D00000.svg)](https://keras.io/)
+[![PyTorch 2.13.0](https://img.shields.io/badge/PyTorch-2.13.0-EE4C2C.svg)](https://pytorch.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live_Demo-FF4B4B.svg)](https://ann-deep-learning-projects-tgcmwtdfyxorbrexrmbcin.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![Dynamic Pricing ANN CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/dynamic-pricing-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/dynamic-pricing-ci.yml)
 
-> A production-style pricing analytics project that uses an artificial neural network to forecast demand at proposed prices, evaluates constrained price scenarios, and recommends the best price for revenue, margin, or a balanced business objective.
+An end-to-end pricing analytics project that uses Artificial Neural Networks to forecast price-dependent demand, evaluate constrained pricing scenarios, and recommend business-friendly prices for revenue, gross-margin, or balanced optimization objectives. The repository includes leakage-safe feature engineering, categorical embeddings, saved model artifacts, regression and classification evaluation, transparent pricing guardrails, manual and batch optimization, automated testing, CI, and a deployed Streamlit application.
 
-**Live demo:** `https://YOUR-APP-NAME.streamlit.app`  
-**Portfolio folder:** `06-dynamic-pricing-optimization`
+**Status:** Portfolio-ready  
+**Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-tgcmwtdfyxorbrexrmbcin.streamlit.app/)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-tgcmwtdfyxorbrexrmbcin.streamlit.app/)
+
+**Primary stack:** Python · Keras 3 · PyTorch · scikit-learn · pandas · NumPy · Plotly · Streamlit
 
 ---
 
@@ -93,18 +98,33 @@ Only variables available at decision time are used. See [`data/README_data.md`](
 
 ## End-to-End Workflow
 
+The workflow is arranged in four compact stages so every step remains readable at normal GitHub zoom.
+
 ```mermaid
-flowchart LR
-    A[Pricing inputs] --> B[Validation and cleaning]
-    B --> C[Leakage-safe feature engineering]
-    C --> D[Scaling and categorical embeddings]
-    D --> E[ANN demand forecast]
-    E --> F[Candidate price grid]
-    F --> G[Demand for each price]
-    G --> H[Revenue and margin calculation]
-    H --> I[Objective selection]
-    I --> J[Business guardrails]
-    J --> K[Recommended price and action]
+flowchart TB
+    subgraph S1["1. Data Preparation"]
+        direction LR
+        A[Pricing and product inputs] --> B[Validation and cleaning] --> C[Leakage-safe feature engineering]
+    end
+
+    subgraph S2["2. ANN Demand Forecasting"]
+        direction LR
+        D[Scaling and categorical embeddings] --> E[ANN demand forecast] --> F[Candidate price grid]
+    end
+
+    subgraph S3["3. Scenario Optimization"]
+        direction LR
+        G[Predict demand for every price] --> H[Calculate revenue and margin] --> I[Select business objective]
+    end
+
+    subgraph S4["4. Business Recommendation"]
+        direction LR
+        J[Apply pricing guardrails] --> K[Recommend price and action] --> L[Single-product and batch output]
+    end
+
+    C --> D
+    F --> G
+    I --> J
 ```
 
 ## ANN Architecture
