@@ -4,6 +4,7 @@
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange.svg)](https://www.tensorflow.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![Credit Card Fraud Project CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/credit-card-fraud-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/credit-card-fraud-ci.yml)
 
 An end-to-end fraud-risk scoring project that uses an Artificial Neural Network
 to identify rare fraudulent credit-card transactions. The repository includes
