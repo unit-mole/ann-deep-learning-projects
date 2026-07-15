@@ -22,7 +22,7 @@ This repository demonstrates how artificial neural networks can be applied to pr
 | 2 | [Credit Card Fraud Detection](02-credit-card-fraud-detection/) | Imbalanced binary classification | [Live Demo](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/) |
 | 3 | [Credit Risk Probability Scoring](03-credit-risk-probability-scoring/) | Risk classification and probability scoring | [Live Demo](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/) |
 | 4 | [Customer Lifetime Value Forecasting](04-customer-lifetime-value-forecasting/) | Multi-task regression and retention prediction | [Live Demo](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/) |
-| 5 | Diabetes Prediction | Binary classification | Planned |
+| 5 | [Diabetes Risk Screening](05-diabetes-prediction/) | Healthcare risk classification and probability scoring | [Live Demo](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/) |
 | 6 | Dynamic Pricing Optimization System | Regression / optimization | Planned |
 | 7 | Handwritten Digit Recognition | Multi-class computer vision | Planned |
 | 8 | House Price Prediction | Regression | Planned |
