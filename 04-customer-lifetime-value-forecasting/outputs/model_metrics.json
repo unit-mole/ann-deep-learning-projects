@@ -1,0 +1,40 @@
+{
+  "artifact_provenance": "Metrics recalculated from the supplied test_predictions.csv artifact.",
+  "test_customers": 899,
+  "regression": {
+    "mae": 103.684359,
+    "rmse": 144.013879,
+    "r2": 0.092381,
+    "mape_nonzero_actuals_pct": 123.145534,
+    "smape_pct": 87.650492,
+    "wape_pct": 71.791782
+  },
+  "retention": {
+    "accuracy": 0.764182,
+    "precision": 0.840943,
+    "recall": 0.845926,
+    "f1": 0.843427,
+    "roc_auc": 0.73082,
+    "confusion_matrix": [
+      [
+        116,
+        108
+      ],
+      [
+        104,
+        571
+      ]
+    ]
+  },
+  "distribution": {
+    "actual_mean_90d_revenue": 144.423715,
+    "predicted_mean_90d_revenue": 114.936469,
+    "actual_zero_share": 0.249166,
+    "predicted_zero_share": 0.272525
+  },
+  "segmentation_thresholds_usd": {
+    "low_max": 132.71,
+    "medium_max": 192.96,
+    "high_max": 213.08
+  }
+}

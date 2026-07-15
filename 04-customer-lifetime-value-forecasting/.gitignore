@@ -1,0 +1,37 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local Streamlit secrets
+.streamlit/secrets.toml
+
+# Logs and generated local runs
+logs/
+artifacts/
+outputs/local_*
+*.log
+
+# Raw or private data
+data/raw/
+data/private/
+data/*.parquet
+data/*.xlsx
+data/*.xls
+!data/sample_input.csv
+!data/README_data.md
+
+# Environment files
+.env
+.env.*
+!.env.example

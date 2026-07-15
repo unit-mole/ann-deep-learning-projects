@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "project_name": "Customer Lifetime Value Forecasting with ANN",
+  "project_slug": "04-customer-lifetime-value-forecasting",
+  "model_type": "Multi-task artificial neural network with categorical embeddings",
+  "forecast_horizon_days": 90,
+  "prediction_definition": "Future customer revenue during the next 90 days; used as a practical CLV proxy.",
+  "model_file": "clv_ann_model.keras",
+  "keras_version_saved": "3.14.0",
+  "target_transform": "none",
+  "output_order": [
+    "clv_output",
+    "retention_output"
+  ],
+  "numeric_features": [
+    "n_orders",
+    "total_revenue",
+    "avg_order_value",
+    "std_order_value",
+    "total_quantity",
+    "avg_quantity",
+    "category_diversity",
+    "payment_diversity",
+    "channel_diversity",
+    "avg_discount",
+    "recency_days",
+    "tenure_days",
+    "orders_per_month",
+    "revenue_per_month",
+    "loyalty_score",
+    "discount_sensitivity",
+    "engagement_score",
+    "cohort_age_months",
+    "avg_revenue_per_active_month"
+  ],
+  "categorical_features": [
+    "country",
+    "preferred_channel",
+    "dominant_category",
+    "acquisition_quarter",
+    "customer_segment_name"
+  ],
+  "category_options": {
+    "country": [
+      "Belgium",
+      "France",
+      "Germany",
+      "Ireland",
+      "Netherlands",
+      "Spain",
+      "United Kingdom"
+    ],
+    "preferred_channel": [
+      "Email Campaign",
+      "Marketplace",
+      "Mobile App",
+      "Web"
+    ],
+    "dominant_category": [
+      "Beauty",
+      "Electronics",
+      "Fashion",
+      "Gift",
+      "Home",
+      "Kids",
+      "Office"
+    ],
+    "acquisition_quarter": [
+      "2023Q1",
+      "2023Q2",
+      "2023Q3",
+      "2023Q4",
+      "2024Q1",
+      "2024Q2",
+      "2024Q3"
+    ],
+    "customer_segment_name": [
+      "Segment_0",
+      "Segment_1",
+      "Segment_2",
+      "Segment_3"
+    ]
+  },
+  "categorical_fallbacks": {
+    "country": "United Kingdom",
+    "preferred_channel": "Web",
+    "dominant_category": "Home",
+    "acquisition_quarter": "2024Q3",
+    "customer_segment_name": "Segment_3"
+  },
+  "segmentation": {
+    "method": "Fixed P25/P75/P90 thresholds from positive predictions in the supplied evaluation artifact.",
+    "currency": "USD",
+    "thresholds": {
+      "low_max": 132.71,
+      "medium_max": 192.96,
+      "high_max": 213.08
+    },
+    "labels": [
+      "Low Value Customer",
+      "Medium Value Customer",
+      "High Value Customer",
+      "VIP / Strategic Customer"
+    ]
+  },
+  "model_architecture": {
+    "numeric_tower": [
+      "Dense(128, ReLU)",
+      "BatchNormalization",
+      "Dropout(0.20)",
+      "Dense(64, ReLU)",
+      "BatchNormalization",
+      "Dropout(0.15)"
+    ],
+    "categorical_tower": "Five independently learned categorical embeddings",
+    "shared_layers": [
+      "Dense(256, ReLU)",
+      "Dense(128, ReLU)",
+      "Dense(64, ReLU)"
+    ],
+    "outputs": [
+      "Non-negative 90-day revenue regression",
+      "Retention probability classification"
+    ],
+    "total_parameters": 77346
+  },
+  "metrics": {
+    "artifact_provenance": "Metrics recalculated from the supplied test_predictions.csv artifact.",
+    "test_customers": 899,
+    "regression": {
+      "mae": 103.684359,
+      "rmse": 144.013879,
+      "r2": 0.092381,
+      "mape_nonzero_actuals_pct": 123.145534,
+      "smape_pct": 87.650492,
+      "wape_pct": 71.791782
+    },
+    "retention": {
+      "accuracy": 0.764182,
+      "precision": 0.840943,
+      "recall": 0.845926,
+      "f1": 0.843427,
+      "roc_auc": 0.73082,
+      "confusion_matrix": [
+        [
+          116,
+          108
+        ],
+        [
+          104,
+          571
+        ]
+      ]
+    },
+    "distribution": {
+      "actual_mean_90d_revenue": 144.423715,
+      "predicted_mean_90d_revenue": 114.936469,
+      "actual_zero_share": 0.249166,
+      "predicted_zero_share": 0.272525
+    },
+    "segmentation_thresholds_usd": {
+      "low_max": 132.71,
+      "medium_max": 192.96,
+      "high_max": 213.08
+    }
+  },
+  "dataset": {
+    "source": "Synthetic transaction data generated in the supplied notebook",
+    "customers_used": 5990,
+    "observation_window_end": "2024-09-30",
+    "forecast_window_end": "2024-12-29",
+    "contains_personal_data": false
+  },
+  "known_limitations": [
+    "The supplied model was trained on synthetic data, so it is a portfolio prototype rather than a production estimate.",
+    "The regression R\u00b2 is 0.092, indicating modest explanatory power and substantial underprediction in the highest-value bucket.",
+    "The original K-means scaler and cluster model were not saved; inference therefore uses a documented heuristic only when customer_segment_name is absent.",
+    "The supplied encoders were fitted on train, validation, and test categories. The included retraining pipeline corrects this by fitting preprocessing on training data only.",
+    "Ordinary MAPE is invalid for zero-revenue customers; the project reports non-zero MAPE, sMAPE, and WAPE instead."
+  ]
+}

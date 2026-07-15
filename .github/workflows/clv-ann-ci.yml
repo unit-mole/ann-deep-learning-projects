@@ -1,0 +1,50 @@
+name: CLV ANN CI
+
+on:
+  push:
+    paths:
+      - "04-customer-lifetime-value-forecasting/**"
+      - ".github/workflows/clv-ann-ci.yml"
+  pull_request:
+    paths:
+      - "04-customer-lifetime-value-forecasting/**"
+      - ".github/workflows/clv-ann-ci.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 04-customer-lifetime-value-forecasting
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: 04-customer-lifetime-value-forecasting/requirements-ci.txt
+
+      - name: Install lightweight CI dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+
+      - name: Compile project source
+        run: python -m compileall -q app src
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Validate required deployment artifacts
+        run: |
+          test -f app/streamlit_app.py
+          test -f app/requirements.txt
+          test -f models/clv_ann_model.keras
+          test -f models/numeric_scaler.pkl
+          test -f models/label_encoders.pkl
+          test -f models/model_metadata.json

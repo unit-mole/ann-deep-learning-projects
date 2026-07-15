@@ -1,0 +1,7 @@
+streamlit>=1.50,<2.0
+pandas>=2.2,<3.0
+numpy>=1.26,<3.0
+scikit-learn==1.8.0
+matplotlib>=3.8,<4.0
+keras==3.14.0
+tensorflow==2.20.0
