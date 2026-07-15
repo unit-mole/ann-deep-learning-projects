@@ -1,11 +1,22 @@
-# ANN Churn Classification
+# Customer Churn Classification using Artificial Neural Networks
 
-> An end-to-end artificial neural network project that estimates customer churn probability and provides an interactive Streamlit demonstration for individual and batch prediction.
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange.svg)](https://www.tensorflow.org/)
+[![Keras](https://img.shields.io/badge/Keras-3.14.0-red.svg)](https://keras.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://churn-risk-ann.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![Churn Project Tests](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/churn-tests.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/churn-tests.yml)
+
+An end-to-end customer churn analytics project that uses an Artificial Neural Network
+to estimate customer churn probability and classify customers into actionable risk groups.
+The repository includes reproducible preprocessing and training code, probability-based
+predictions, threshold optimization, model evaluation, saved model artifacts, manual and
+batch scoring, automated testing, and an interactive Streamlit application.
 
 **Status:** Portfolio-ready  
-**Live demo:** [Open the Streamlit application](https://churn-risk-ann.streamlit.app)  
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://churn-risk-ann.streamlit.app)
-**Primary stack:** Python · Keras · TensorFlow · scikit-learn · Streamlit
+**Live demo:** [Open the Streamlit application](https://churn-risk-ann.streamlit.app/)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://churn-risk-ann.streamlit.app/)  
+**Primary stack:** Python · Keras · TensorFlow · scikit-learn · pandas · Streamlit
 
 ---
 
