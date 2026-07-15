@@ -23,7 +23,7 @@ This repository demonstrates how artificial neural networks can be applied to pr
 | 3 | [Credit Risk Probability Scoring](03-credit-risk-probability-scoring/) | Risk classification and probability scoring | [Live Demo](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/) |
 | 4 | [Customer Lifetime Value Forecasting](04-customer-lifetime-value-forecasting/) | Multi-task regression and retention prediction | [Live Demo](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/) |
 | 5 | [Diabetes Risk Screening](05-diabetes-prediction/) | Healthcare risk classification and probability scoring | [Live Demo](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/) |
-| 6 | Dynamic Pricing Optimization System | Regression / optimization | Planned |
+| 6 | [Dynamic Pricing Optimization System](06-dynamic-pricing-optimization/) | Demand forecasting and constrained price optimization | [Live Demo](https://ann-deep-learning-projects-tgcmwtdfyxorbrexrmbcin.streamlit.app/) |
 | 7 | Handwritten Digit Recognition | Multi-class computer vision | Planned |
 | 8 | House Price Prediction | Regression | Planned |
 | 9 | Multi-Output Prediction System | Multi-output learning | Planned |
