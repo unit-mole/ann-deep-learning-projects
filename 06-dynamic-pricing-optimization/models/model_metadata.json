@@ -1,0 +1,72 @@
+{
+  "model_version": "2.0.0",
+  "training_backend": "jax",
+  "inference_backend": "torch",
+  "numeric_feature_columns": [
+    "day_of_year",
+    "month",
+    "week_of_year",
+    "weekend_flag",
+    "holiday_flag",
+    "peak_season_flag",
+    "summer_flag",
+    "promotion_flag",
+    "competitor_promo_flag",
+    "base_cost",
+    "current_price",
+    "competitor_price",
+    "rating",
+    "inventory_level",
+    "marketing_index",
+    "demand_index",
+    "customer_income_index",
+    "historical_sales",
+    "seasonal_wave_1",
+    "seasonal_wave_2",
+    "month_sin",
+    "month_cos",
+    "week_sin",
+    "week_cos",
+    "price_gap_vs_competitor_pct",
+    "markup_pct",
+    "inventory_pressure",
+    "promo_competition_interaction"
+  ],
+  "categorical_columns": [
+    "category",
+    "region",
+    "channel"
+  ],
+  "encoder_maps": {
+    "category": {
+      "beauty": 1,
+      "electronics": 2,
+      "fashion": 3,
+      "grocery": 4,
+      "home": 5,
+      "sports": 6
+    },
+    "region": {
+      "east": 1,
+      "north": 2,
+      "south": 3,
+      "west": 4
+    },
+    "channel": {
+      "marketplace": 1,
+      "online": 2,
+      "store": 3
+    }
+  },
+  "high_demand_cutoff_units": 102.17090534270696,
+  "segment_method": "transparent business rules",
+  "segment_definitions": {
+    "0": "Value / Low Velocity",
+    "1": "Core / Stable Demand",
+    "2": "Premium / High Value",
+    "3": "Promotion-Sensitive"
+  },
+  "training_rows": 11200,
+  "validation_rows": 2400,
+  "test_rows": 2400
+}
