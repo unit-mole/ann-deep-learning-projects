@@ -14,7 +14,6 @@ and a Streamlit application for manual and batch scoring.
 **Status:** Portfolio-ready  
 **Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)  
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)  
-**Notebook:** [Open the project notebook](notebooks/credit_risk_probability_scoring.ipynb)  
 **Primary stack:** Python · Keras · TensorFlow · scikit-learn · Streamlit
 
 ## Business problem
