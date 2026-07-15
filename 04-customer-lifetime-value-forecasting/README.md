@@ -372,20 +372,43 @@ ann-deep-learning-projects/
 
 ## Run Locally
 
-Use Python 3.12 to match the recommended deployment environment.
+Use Python 3.12 to match the tested local and deployment environments.
 
 ### Windows Command Prompt
 
+Clone the repository and enter the project folder:
+
 ```bat
-cd /d "C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\ann-deep-learning-projects\04-customer-lifetime-value-forecasting"
+git clone https://github.com/unit-mole/ann-deep-learning-projects.git
 
+cd ann-deep-learning-projects\04-customer-lifetime-value-forecasting
+```
+
+Create and activate a Python 3.12 virtual environment:
+
+```bat
 py -3.12 -m venv .venv
+
 .venv\Scripts\activate.bat
+```
 
+Install the project and test dependencies:
+
+```bat
 python -m pip install --upgrade pip setuptools wheel
-python -m pip install -r requirements.txt -r requirements-ci.txt
 
+python -m pip install -r requirements.txt -r requirements-ci.txt
+```
+
+Run the automated tests:
+
+```bat
 python -m pytest -q
+```
+
+Launch the Streamlit application:
+
+```bat
 python -m streamlit run app\streamlit_app.py
 ```
 
@@ -400,8 +423,10 @@ http://localhost:8501
 After the first installation:
 
 ```bat
-cd /d "C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\ann-deep-learning-projects\04-customer-lifetime-value-forecasting"
+cd ann-deep-learning-projects\04-customer-lifetime-value-forecasting
+
 .venv\Scripts\activate.bat
+
 python -m streamlit run app\streamlit_app.py
 ```
 
@@ -421,15 +446,23 @@ Retraining overwrites files in `models/` and regenerates evaluation artifacts in
 
 ## Deployment
 
-Streamlit Community Cloud is the recommended hosting option because the application is already written in Streamlit, connects directly to GitHub, and does not require a separate container configuration.
+The application is deployed on Streamlit Community Cloud and connected directly
+to the `main` branch of this GitHub repository.
 
-Use this application entrypoint:
+**Live application:**  
+[Open the Customer Lifetime Value Forecasting application](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/)
+
+**Streamlit entrypoint:**
 
 ```text
 04-customer-lifetime-value-forecasting/app/streamlit_app.py
 ```
 
-See [README_HOSTING.md](README_HOSTING.md) for the full deployment checklist. After deployment, replace the pending live-demo text at the top of this README with the final Streamlit URL.
+Changes pushed to the relevant project files on the `main` branch automatically
+trigger a Streamlit application update.
+
+See [README_HOSTING.md](README_HOSTING.md) for the complete deployment configuration,
+maintenance instructions, and troubleshooting guide.
 
 ---
 

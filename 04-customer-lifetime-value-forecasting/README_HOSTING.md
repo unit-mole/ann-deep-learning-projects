@@ -1,167 +1,277 @@
 # Hosting Guide — Customer Lifetime Value Forecasting
 
+## Current Deployment Status
+
+**Status:** Successfully deployed  
+**Platform:** Streamlit Community Cloud  
+**Repository:** `unit-mole/ann-deep-learning-projects`  
+**Branch:** `main`  
+**Python version:** `3.12`  
+**Application entrypoint:**
+
+```text
+04-customer-lifetime-value-forecasting/app/streamlit_app.py
+```
+
+**Live application:**  
+[Open the deployed Streamlit application](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/)
+
+The GitHub Actions workflow is installed at:
+
+```text
+.github/workflows/clv-ann-ci.yml
+```
+
+The workflow runs automatically when relevant CLV project files or the workflow
+configuration are changed.
+
+---
+
 ## Recommended Platform
 
-Use **Streamlit Community Cloud** for this project.
+Streamlit Community Cloud is the selected hosting platform for this project.
 
-Why it is the best fit:
+It is a strong fit because:
 
-- The application is already written in Streamlit.
-- It connects directly to a GitHub repository and branch.
-- Commits automatically trigger app updates.
-- No Dockerfile or server configuration is required.
-- The final public URL is easy to share on GitHub, LinkedIn, a resume, or a portfolio.
+- The application is written in Streamlit.
+- It connects directly to the GitHub repository and `main` branch.
+- Relevant commits automatically trigger application updates.
+- No Dockerfile or separate server configuration is required.
+- The public URL is suitable for GitHub, LinkedIn, a resume, and a portfolio.
 
-Hugging Face Spaces remains possible, but its built-in Streamlit SDK was deprecated in April 2025; a new Streamlit Space now requires a Docker template. That adds unnecessary complexity for this portfolio app.
+Hugging Face Spaces remains an alternative, but a Docker-based setup introduces
+additional configuration that is unnecessary for this portfolio application.
 
-## Files Required for Deployment
+---
 
-Keep these files committed:
+## Deployment Files
+
+Keep these files committed to the repository:
 
 ```text
 04-customer-lifetime-value-forecasting/
 ├── app/
 │   ├── streamlit_app.py
 │   └── requirements.txt
-├── data/sample_input.csv
+├── data/
+│   └── sample_input.csv
 ├── models/
 │   ├── clv_ann_model.keras
 │   ├── label_encoders.pkl
 │   ├── numeric_scaler.pkl
 │   └── model_metadata.json
-├── outputs/model_metrics.json
-├── outputs/*.png
-└── src/*.py
+├── outputs/
+│   ├── model_metrics.json
+│   └── *.png
+└── src/
+    └── *.py
 ```
 
-The trained model is approximately 1.1 MB, so normal Git is sufficient; Git LFS is not required.
+The trained model is approximately 1.1 MB, so standard Git is sufficient and
+Git LFS is not required.
 
-## Step 1 — Test Locally
+---
 
-From the project folder:
+## Current Streamlit Configuration
+
+| Setting | Value |
+|---|---|
+| Repository | `unit-mole/ann-deep-learning-projects` |
+| Branch | `main` |
+| Main file path | `04-customer-lifetime-value-forecasting/app/streamlit_app.py` |
+| Python version | `3.12` |
+| Dependency file | `04-customer-lifetime-value-forecasting/app/requirements.txt` |
+| Secrets | None required |
+| Live URL | `https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/` |
+
+---
+
+## Test Locally
+
+Clone the repository and enter the CLV project folder:
 
 ```bat
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app/streamlit_app.py
+git clone https://github.com/unit-mole/ann-deep-learning-projects.git
+
+cd ann-deep-learning-projects\04-customer-lifetime-value-forecasting
 ```
 
-Verify all four tabs:
+Create and activate the virtual environment:
+
+```bat
+py -3.12 -m venv .venv
+
+.venv\Scripts\activate.bat
+```
+
+Install the dependencies:
+
+```bat
+python -m pip install --upgrade pip setuptools wheel
+
+python -m pip install -r requirements.txt -r requirements-ci.txt
+```
+
+Run the automated tests:
+
+```bat
+python -m pytest -q
+```
+
+Start the application:
+
+```bat
+python -m streamlit run app\streamlit_app.py
+```
+
+Verify all four application sections:
 
 1. Overview
 2. Single Customer
 3. Batch Scoring
 4. Model Performance
 
-Also test the included `data/sample_input.csv` and download the scored result.
+Also test `data/sample_input.csv` and confirm that the scored CSV downloads
+successfully.
 
-## Step 2 — Place the Project in the Monorepo
+---
 
-Use this exact folder location:
+## GitHub and CI Configuration
+
+The project is stored at:
 
 ```text
 ann-deep-learning-projects/
 └── 04-customer-lifetime-value-forecasting/
 ```
 
-Move the supplied CI file to the monorepo workflow directory:
+The CI workflow is already installed at:
 
 ```text
-From: 04-customer-lifetime-value-forecasting/ci/clv-ann-ci.yml
-To:   .github/workflows/clv-ann-ci.yml
+.github/workflows/clv-ann-ci.yml
 ```
 
-## Step 3 — Commit and Push
+GitHub Actions validates the project automatically when relevant files are
+pushed. The workflow should remain at the repository level under
+`.github/workflows/`; it should not be moved back into the project folder.
 
-Run from the root of `ann-deep-learning-projects`:
+For future updates, run these commands from the repository root:
 
 ```bat
 git status
-git add 04-customer-lifetime-value-forecasting .github/workflows/clv-ann-ci.yml
-git commit -m "Add customer lifetime value forecasting ANN project"
+
+git add 04-customer-lifetime-value-forecasting .github\workflows\clv-ann-ci.yml
+
+git commit -m "Update Customer Lifetime Value Forecasting project"
+
 git pull --rebase origin main
+
 git push origin main
 ```
 
-## Step 4 — Deploy on Streamlit Community Cloud
+---
 
-1. Sign in to Streamlit Community Cloud with GitHub.
-2. Select **Create app**.
-3. Choose **Yup, I have an app**.
-4. Set the repository to `unit-mole/ann-deep-learning-projects`.
-5. Set the branch to `main`.
-6. Set the entrypoint file to:
+## Updating the Live Application
 
-```text
-04-customer-lifetime-value-forecasting/app/streamlit_app.py
-```
+The Streamlit application is connected to the `main` branch.
 
-7. Open **Advanced settings** and select **Python 3.12**.
-8. No secrets are required.
-9. Choose a memorable subdomain, such as `clv-forecasting-ann`, if available.
-10. Deploy the app and review the build logs.
+To publish an update:
 
-The dependency file is placed next to the entrypoint at `app/requirements.txt`, which is one of the locations Streamlit Community Cloud searches.
+1. Test the change locally.
+2. Commit and push the relevant files to `main`.
+3. Confirm that the CLV GitHub Actions workflow passes.
+4. Allow Streamlit Community Cloud to rebuild or restart the application.
+5. Open the live URL and repeat the application validation checklist.
 
-## Step 5 — Share the Final Link
+**Live URL:**  
+[https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/](https://ann-deep-learning-projects-u4gymvvpwuaowqnmkjq3wa.streamlit.app/)
 
-The final address will use this pattern:
+---
 
-```text
-https://<your-subdomain>.streamlit.app
-```
+## Live Application Validation Checklist
 
-Add it to:
+After each deployment update, confirm that:
 
-- The `Live demo` line in `README.md`
-- Your GitHub repository About section
-- Your resume project entry
-- LinkedIn Featured or Projects
-- Your personal portfolio website
+- The application opens without an error.
+- The Overview section displays the project metrics.
+- Single-customer forecasting returns CLV, retention probability, segment, and recommendation.
+- Batch scoring works with the included sample file.
+- CSV upload works.
+- The scored CSV downloads successfully.
+- All model-performance charts load.
+- The application also works in a private or incognito browser window.
 
-After deployment, replace the README placeholder with the real URL and add the official Streamlit badge:
-
-```markdown
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://<your-subdomain>.streamlit.app)
-```
+---
 
 ## Build Troubleshooting
 
 ### TensorFlow or Keras model-load error
 
-Confirm Streamlit Cloud is using Python 3.12 and that both files are committed:
+Confirm that Streamlit Community Cloud is using Python 3.12 and that these files
+are committed:
 
 ```text
 models/clv_ann_model.keras
 models/model_metadata.json
 ```
 
-The saved artifact reports Keras 3.14.0, which is pinned in `requirements.txt`.
+The saved artifact reports Keras 3.14.0, which is pinned in the requirements
+files.
 
 ### `ModuleNotFoundError: src`
 
-Use the provided `app/streamlit_app.py` unchanged. It adds the project root to `sys.path` before importing project modules.
+Use the provided `app/streamlit_app.py` unchanged. It adds the project root to
+`sys.path` before importing project modules.
 
 ### File not found
 
-Do not use Windows backslashes inside application paths. The code uses `pathlib`, which is portable across Windows and Linux.
+Do not use local Windows absolute paths inside the application. The application
+uses `pathlib` and repository-relative paths so it works on both Windows and
+Linux.
 
 ### Slow first launch
 
-TensorFlow creates a heavier cold start than a simple analytics app. Subsequent reruns should use Streamlit's cached model resource.
+TensorFlow can create a heavier cold start than a simple analytics application.
+Subsequent reruns should use Streamlit's cached model resource.
 
 ### Dependency changes not reflected
 
-Commit and push the updated `requirements.txt`. Streamlit Community Cloud detects dependency changes and rebuilds the environment.
+Commit and push the updated dependency file. Streamlit Community Cloud detects
+dependency changes and rebuilds the environment.
+
+### Application does not refresh after a push
+
+Open the application settings in Streamlit Community Cloud, review the build
+logs, and restart or reboot the application if required. Confirm that the
+deployment still points to the `main` branch and the documented entrypoint.
+
+---
+
+## Redeployment Configuration
+
+If the application ever needs to be recreated in Streamlit Community Cloud, use:
+
+```text
+Repository: unit-mole/ann-deep-learning-projects
+Branch: main
+Main file path: 04-customer-lifetime-value-forecasting/app/streamlit_app.py
+Python version: 3.12
+Secrets: None
+```
+
+After redeployment, test the live application before updating any public links.
+
+---
 
 ## Alternative — Hugging Face Spaces
 
-Only choose Hugging Face Spaces when you specifically want the demo on your Hugging Face profile. Because the built-in Streamlit SDK has been deprecated, create a **Docker Space**, install the same dependencies, expose port 8501, and start:
+Use Hugging Face Spaces only when the project specifically needs to appear on a
+Hugging Face profile. A Docker Space can install the same dependencies, expose
+port 8501, and start the application with:
 
 ```text
 streamlit run app/streamlit_app.py --server.address=0.0.0.0 --server.port=8501
 ```
 
-For this project, Streamlit Community Cloud remains simpler and more recruiter-friendly.
+For this project, Streamlit Community Cloud remains the simpler and more
+recruiter-friendly hosting option.
