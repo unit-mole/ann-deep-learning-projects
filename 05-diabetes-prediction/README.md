@@ -1,18 +1,35 @@
-# Diabetes Risk Screening with an Artificial Neural Network
+# Diabetes Risk Screening using an Artificial Neural Network
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20-orange.svg)](https://www.tensorflow.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-FF4B4B.svg)](#live-demo)
-[![CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/diabetes-ann-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/diabetes-ann-ci.yml)
+[![Keras](https://img.shields.io/badge/Keras-3.15.0-red.svg)](https://keras.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
+[![Diabetes ANN CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/diabetes-ann-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/diabetes-ann-ci.yml)
 
-A healthcare analytics portfolio project that uses a Keras artificial neural network to estimate a **diabetes screening risk probability** from eight patient health indicators.
+An end-to-end healthcare analytics portfolio project that uses a Keras Artificial Neural
+Network to estimate a diabetes screening risk probability from eight patient health
+indicators. The project includes medical zero-value handling, train-only median imputation,
+feature scaling, class-weighted ANN training, recall-focused threshold tuning, held-out
+model evaluation, permutation-based feature importance, manual and batch scoring,
+automated testing, continuous integration, and an interactive Streamlit application.
+
+The application generates a model-estimated diabetes risk probability, assigns a
+Low, Medium, or High Risk communication band, and provides a screening flag with a
+responsible interpretation. It is designed strictly as an educational machine-learning
+demonstration and must not be used for diagnosis or medical decision-making.
+
+**Status:** Portfolio-ready  
+**Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)  
+**Primary stack:** Python · Keras · TensorFlow · scikit-learn · pandas · Streamlit
+
+---
 
 > [!CAUTION]
-> **Healthcare disclaimer:** This project is for educational and portfolio demonstration purposes only. It is not a medical diagnostic tool. The prediction should not be used as medical advice. Users should consult a qualified healthcare professional for medical decisions.
+> **Healthcare disclaimer:** This project is for educational and portfolio demonstration purposes only. It is not a medical diagnostic tool. Its predictions must not be used as medical advice or as a substitute for professional evaluation. Users should consult a qualified healthcare professional for medical decisions.
 
-## Live demo
-
-**Streamlit Community Cloud:** `https://YOUR-APP-NAME.streamlit.app/`
+---
 
 ## Business and analytical question
 
