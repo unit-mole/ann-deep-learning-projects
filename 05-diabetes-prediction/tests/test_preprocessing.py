@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pytest
 
 from src.config import FEATURE_COLUMNS
 from src.data_preprocessing import build_preprocessor
@@ -30,3 +31,28 @@ def test_preprocessor_returns_finite_values():
     ], columns=FEATURE_COLUMNS)
     transformed = build_preprocessor().fit_transform(prepare_feature_frame(data))
     assert np.isfinite(transformed).all()
+
+
+def test_missing_column_has_clear_error():
+    data = pd.DataFrame([{column: 1 for column in FEATURE_COLUMNS if column != "Glucose"}])
+    with pytest.raises(ValueError, match="Missing required columns: Glucose"):
+        prepare_feature_frame(data)
+
+
+def test_invalid_text_is_not_silently_imputed():
+    row = {column: 1 for column in FEATURE_COLUMNS}
+    row["Glucose"] = "not-a-number"
+    with pytest.raises(ValueError, match="Glucose: non-numeric"):
+        prepare_feature_frame(pd.DataFrame([row]))
+
+
+def test_negative_values_are_rejected():
+    row = {column: 1 for column in FEATURE_COLUMNS}
+    row["BMI"] = -1
+    with pytest.raises(ValueError, match="BMI: negative"):
+        prepare_feature_frame(pd.DataFrame([row]))
+
+
+def test_empty_batch_is_rejected():
+    with pytest.raises(ValueError, match="no data rows"):
+        prepare_feature_frame(pd.DataFrame(columns=FEATURE_COLUMNS))

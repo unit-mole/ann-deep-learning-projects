@@ -38,7 +38,19 @@ def load_sample_data() -> pd.DataFrame:
     return pd.read_csv(PROJECT_ROOT / "data" / "sample_input.csv")
 
 
-@st.cache_data
+def read_uploaded_csv(uploaded_file) -> pd.DataFrame | None:
+    """Read an uploaded CSV and show a friendly parsing error when needed."""
+    try:
+        return pd.read_csv(uploaded_file)
+    except pd.errors.EmptyDataError:
+        st.error("The uploaded CSV is empty or does not contain a header row.")
+    except pd.errors.ParserError as error:
+        st.error(f"The uploaded CSV could not be parsed: {error}")
+    except UnicodeDecodeError:
+        st.error("The uploaded file is not a readable UTF-8 CSV.")
+    return None
+
+
 def load_model_card() -> tuple[dict, pd.DataFrame]:
     metrics = json.loads((OUTPUT_DIR / "model_metrics.json").read_text())
     importance = pd.read_csv(OUTPUT_DIR / "feature_importance.csv")
@@ -126,7 +138,7 @@ with batch_tab:
     else:
         uploaded = st.file_uploader("Upload a CSV with the required eight columns", type=["csv"])
         if uploaded is not None:
-            batch_data = pd.read_csv(uploaded)
+            batch_data = read_uploaded_csv(uploaded)
 
     if batch_data is not None:
         st.write("Input preview")
@@ -134,7 +146,7 @@ with batch_tab:
         if st.button("Run batch scoring", type="primary"):
             try:
                 scored = pipeline.score(batch_data)
-            except ValueError as error:
+            except (ValueError, KeyError) as error:
                 st.error(str(error))
             else:
                 st.success(f"Scored {len(scored):,} records.")

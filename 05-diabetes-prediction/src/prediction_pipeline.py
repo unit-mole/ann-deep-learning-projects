@@ -10,7 +10,7 @@ import pandas as pd
 import tensorflow as tf
 
 from .config import FEATURE_COLUMNS, MODEL_DIR
-from .feature_engineering import prepare_feature_frame
+from .feature_engineering import prepare_feature_frame, validate_feature_columns
 from .risk_scoring import (
     categorize_probabilities,
     recommendation_for_category,
@@ -40,7 +40,7 @@ class DiabetesPredictionPipeline:
         )
 
     def predict_probabilities(self, data: pd.DataFrame) -> np.ndarray:
-        """Return diabetes risk probabilities for raw input records."""
+        """Return diabetes risk probabilities for validated raw input records."""
         features = prepare_feature_frame(data)
         transformed = self.preprocessor.transform(features)
         probabilities = self.model.predict(transformed, verbose=0).ravel()
@@ -48,6 +48,9 @@ class DiabetesPredictionPipeline:
 
     def score(self, data: pd.DataFrame) -> pd.DataFrame:
         """Return inputs plus probability, band, flag, and interpretation."""
+        # Validate the schema before selecting columns so uploaded files receive a
+        # clear ValueError instead of an unhandled pandas KeyError.
+        validate_feature_columns(data)
         features = data.loc[:, FEATURE_COLUMNS].copy()
         probabilities = self.predict_probabilities(features)
         categories = categorize_probabilities(probabilities)

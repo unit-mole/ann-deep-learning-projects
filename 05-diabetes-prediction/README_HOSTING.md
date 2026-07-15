@@ -1,8 +1,27 @@
 # Hosting guide — Streamlit Community Cloud
 
-Streamlit Community Cloud is recommended for this project because the interface is already written in Streamlit, the repository is public, and the platform can deploy a main file located inside a subdirectory of a monorepo.
+Streamlit Community Cloud is the selected hosting platform for this project because the interface is Streamlit-native, the repository is public, and the application entrypoint is located inside a subdirectory of the ANN monorepo.
+
+## Live deployment
+
+The application has been deployed successfully and is publicly accessible without requiring a Streamlit sign-in.
+
+**Live application:**  
+[https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)
+
+Deployment configuration:
+
+- **Repository:** `unit-mole/ann-deep-learning-projects`
+- **Branch:** `main`
+- **Main file path:** `05-diabetes-prediction/app/streamlit_app.py`
+- **Python version:** `3.12`
+- **Hosting platform:** Streamlit Community Cloud
+- **Visibility:** Public
+- **Deployment status:** Active
 
 ## Required tracked files
+
+The deployed app depends on the following repository files:
 
 - `app/streamlit_app.py`
 - `app/requirements.txt`
@@ -13,90 +32,144 @@ Streamlit Community Cloud is recommended for this project because the interface 
 - `outputs/model_metrics.json`
 - `outputs/feature_importance.csv`
 - `data/sample_input.csv`
-- the `src/` package
+- the complete `src/` package
 
-No secrets or external APIs are required.
+No secrets, API keys, databases, or external services are required.
 
 ## 1. Test locally
 
 ```bat
 cd /d "C:\Users\atripathi\OneDrive - Veralto\Desktop\AI Codes\GIT Projects\ann-deep-learning-projects\05-diabetes-prediction"
 py -3.12 -m venv .venv
-.venv\Scripts\activate
+call ".venv\Scripts\activate.bat"
 python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app/streamlit_app.py
+python -m pip install -r requirements-dev.txt
+python -m pytest tests -q
+python -m streamlit run app\streamlit_app.py
 ```
 
-Confirm all three app tabs load, score the included sample, and download the result.
+Before publishing changes, confirm that:
 
-## 2. Commit the project and workflow
+- all automated tests pass;
+- the Individual Screening tab produces a result;
+- the included batch sample is scored successfully;
+- CSV output can be downloaded;
+- the Model Card tab loads its metrics and feature-importance chart.
+
+## 2. Commit and push updates
 
 Run these commands from the root of `ann-deep-learning-projects`:
 
 ```bat
 git status
-git add 05-diabetes-prediction .github/workflows/diabetes-ann-ci.yml
-git commit -m "Add GitHub-ready diabetes prediction ANN project"
+git add "05-diabetes-prediction"
+git add ".github\workflows\diabetes-ann-ci.yml"
+git commit -m "Update diabetes prediction project"
 git pull --rebase origin main
 git push origin main
+git status
 ```
 
-## 3. Deploy in Streamlit Community Cloud
+Streamlit Community Cloud monitors the connected `main` branch. A successful push normally triggers an automatic rebuild or app restart.
 
-1. Sign in to Streamlit Community Cloud with GitHub.
-2. Select **Create app** / **Deploy an app**.
-3. Choose repository `unit-mole/ann-deep-learning-projects`.
-4. Choose branch `main`.
-5. Set the main file path to:
+## 3. Deployment configuration reference
+
+When recreating the deployment, use:
+
+```text
+Repository: unit-mole/ann-deep-learning-projects
+Branch: main
+Main file path: 05-diabetes-prediction/app/streamlit_app.py
+Python version: 3.12
+```
+
+The current public application URL is:
+
+```text
+https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/
+```
+
+No values are required in Streamlit **Secrets**.
+
+## 4. Monorepo dependency behavior
+
+Community Cloud searches the entrypoint directory before the repository root. Because the app entrypoint is:
 
 ```text
 05-diabetes-prediction/app/streamlit_app.py
 ```
 
-6. Open advanced settings and select Python `3.12`.
-7. Choose an available subdomain, for example:
+an app-specific dependency file is maintained at:
 
 ```text
-diabetes-risk-ann
+05-diabetes-prediction/app/requirements.txt
 ```
 
-8. Deploy and review the build logs.
+The project-level `requirements.txt` is used for local development and CI. Keep the two runtime dependency files synchronized. The development file `requirements-dev.txt` additionally includes testing and notebook-validation packages.
 
-The final shareable address will follow this pattern:
+## 5. Post-deployment verification
 
-```text
-https://diabetes-risk-ann.streamlit.app/
-```
+After each material update:
 
-After deployment, replace the placeholder link in `README.md`, the project entry in the monorepo README, your resume, LinkedIn, and portfolio website.
+1. Open the live URL in a normal browser window.
+2. Open it again in an Incognito/InPrivate window.
+3. Test one manual prediction.
+4. Run the included batch sample.
+5. Upload a valid CSV and confirm scoring.
+6. Upload an invalid CSV and confirm that a clear validation message appears.
+7. Confirm that the model-card metrics and feature-importance chart load.
+8. Check the GitHub Actions workflow for a green status.
 
-## 4. Monorepo dependency behavior
-
-Community Cloud searches the entrypoint directory first and then the repository root. Because this app lives at `05-diabetes-prediction/app/streamlit_app.py`, an identical dependency file is included at `05-diabetes-prediction/app/requirements.txt` for cloud deployment. The project-root `requirements.txt` remains the convenient file for local development and CI. Keep these two files synchronized.
-
-## 5. Common troubleshooting
+## 6. Common troubleshooting
 
 ### Model artifact not found
 
-Confirm the three files under `models/` were committed and that GitHub displays them. The app uses project-root-relative paths, not local Windows paths.
+Confirm that these files are visible on GitHub:
 
-### TensorFlow installation failure
+```text
+models/diabetes_ann.keras
+models/preprocessor.joblib
+models/model_metadata.json
+```
 
-Confirm Python `3.12` was selected at initial deployment and the pinned `tensorflow-cpu` version remains in `requirements.txt`. Changing Python after deployment generally requires deleting and redeploying the app.
+The app uses project-root-relative paths and does not rely on local Windows paths.
 
-### App starts but batch scoring fails
+### TensorFlow or Keras installation failure
 
-Use the exact schema in `data/sample_input.csv`. Column spelling and capitalization must match.
+Confirm that Streamlit is using Python `3.12` and that both dependency files include the pinned versions:
+
+```text
+tensorflow-cpu==2.20.0
+keras==3.15.0
+```
+
+Changing the Python version may require rebooting or recreating the Streamlit deployment.
+
+### Uploaded CSV cannot be scored
+
+Use the schema in `data/sample_input.csv`. The required columns are:
+
+```text
+Pregnancies
+Glucose
+BloodPressure
+SkinThickness
+Insulin
+BMI
+DiabetesPedigreeFunction
+Age
+```
+
+Column spelling and capitalization must match. Empty files, missing columns, unexpected text, infinite values, and negative measurements are rejected with a user-facing validation message.
+
+### App does not update after a GitHub push
+
+Open the app-management page in Streamlit Community Cloud and select **Reboot app**. Review the build logs if the new commit is not reflected.
 
 ### Memory or cold-start concerns
 
-The model is small. It is cached with `st.cache_resource`, so it loads once per app process rather than on every interaction.
-
-### Repository is private
-
-Community Cloud can connect to authorized private GitHub repositories, but a public portfolio repository is simpler for recruiters to review.
+The trained model is small and is loaded with `st.cache_resource`, so the artifacts are loaded once per application process rather than on every interaction.
 
 ## Optional Hugging Face Spaces route
 
-A Hugging Face Space can also host Streamlit-compatible apps, but Streamlit Community Cloud is the cleaner first choice for this Streamlit-native monorepo. Use a Space only when you want the project grouped with model cards or other Hugging Face assets.
+Hugging Face Spaces can also host a Streamlit-compatible interface, but Streamlit Community Cloud remains the preferred deployment for this Streamlit-native monorepo. A Space would be useful only if the project is later paired with additional Hugging Face model-card assets.

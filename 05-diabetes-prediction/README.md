@@ -9,27 +9,26 @@
 
 An end-to-end healthcare analytics portfolio project that uses a Keras Artificial Neural
 Network to estimate a diabetes screening risk probability from eight patient health
-indicators. The project includes medical zero-value handling, train-only median imputation,
-feature scaling, class-weighted ANN training, recall-focused threshold tuning, held-out
-model evaluation, permutation-based feature importance, manual and batch scoring,
-automated testing, continuous integration, and an interactive Streamlit application.
+indicators. The project includes clinically implausible zero-value handling, train-only
+median imputation, feature scaling, class-weighted ANN training, recall-focused threshold
+tuning, held-out model evaluation, permutation-based feature importance, validated manual
+and batch scoring, automated testing, continuous integration, and an interactive Streamlit
+application.
 
-The application generates a model-estimated diabetes risk probability, assigns a
-Low, Medium, or High Risk communication band, and provides a screening flag with a
-responsible interpretation. It is designed strictly as an educational machine-learning
-demonstration and must not be used for diagnosis or medical decision-making.
+The application generates a model-estimated diabetes risk probability, assigns a Low,
+Medium, or High Risk communication band, and provides a screening flag with a responsible
+interpretation. It is designed strictly as an educational machine-learning demonstration
+and must not be used for diagnosis or medical decision-making.
 
 **Status:** Portfolio-ready  
 **Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)  
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)  
-**Primary stack:** Python · Keras · TensorFlow · scikit-learn · pandas · Streamlit
+**Primary stack:** Python Â· Keras Â· TensorFlow Â· scikit-learn Â· pandas Â· Streamlit
 
 ---
 
 > [!CAUTION]
 > **Healthcare disclaimer:** This project is for educational and portfolio demonstration purposes only. It is not a medical diagnostic tool. Its predictions must not be used as medical advice or as a substitute for professional evaluation. Users should consult a qualified healthcare professional for medical decisions.
-
----
 
 ## Business and analytical question
 
@@ -44,7 +43,7 @@ The app returns:
 
 ## Why this project is portfolio-ready
 
-This implementation goes beyond a notebook-only classifier. It provides a leakage-safe preprocessing pipeline, class-imbalance handling, threshold tuning, reusable inference, held-out evaluation, explainability, automated tests, CI, and an interactive Streamlit interface.
+This implementation goes beyond a notebook-only classifier. It provides a leakage-safe preprocessing pipeline, class-imbalance handling, threshold tuning, reusable inference, strict CSV schema and value validation, held-out evaluation, explainability, automated tests, CI, and an interactive Streamlit interface.
 
 ## Dataset
 
@@ -65,6 +64,14 @@ The project uses the public Pima Indians Diabetes benchmark dataset:
 | BMI | Body mass index |
 | DiabetesPedigreeFunction | Family-history-related score in the benchmark data |
 | Age | Age in years |
+
+### Dataset provenance and usage
+
+The repository copy of `diabetes.csv` was supplied with the original project notebook. The exact download mirror for this particular copy was not recorded. Historical attribution for the benchmark is commonly given to the **National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK)** and the dataset is associated with Smith et al. (1988), [â€œUsing the ADAP Learning Algorithm to Forecast the Onset of Diabetes Mellitusâ€](https://pmc.ncbi.nlm.nih.gov/articles/PMC2245318/).
+
+A commonly used public reference mirror is the [Pima Indians Diabetes Database on Kaggle](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database). The mirror is provided for reference and is not asserted to be the exact source of the included CSV.
+
+The repositoryâ€™s MIT license applies to project code and documentation; it does not independently establish dataset ownership or redistribution rights. Verify the terms of the source used before redistributing the data or using it commercially. See [`data/README_data.md`](data/README_data.md) for detailed provenance, usage, data-quality, and safety notes.
 
 ### Zero-value and missing-value handling
 
@@ -117,7 +124,7 @@ Training configuration:
 - Reduce-on-plateau learning-rate scheduling
 - Balanced class weights: `0 = 0.767`, `1 = 1.436`
 
-The uploaded parameter file identified `64` hidden units, `0.30` dropout, `0.001` learning rate, and batch size `32`; the portfolio model retains those core choices and adds regularization and screening-oriented evaluation.
+The uploaded parameter file identified `64` hidden units, `0.30` dropout, `0.001` learning rate, and batch size `32`; the portfolio model retains those core choices and adds regularization and screening-oriented evaluation. Runtime dependencies explicitly pin TensorFlow `2.20.0` and Keras `3.15.0` for reproducible loading and deployment of the saved model.
 
 ## Probability, risk bands, and threshold
 
@@ -163,7 +170,7 @@ This comparison is not a claim of clinical superiority; it shows how the project
 |---|---|
 | ![Confusion matrix](outputs/confusion_matrix.png) | ![ROC curve](outputs/roc_curve.png) |
 
-| Precision–recall curve | Risk probability distribution |
+| Precisionâ€“recall curve | Risk probability distribution |
 |---|---|
 | ![Precision-recall curve](outputs/precision_recall_curve.png) | ![Risk distribution](outputs/risk_distribution.png) |
 
@@ -177,7 +184,7 @@ Permutation importance measures the held-out ROC-AUC decrease after shuffling on
 
 - Manual scoring for one patient profile
 - Included sample or CSV upload for batch scoring
-- Input preview and schema validation
+- Input preview plus schema, numeric-value, empty-file, infinite-value, and negative-value validation
 - Risk probability, risk band, screening flag, and interpretation
 - Low/Medium/High distribution chart
 - Downloadable scored CSV
@@ -188,57 +195,63 @@ Permutation importance measures the held-out ROC-AUC decrease after shuffling on
 
 ```text
 05-diabetes-prediction/
-├── app/
-│   ├── requirements.txt
-│   └── streamlit_app.py
-├── data/
-│   ├── diabetes.csv
-│   ├── sample_input.csv
-│   └── README_data.md
-├── images/
-│   ├── 01_app_home.png
-│   ├── 02_individual_low_risk.png
-│   ├── 03_individual_high_risk.png
-│   ├── 04_batch_input_preview.png
-│   ├── 05_batch_risk_distribution.png
-│   ├── 06_batch_risk_distribution.png
-│   ├── 07_model_card_metrics.png
-│   ├── 08_feature_importance.png
-│   └── README.md
-├── models/
-│   ├── diabetes_ann.keras
-│   ├── model_metadata.json
-│   └── preprocessor.joblib
-├── notebooks/
-│   └── diabetes_prediction_portfolio.ipynb
-├── outputs/
-│   ├── confusion_matrix.png
-│   ├── data_quality_report.json
-│   ├── feature_importance.csv
-│   ├── feature_importance.png
-│   ├── model_metrics.json
-│   ├── precision_recall_curve.png
-│   ├── risk_distribution.png
-│   ├── roc_curve.png
-│   ├── scored_test_sample.csv
-│   ├── threshold_analysis.csv
-│   └── training_history.csv
-├── src/
-│   ├── config.py
-│   ├── data_preprocessing.py
-│   ├── feature_engineering.py
-│   ├── model_evaluation.py
-│   ├── model_training.py
-│   ├── prediction_pipeline.py
-│   └── risk_scoring.py
-├── tests/
-├── .gitignore
-├── .python-version
-├── CHANGELOG.md
-├── README.md
-├── README_HOSTING.md
-├── requirements-dev.txt
-└── requirements.txt
+â”œâ”€â”€ .streamlit/
+â”‚   â””â”€â”€ config.toml
+â”œâ”€â”€ app/
+â”‚   â”œâ”€â”€ requirements.txt
+â”‚   â””â”€â”€ streamlit_app.py
+â”œâ”€â”€ data/
+â”‚   â”œâ”€â”€ diabetes.csv
+â”‚   â”œâ”€â”€ sample_input.csv
+â”‚   â””â”€â”€ README_data.md
+â”œâ”€â”€ images/
+â”‚   â”œâ”€â”€ 01_app_home.png
+â”‚   â”œâ”€â”€ 02_individual_low_risk.png
+â”‚   â”œâ”€â”€ 03_individual_high_risk.png
+â”‚   â”œâ”€â”€ 04_batch_input_preview.png
+â”‚   â”œâ”€â”€ 05_batch_scored_output.png
+â”‚   â”œâ”€â”€ 06_batch_risk_distribution.png
+â”‚   â”œâ”€â”€ 07_model_card_metrics.png
+â”‚   â””â”€â”€ 08_feature_importance.png
+â”œâ”€â”€ models/
+â”‚   â”œâ”€â”€ diabetes_ann.keras
+â”‚   â”œâ”€â”€ diabetes_best_params.json
+â”‚   â”œâ”€â”€ model_metadata.json
+â”‚   â””â”€â”€ preprocessor.joblib
+â”œâ”€â”€ notebooks/
+â”‚   â””â”€â”€ diabetes_prediction_portfolio.ipynb
+â”œâ”€â”€ outputs/
+â”‚   â”œâ”€â”€ confusion_matrix.png
+â”‚   â”œâ”€â”€ data_quality_report.json
+â”‚   â”œâ”€â”€ feature_importance.csv
+â”‚   â”œâ”€â”€ feature_importance.png
+â”‚   â”œâ”€â”€ model_metrics.json
+â”‚   â”œâ”€â”€ precision_recall_curve.png
+â”‚   â”œâ”€â”€ risk_distribution.png
+â”‚   â”œâ”€â”€ roc_curve.png
+â”‚   â”œâ”€â”€ scored_test_sample.csv
+â”‚   â”œâ”€â”€ threshold_analysis.csv
+â”‚   â””â”€â”€ training_history.csv
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ __init__.py
+â”‚   â”œâ”€â”€ config.py
+â”‚   â”œâ”€â”€ data_preprocessing.py
+â”‚   â”œâ”€â”€ feature_engineering.py
+â”‚   â”œâ”€â”€ model_evaluation.py
+â”‚   â”œâ”€â”€ model_training.py
+â”‚   â”œâ”€â”€ prediction_pipeline.py
+â”‚   â””â”€â”€ risk_scoring.py
+â”œâ”€â”€ tests/
+â”‚   â”œâ”€â”€ conftest.py
+â”‚   â”œâ”€â”€ test_preprocessing.py
+â”‚   â””â”€â”€ test_risk_scoring.py
+â”œâ”€â”€ .gitignore
+â”œâ”€â”€ .python-version
+â”œâ”€â”€ CHANGELOG.md
+â”œâ”€â”€ README.md
+â”œâ”€â”€ README_HOSTING.md
+â”œâ”€â”€ requirements-dev.txt
+â””â”€â”€ requirements.txt
 ```
 
 No encoder is required because all eight model inputs are numeric. `preprocessor.joblib` replaces the separate scaler/encoder pattern by saving the complete imputation-and-scaling pipeline.
@@ -267,16 +280,21 @@ pip install -r requirements-dev.txt
 pytest -q
 ```
 
-## Deploy
+## Deployment
 
-Streamlit Community Cloud is the recommended host because this is a Streamlit-native portfolio app connected to a public GitHub monorepo. Use:
+The application is deployed publicly on Streamlit Community Cloud and has been verified in an Incognito/InPrivate browser session.
+
+**Live application:** [Open Diabetes Risk Screening ANN](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)
+
+Deployment configuration:
 
 - Repository: `unit-mole/ann-deep-learning-projects`
 - Branch: `main`
 - Main file path: `05-diabetes-prediction/app/streamlit_app.py`
 - Python: `3.12`
+- Visibility: Public
 
-See [README_HOSTING.md](README_HOSTING.md) for the full deployment and troubleshooting guide.
+See [README_HOSTING.md](README_HOSTING.md) for deployment maintenance and troubleshooting instructions.
 
 ## Application screenshots
 
@@ -296,7 +314,7 @@ The screenshots below demonstrate the complete Streamlit workflow, including man
 
 | Batch input preview | Batch scoring output |
 |---|---|
-| ![Batch input preview](images/04_batch_input_preview.png) | ![Batch scoring output](images/05_batch_risk_distribution.png) |
+| ![Batch input preview](images/04_batch_input_preview.png) | ![Batch scoring output](images/05_batch_scored_output.png) |
 
 ### Batch risk distribution
 
@@ -329,7 +347,7 @@ The screenshots below demonstrate the complete Streamlit workflow, including man
 
 ## Skills demonstrated
 
-`Artificial Neural Networks` · `TensorFlow/Keras` · `Healthcare Analytics` · `Data Quality` · `Missing-Value Imputation` · `Class Weights` · `Threshold Tuning` · `ROC-AUC` · `PR-AUC` · `Permutation Importance` · `Streamlit` · `Batch Inference` · `Model Packaging` · `Testing` · `CI/CD`
+`Artificial Neural Networks` Â· `TensorFlow/Keras` Â· `Healthcare Analytics` Â· `Data Quality` Â· `Missing-Value Imputation` Â· `Class Weights` Â· `Threshold Tuning` Â· `ROC-AUC` Â· `PR-AUC` Â· `Permutation Importance` Â· `Streamlit` Â· `Batch Inference` Â· `Model Packaging` Â· `Testing` Â· `CI/CD`
 
 ## Portfolio descriptions
 
@@ -337,4 +355,5 @@ The screenshots below demonstrate the complete Streamlit workflow, including man
 
 **Pinned repository description:** A production-structured Keras ANN project that converts eight health indicators into a diabetes risk probability and transparent risk band, with batch scoring, model-card evaluation, and responsible healthcare disclaimers.
 
-This project supports a transition from Quality Data Scientist to Data Science / ML / AI roles by demonstrating the same core strengths used in quality analytics—data validation, traceability, risk prioritization, reproducible pipelines, metric trade-offs, and stakeholder-friendly decision support—within a complete deployed machine-learning workflow.
+This project supports a transition from Quality Data Scientist to Data Science / ML / AI roles by demonstrating the same core strengths used in quality analyticsâ€”data validation, traceability, risk prioritization, reproducible pipelines, metric trade-offs, and stakeholder-friendly decision supportâ€”within a complete deployed machine-learning workflow.
+
