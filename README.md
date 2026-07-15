@@ -20,7 +20,7 @@ This repository demonstrates how artificial neural networks can be applied to pr
 |---:|---|---|---|
 | 1 | [Churn Classification](01-churn-classification/) | Binary classification | [Live Demo](https://churn-risk-ann.streamlit.app) |
 | 2 | [Credit Card Fraud Detection](02-credit-card-fraud-detection/) | Imbalanced binary classification | [Live Demo](https://ann-deep-learning-projects-dqnj5rpwbpmuxtd2tcm5mh.streamlit.app/) |
-| 3 | Credit Risk Probability Scoring | Risk classification and probability scoring | Planned |
+| 3 | [Credit Risk Probability Scoring](03-credit-risk-probability-scoring/) | Risk classification and probability scoring | [Live Demo](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/) |
 | 4 | Customer Lifetime Value Forecasting | Regression / forecasting | Planned |
 | 5 | Diabetes Prediction | Binary classification | Planned |
 | 6 | Dynamic Pricing Optimization System | Regression / optimization | Planned |
