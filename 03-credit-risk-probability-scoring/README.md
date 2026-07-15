@@ -1,14 +1,21 @@
 # Credit Risk Probability Scoring using Artificial Neural Networks
 
-[![Python](https://img.shields.io/badge/Python-3.11-3776AB)](https://www.python.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-ANN-FF6F00)](https://www.tensorflow.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-FF4B4B)](https://streamlit.io/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.21-orange.svg)](https://www.tensorflow.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Demo-red.svg)](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> An end-to-end credit analytics portfolio project that converts applicant data into a probability of default, operational risk category, and review recommendation using a deep neural network.
+An end-to-end credit-risk probability scoring project that uses an Artificial Neural Network
+to estimate applicant default risk and assign operational risk categories. The repository
+includes reproducible preprocessing and training code, imbalance-aware evaluation,
+probability-based scoring, threshold controls, saved model artifacts, risk recommendations,
+and a Streamlit application for manual and batch scoring.
 
-**Live demo:** [`https://<your-app-name>.streamlit.app` ](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/) 
-**Notebook:** [`notebooks/credit_risk_probability_scoring.ipynb`](notebooks/credit_risk_probability_scoring.ipynb)
+**Status:** Portfolio-ready  
+**Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)  
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)  
+**Notebook:** [Open the project notebook](notebooks/credit_risk_probability_scoring.ipynb)  
+**Primary stack:** Python · Keras · TensorFlow · scikit-learn · Streamlit
 
 ## Business problem
 
