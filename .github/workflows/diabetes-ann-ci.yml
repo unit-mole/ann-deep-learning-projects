@@ -1,0 +1,53 @@
+name: Diabetes ANN CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "05-diabetes-prediction/**"
+      - ".github/workflows/diabetes-ann-ci.yml"
+  pull_request:
+    paths:
+      - "05-diabetes-prediction/**"
+      - ".github/workflows/diabetes-ann-ci.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 05-diabetes-prediction
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: 05-diabetes-prediction/requirements*.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Compile Python files
+        run: python -m compileall app src tests
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Verify model artifacts load and score sample
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          from src.prediction_pipeline import DiabetesPredictionPipeline
+          pipeline = DiabetesPredictionPipeline()
+          result = pipeline.score(pd.read_csv("data/sample_input.csv"))
+          assert len(result) == 5
+          assert result["DiabetesRiskProbability"].between(0, 1).all()
+          print(result[["DiabetesRiskProbability", "RiskCategory"]])
+          PY

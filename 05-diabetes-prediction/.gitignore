@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets and local Streamlit settings
+.env
+.streamlit/secrets.toml
+
+# Training scratch files
+logs/
+checkpoints/
+*.h5
+*.tmp
+
+# Keep the public benchmark data and portfolio artifacts tracked.
+# Add any private or larger datasets below before committing.
+data/private_*
+data/raw_*

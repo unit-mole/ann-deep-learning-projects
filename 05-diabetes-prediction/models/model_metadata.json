@@ -1,0 +1,155 @@
+{
+  "model_name": "Diabetes Risk Screening ANN",
+  "model_format": "Keras v3 .keras",
+  "created_at_utc": "2026-07-15T18:00:37.565121+00:00",
+  "random_state": 42,
+  "features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "preprocessed_input_dimension": 13,
+  "architecture": [
+    64,
+    32,
+    1
+  ],
+  "activation_functions": [
+    "relu",
+    "relu",
+    "sigmoid"
+  ],
+  "dropout_rates": [
+    0.3,
+    0.15
+  ],
+  "learning_rate": 0.001,
+  "batch_size": 32,
+  "epochs_ran": 29,
+  "class_weights": {
+    "0": 0.7671428571428571,
+    "1": 1.4358288770053476
+  },
+  "threshold_selection": "Validation-set F2 maximization (recall weighted more than precision)",
+  "classification_threshold": 0.33,
+  "risk_bands": {
+    "Low Risk": "probability < 0.30",
+    "Medium Risk": "0.30 <= probability < 0.60",
+    "High Risk": "probability >= 0.60"
+  },
+  "data_quality": {
+    "rows": 768,
+    "feature_count": 8,
+    "class_counts": {
+      "0": 500,
+      "1": 268
+    },
+    "positive_rate": 0.3489583333333333,
+    "explicit_missing_values": {
+      "Pregnancies": 0,
+      "Glucose": 0,
+      "BloodPressure": 0,
+      "SkinThickness": 0,
+      "Insulin": 0,
+      "BMI": 0,
+      "DiabetesPedigreeFunction": 0,
+      "Age": 0,
+      "Outcome": 0
+    },
+    "zero_as_missing_counts": {
+      "Glucose": 5,
+      "BloodPressure": 35,
+      "SkinThickness": 227,
+      "Insulin": 374,
+      "BMI": 11
+    }
+  },
+  "split_sizes": {
+    "train": 537,
+    "validation": 115,
+    "test": 116
+  },
+  "test_metrics": {
+    "classification_threshold": 0.33,
+    "accuracy": 0.7413793103448276,
+    "precision": 0.5932203389830508,
+    "recall": 0.8536585365853658,
+    "f1_score": 0.7,
+    "roc_auc": 0.855609756097561,
+    "pr_auc": 0.7722812370539409,
+    "confusion_matrix": [
+      [
+        51,
+        24
+      ],
+      [
+        6,
+        35
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.8947368421052632,
+        "recall": 0.68,
+        "f1-score": 0.7727272727272727,
+        "support": 75.0
+      },
+      "1": {
+        "precision": 0.5932203389830508,
+        "recall": 0.8536585365853658,
+        "f1-score": 0.7,
+        "support": 41.0
+      },
+      "accuracy": 0.7413793103448276,
+      "macro avg": {
+        "precision": 0.7439785905441569,
+        "recall": 0.7668292682926829,
+        "f1-score": 0.7363636363636363,
+        "support": 116.0
+      },
+      "weighted avg": {
+        "precision": 0.788166353932757,
+        "recall": 0.7413793103448276,
+        "f1-score": 0.7470219435736677,
+        "support": 116.0
+      }
+    }
+  },
+  "top_permutation_features": [
+    {
+      "feature": "Glucose",
+      "importance_mean_auc_decrease": 0.17588617886178862,
+      "importance_std": 0.042708520394922206
+    },
+    {
+      "feature": "BMI",
+      "importance_mean_auc_decrease": 0.06178861788617884,
+      "importance_std": 0.012991859743374426
+    },
+    {
+      "feature": "Age",
+      "importance_mean_auc_decrease": 0.01897560975609755,
+      "importance_std": 0.008049864425657449
+    },
+    {
+      "feature": "Pregnancies",
+      "importance_mean_auc_decrease": 0.008715447154471529,
+      "importance_std": 0.014097701633754072
+    },
+    {
+      "feature": "Insulin",
+      "importance_mean_auc_decrease": 0.007495934959349565,
+      "importance_std": 0.009583555550105363
+    }
+  ],
+  "limitations": [
+    "Small public benchmark dataset with limited demographic scope.",
+    "Retrospective portfolio demonstration, not prospective clinical validation.",
+    "Risk bands are communication bands and are not clinical decision thresholds."
+  ]
+}

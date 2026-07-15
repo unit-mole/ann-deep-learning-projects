@@ -1,0 +1,27 @@
+{
+  "rows": 768,
+  "feature_count": 8,
+  "class_counts": {
+    "0": 500,
+    "1": 268
+  },
+  "positive_rate": 0.3489583333333333,
+  "explicit_missing_values": {
+    "Pregnancies": 0,
+    "Glucose": 0,
+    "BloodPressure": 0,
+    "SkinThickness": 0,
+    "Insulin": 0,
+    "BMI": 0,
+    "DiabetesPedigreeFunction": 0,
+    "Age": 0,
+    "Outcome": 0
+  },
+  "zero_as_missing_counts": {
+    "Glucose": 5,
+    "BloodPressure": 35,
+    "SkinThickness": 227,
+    "Insulin": 374,
+    "BMI": 11
+  }
+}
