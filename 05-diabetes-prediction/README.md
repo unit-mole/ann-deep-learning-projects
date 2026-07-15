@@ -23,7 +23,7 @@ and must not be used for diagnosis or medical decision-making.
 **Status:** Portfolio-ready  
 **Live demo:** [Open the Streamlit application](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)  
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-bczyq9q5aa8eqbvqskqyar.streamlit.app/)  
-**Primary stack:** Python Â· Keras Â· TensorFlow Â· scikit-learn Â· pandas Â· Streamlit
+**Primary stack:** Python · Keras · TensorFlow · scikit-learn · pandas · Streamlit
 
 ---
 
@@ -67,11 +67,11 @@ The project uses the public Pima Indians Diabetes benchmark dataset:
 
 ### Dataset provenance and usage
 
-The repository copy of `diabetes.csv` was supplied with the original project notebook. The exact download mirror for this particular copy was not recorded. Historical attribution for the benchmark is commonly given to the **National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK)** and the dataset is associated with Smith et al. (1988), [â€œUsing the ADAP Learning Algorithm to Forecast the Onset of Diabetes Mellitusâ€](https://pmc.ncbi.nlm.nih.gov/articles/PMC2245318/).
+The repository copy of `diabetes.csv` was supplied with the original project notebook. The exact download mirror for this particular copy was not recorded. Historical attribution for the benchmark is commonly given to the **National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK)** and the dataset is associated with Smith et al. (1988), [“Using the ADAP Learning Algorithm to Forecast the Onset of Diabetes Mellitus”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2245318/).
 
 A commonly used public reference mirror is the [Pima Indians Diabetes Database on Kaggle](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database). The mirror is provided for reference and is not asserted to be the exact source of the included CSV.
 
-The repositoryâ€™s MIT license applies to project code and documentation; it does not independently establish dataset ownership or redistribution rights. Verify the terms of the source used before redistributing the data or using it commercially. See [`data/README_data.md`](data/README_data.md) for detailed provenance, usage, data-quality, and safety notes.
+The repository’s MIT license applies to project code and documentation; it does not independently establish dataset ownership or redistribution rights. Verify the terms of the source used before redistributing the data or using it commercially. See [`data/README_data.md`](data/README_data.md) for detailed provenance, usage, data-quality, and safety notes.
 
 ### Zero-value and missing-value handling
 
@@ -170,7 +170,7 @@ This comparison is not a claim of clinical superiority; it shows how the project
 |---|---|
 | ![Confusion matrix](outputs/confusion_matrix.png) | ![ROC curve](outputs/roc_curve.png) |
 
-| Precisionâ€“recall curve | Risk probability distribution |
+| Precision–recall curve | Risk probability distribution |
 |---|---|
 | ![Precision-recall curve](outputs/precision_recall_curve.png) | ![Risk distribution](outputs/risk_distribution.png) |
 
@@ -195,63 +195,63 @@ Permutation importance measures the held-out ROC-AUC decrease after shuffling on
 
 ```text
 05-diabetes-prediction/
-â”œâ”€â”€ .streamlit/
-â”‚   â””â”€â”€ config.toml
-â”œâ”€â”€ app/
-â”‚   â”œâ”€â”€ requirements.txt
-â”‚   â””â”€â”€ streamlit_app.py
-â”œâ”€â”€ data/
-â”‚   â”œâ”€â”€ diabetes.csv
-â”‚   â”œâ”€â”€ sample_input.csv
-â”‚   â””â”€â”€ README_data.md
-â”œâ”€â”€ images/
-â”‚   â”œâ”€â”€ 01_app_home.png
-â”‚   â”œâ”€â”€ 02_individual_low_risk.png
-â”‚   â”œâ”€â”€ 03_individual_high_risk.png
-â”‚   â”œâ”€â”€ 04_batch_input_preview.png
-â”‚   â”œâ”€â”€ 05_batch_scored_output.png
-â”‚   â”œâ”€â”€ 06_batch_risk_distribution.png
-â”‚   â”œâ”€â”€ 07_model_card_metrics.png
-â”‚   â””â”€â”€ 08_feature_importance.png
-â”œâ”€â”€ models/
-â”‚   â”œâ”€â”€ diabetes_ann.keras
-â”‚   â”œâ”€â”€ diabetes_best_params.json
-â”‚   â”œâ”€â”€ model_metadata.json
-â”‚   â””â”€â”€ preprocessor.joblib
-â”œâ”€â”€ notebooks/
-â”‚   â””â”€â”€ diabetes_prediction_portfolio.ipynb
-â”œâ”€â”€ outputs/
-â”‚   â”œâ”€â”€ confusion_matrix.png
-â”‚   â”œâ”€â”€ data_quality_report.json
-â”‚   â”œâ”€â”€ feature_importance.csv
-â”‚   â”œâ”€â”€ feature_importance.png
-â”‚   â”œâ”€â”€ model_metrics.json
-â”‚   â”œâ”€â”€ precision_recall_curve.png
-â”‚   â”œâ”€â”€ risk_distribution.png
-â”‚   â”œâ”€â”€ roc_curve.png
-â”‚   â”œâ”€â”€ scored_test_sample.csv
-â”‚   â”œâ”€â”€ threshold_analysis.csv
-â”‚   â””â”€â”€ training_history.csv
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â”œâ”€â”€ config.py
-â”‚   â”œâ”€â”€ data_preprocessing.py
-â”‚   â”œâ”€â”€ feature_engineering.py
-â”‚   â”œâ”€â”€ model_evaluation.py
-â”‚   â”œâ”€â”€ model_training.py
-â”‚   â”œâ”€â”€ prediction_pipeline.py
-â”‚   â””â”€â”€ risk_scoring.py
-â”œâ”€â”€ tests/
-â”‚   â”œâ”€â”€ conftest.py
-â”‚   â”œâ”€â”€ test_preprocessing.py
-â”‚   â””â”€â”€ test_risk_scoring.py
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ .python-version
-â”œâ”€â”€ CHANGELOG.md
-â”œâ”€â”€ README.md
-â”œâ”€â”€ README_HOSTING.md
-â”œâ”€â”€ requirements-dev.txt
-â””â”€â”€ requirements.txt
+├── .streamlit/
+│   └── config.toml
+├── app/
+│   ├── requirements.txt
+│   └── streamlit_app.py
+├── data/
+│   ├── diabetes.csv
+│   ├── sample_input.csv
+│   └── README_data.md
+├── images/
+│   ├── 01_app_home.png
+│   ├── 02_individual_low_risk.png
+│   ├── 03_individual_high_risk.png
+│   ├── 04_batch_input_preview.png
+│   ├── 05_batch_scored_output.png
+│   ├── 06_batch_risk_distribution.png
+│   ├── 07_model_card_metrics.png
+│   └── 08_feature_importance.png
+├── models/
+│   ├── diabetes_ann.keras
+│   ├── diabetes_best_params.json
+│   ├── model_metadata.json
+│   └── preprocessor.joblib
+├── notebooks/
+│   └── diabetes_prediction_portfolio.ipynb
+├── outputs/
+│   ├── confusion_matrix.png
+│   ├── data_quality_report.json
+│   ├── feature_importance.csv
+│   ├── feature_importance.png
+│   ├── model_metrics.json
+│   ├── precision_recall_curve.png
+│   ├── risk_distribution.png
+│   ├── roc_curve.png
+│   ├── scored_test_sample.csv
+│   ├── threshold_analysis.csv
+│   └── training_history.csv
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data_preprocessing.py
+│   ├── feature_engineering.py
+│   ├── model_evaluation.py
+│   ├── model_training.py
+│   ├── prediction_pipeline.py
+│   └── risk_scoring.py
+├── tests/
+│   ├── conftest.py
+│   ├── test_preprocessing.py
+│   └── test_risk_scoring.py
+├── .gitignore
+├── .python-version
+├── CHANGELOG.md
+├── README.md
+├── README_HOSTING.md
+├── requirements-dev.txt
+└── requirements.txt
 ```
 
 No encoder is required because all eight model inputs are numeric. `preprocessor.joblib` replaces the separate scaler/encoder pattern by saving the complete imputation-and-scaling pipeline.
@@ -347,7 +347,7 @@ The screenshots below demonstrate the complete Streamlit workflow, including man
 
 ## Skills demonstrated
 
-`Artificial Neural Networks` Â· `TensorFlow/Keras` Â· `Healthcare Analytics` Â· `Data Quality` Â· `Missing-Value Imputation` Â· `Class Weights` Â· `Threshold Tuning` Â· `ROC-AUC` Â· `PR-AUC` Â· `Permutation Importance` Â· `Streamlit` Â· `Batch Inference` Â· `Model Packaging` Â· `Testing` Â· `CI/CD`
+`Artificial Neural Networks` · `TensorFlow/Keras` · `Healthcare Analytics` · `Data Quality` · `Missing-Value Imputation` · `Class Weights` · `Threshold Tuning` · `ROC-AUC` · `PR-AUC` · `Permutation Importance` · `Streamlit` · `Batch Inference` · `Model Packaging` · `Testing` · `CI/CD`
 
 ## Portfolio descriptions
 
@@ -355,5 +355,5 @@ The screenshots below demonstrate the complete Streamlit workflow, including man
 
 **Pinned repository description:** A production-structured Keras ANN project that converts eight health indicators into a diabetes risk probability and transparent risk band, with batch scoring, model-card evaluation, and responsible healthcare disclaimers.
 
-This project supports a transition from Quality Data Scientist to Data Science / ML / AI roles by demonstrating the same core strengths used in quality analyticsâ€”data validation, traceability, risk prioritization, reproducible pipelines, metric trade-offs, and stakeholder-friendly decision supportâ€”within a complete deployed machine-learning workflow.
+This project supports a transition from Quality Data Scientist to Data Science / ML / AI roles by demonstrating the same core strengths used in quality analytics—data validation, traceability, risk prioritization, reproducible pipelines, metric trade-offs, and stakeholder-friendly decision support—within a complete deployed machine-learning workflow.
 
