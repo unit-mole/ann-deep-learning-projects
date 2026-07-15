@@ -17,11 +17,16 @@ and a Streamlit application for manual and batch scoring.
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/)  
 **Primary stack:** Python · Keras · TensorFlow · scikit-learn · Streamlit
 
+---
+
 ## Business Problem
 
-Lenders need more than a binary approve/reject prediction. They need a comparable risk score that can rank applicants, support manual-review queues, and make decision policies transparent. This project answers:
+Lenders need more than a binary approve/reject prediction. They need a comparable
+risk score that can rank applicants, support manual-review queues, and make
+decision policies transparent. This project answers:
 
-> Given applicant information, what is the probability that the applicant belongs to a higher default-risk category?
+> Given applicant information, what is the probability that the applicant
+> belongs to a higher default-risk category?
 
 The deployed pipeline returns:
 
@@ -29,33 +34,89 @@ The deployed pipeline returns:
 - **Low / Medium / High risk category**
 - **Decision recommendation and review priority**
 
+## Project Objective
+
+Build a portfolio-ready ANN solution that can:
+
+1. Validate and preprocess applicant-level credit data.
+2. Engineer affordability and collateral-related features.
+3. Learn non-linear credit-risk patterns using a deep neural network.
+4. Handle class imbalance using training-set class weights.
+5. Produce probability-of-default scores rather than class labels alone.
+6. Convert probabilities into operational risk categories and review actions.
+7. Support individual, sample, and batch scoring in an interactive application.
+8. Save and reload the artifacts required for reproducible inference.
+
 ## Portfolio Scope
 
-This is an educational demonstration built on a deterministic **synthetic banking dataset**. It is not a production credit model and must not be used for real lending decisions.
+This is an educational demonstration built on a deterministic **synthetic banking
+dataset**. It is not a production credit model and must not be used for real
+lending decisions.
 
 ## Dataset
 
-The notebook generates 25,000 applicant records with demographic, financial, credit-history, collateral, and loan-purpose fields. The observed target distribution is:
+The notebook generates 25,000 applicant records with demographic, financial,
+credit-history, collateral, and loan-purpose fields. The observed target
+distribution is:
 
 | Class | Records | Share |
 |---|---:|---:|
 | Non-default | 19,682 | 78.73% |
 | Default | 5,318 | 21.27% |
 
-Six fields receive 1% controlled missingness to demonstrate imputation. No private customer data is included in GitHub.
+Six fields receive 1% controlled missingness to demonstrate imputation. No
+private customer data is included in GitHub.
 
-## Workflow
+## Tools and Technologies
 
-1. Generate or load applicant-level data.
-2. Create `monthly_income`, `loan_to_income`, and `collateral_ratio`.
-3. Split data into 70% train, 15% validation, and 15% test sets with stratification.
-4. Median-impute and standardize numerical fields.
-5. Most-frequent-impute and one-hot encode categorical fields.
-6. Handle imbalance with balanced class weights.
-7. Train an ANN with early stopping, learning-rate reduction, and best-model checkpointing.
-8. Select the binary classification threshold on validation F1.
-9. Evaluate probability quality, classification performance, calibration, and error trade-offs.
-10. Serve single and batch scoring through Streamlit.
+| Area | Technology |
+|---|---|
+| Language | Python |
+| Data processing | pandas, NumPy |
+| Modeling | TensorFlow / Keras |
+| Preprocessing | scikit-learn |
+| Evaluation | scikit-learn, Matplotlib |
+| Interactive charts | Plotly |
+| Demo application | Streamlit |
+| Model persistence | Keras `.keras`, Joblib, JSON |
+| Testing / quality | pytest, compile checks, GitHub Actions |
+| Hosting | Streamlit Community Cloud |
+
+## Project Workflow
+
+```text
+Applicant-level data
+        │
+        ▼
+Schema validation and controlled missingness
+        │
+        ▼
+Feature engineering
+        │
+        ▼
+Stratified 70% / 15% / 15% split
+        │
+        ▼
+Numerical imputation and scaling
+        │
+        ▼
+Categorical imputation and one-hot encoding
+        │
+        ▼
+ANN training with balanced class weights
+        │
+        ▼
+Validation threshold selection
+        │
+        ▼
+Held-out test evaluation and calibration checks
+        │
+        ▼
+Saved model + preprocessing schema + metadata
+        │
+        ▼
+Streamlit manual, sample, and batch scoring
+```
 
 ## Feature Engineering
 
@@ -65,7 +126,9 @@ Six fields receive 1% controlled missingness to demonstrate imputation. No priva
 | Loan-to-income | Loan amount / annual income | Relative debt burden |
 | Collateral ratio | Collateral value / loan amount | Security coverage proxy |
 
-The portable preprocessing schema stores training medians, scaling statistics, categorical modes, category order, and final feature order. This makes the demo less dependent on scikit-learn pickle compatibility.
+The portable preprocessing schema stores training medians, scaling statistics,
+categorical modes, category order, and final feature order. This makes the demo
+less dependent on scikit-learn pickle compatibility.
 
 ## ANN Architecture
 
@@ -83,19 +146,24 @@ Dense 32 + ReLU + Dropout(0.10)
 Sigmoid probability of default
 ```
 
-Training uses Adam, binary cross-entropy, ROC-AUC, PR-AUC, balanced class weights, early stopping, and `ReduceLROnPlateau`.
+Training uses Adam, binary cross-entropy, ROC-AUC, PR-AUC, balanced class
+weights, early stopping, and `ReduceLROnPlateau`.
 
 ## Probability and Decision Logic
 
-The ANN outputs a continuous probability between 0 and 1. Two threshold layers are intentionally separated:
+The ANN outputs a continuous probability between 0 and 1. Two threshold layers
+are intentionally separated:
 
-- **Classification threshold: 0.58** — selected on the validation set to maximize F1.
+- **Classification threshold: 0.58** — selected on the validation set to
+  maximize F1.
 - **Operational risk bands:**
   - `< 0.20`: Low Risk
   - `0.20–<0.50`: Medium Risk
   - `>= 0.50`: High Risk
 
-Risk bands are a policy layer for demonstration. A real lender would set them using expected-loss economics, approval capacity, portfolio appetite, calibration, fairness review, and regulation—not validation F1 alone.
+Risk bands are a policy layer for demonstration. A real lender would set them
+using expected-loss economics, approval capacity, portfolio appetite,
+calibration, fairness review, and regulation—not validation F1 alone.
 
 ## Model Results
 
@@ -114,18 +182,31 @@ Confusion matrix at threshold 0.58:
 
 | | Predicted non-default | Predicted default |
 |---|---:|---:|
-| Actual non-default | 2,384 | 568 |
-| Actual default | 280 | 518 |
+| **Actual non-default** | 2,384 | 568 |
+| **Actual default** | 280 | 518 |
 
-A **false negative** is a risky applicant treated as lower risk and can create credit loss. A **false positive** is a safer applicant flagged as risky and can reduce approvals, revenue, and customer access. Threshold selection therefore requires business-cost analysis, not accuracy alone.
+A **false negative** is a risky applicant treated as lower risk and can create
+credit loss. A **false positive** is a safer applicant flagged as risky and can
+reduce approvals, revenue, and customer access. Threshold selection therefore
+requires business-cost analysis, not accuracy alone.
 
 ## Class Imbalance
 
-Defaults are only 21.27% of the synthetic data. The notebook uses balanced class weights (`0: 0.635`, `1: 2.351`) rather than generating synthetic minority examples. This retains original training rows while making default errors more influential. Precision-recall analysis and validation threshold tuning complement the class weighting.
+Defaults are only 21.27% of the synthetic data. The notebook uses balanced class
+weights (`0: 0.635`, `1: 2.351`) rather than generating synthetic minority
+examples. This retains original training rows while making default errors more
+influential. Precision-recall analysis and validation threshold tuning
+complement the class weighting.
 
 ## Explainability
 
-Permutation importance identifies the strongest model-performance drivers in the executed notebook. The leading signals include loan-to-income ratio, debt-to-income ratio, monthly income, delinquency count, revolving utilization, grade, home ownership, and collateral value. These are global associations—not causal explanations or legally sufficient adverse-action reasons.
+Permutation importance identifies the strongest model-performance drivers in
+the executed notebook. The leading signals include loan-to-income ratio,
+debt-to-income ratio, monthly income, delinquency count, revolving utilization,
+grade, home ownership, and collateral value.
+
+These are global associations—not causal explanations or legally sufficient
+adverse-action reasons.
 
 ![Permutation importance](outputs/permutation_importance.png)
 
@@ -157,98 +238,152 @@ The application supports:
 
 ### Application Overview
 
-The home screen presents the business purpose, model threshold, and three supported scoring modes: manual entry, CSV upload, and preloaded sample data.
-
-![Credit Risk Probability Scoring application home](images/01_app_home.png)
-
-The main demonstration view summarizes the scoring output and connects model probabilities to business-facing risk categories and review recommendations.
+The main demonstration view connects model probabilities to business-facing
+risk categories, recommendations, and review priorities.
 
 ![Credit Risk Probability Scoring Streamlit demo](images/demo_screenshot.png)
 
-### Sample Applicant Workflow
+### Manual Risk Examples
 
-The preloaded sample data provides a safe, reproducible way to test the application without uploading private information.
+The manual-scoring workflow demonstrates how applicant characteristics affect
+the risk output and resulting recommendation.
 
-![Sample applicant input preview](images/02_sample_input_preview.png)
-
-After scoring, the application displays the first applicant's probability, risk category, predicted class, recommendation, and the portfolio-level distribution of risk bands.
-
-![Sample applicant scoring summary](images/03_sample_scoring_summary.png)
-
-### Risk Distribution and Detailed Scored Output
-
-The demonstration sample contains applicants across Low, Medium, and High Risk categories, making the model's operational segmentation visible.
-
-![Risk category distribution](images/04_risk_category_distribution.png)
-
-The detailed table preserves the applicant inputs and adds the scoring fields:
-
-- `risk_probability`
-- `risk_category`
-- `predicted_default`
-- `decision_recommendation`
-- `review_priority`
-
-![Detailed scored applicant table](images/05_sample_scored_table.png)
-
-### Manual Low-Risk Prediction
-
-A stronger applicant profile with lower leverage, longer credit history, lower utilization, and verified information produces a Low Risk result and a standard underwriting recommendation.
-
-![Manual low-risk applicant prediction](images/06_manual_low_risk_prediction.png)
-
-### Manual High-Risk Prediction
-
-A weaker applicant profile with high utilization, high debt burden, limited credit history, delinquencies, and a lower credit grade produces a High Risk result and enhanced scrutiny recommendation.
-
-![Manual high-risk applicant prediction](images/07_manual_high_risk_prediction.png)
+<p align="center">
+  <img src="images/06_manual_low_risk_prediction.png" width="48%" alt="Manual low-risk applicant prediction">
+  <img src="images/07_manual_high_risk_prediction.png" width="48%" alt="Manual high-risk applicant prediction">
+</p>
 
 ### CSV Batch Scoring
 
-The upload workflow previews the incoming applicant data before scoring, which helps reviewers validate the schema and record structure.
-
-![Batch upload preview](images/08_batch_upload_preview.png)
-
-After scoring, the application displays the risk summary, category distribution, detailed output, and a button for downloading the scored CSV.
+The batch workflow previews applicant data, scores all records, summarizes the
+risk distribution, and provides a downloadable scored CSV.
 
 ![Batch scoring results](images/09_batch_scoring_results.png)
 
-### Input Schema and Interpretation
+<details>
+<summary><strong>View additional application screenshots</strong></summary>
 
-The app documents the required raw columns, automatically derived fields, and the treatment of previously unseen categorical values.
+### Application Home
+
+![Application home](images/01_app_home.png)
+
+### Sample Input Preview
+
+![Sample input preview](images/02_sample_input_preview.png)
+
+### Sample Scoring Summary
+
+![Sample scoring summary](images/03_sample_scoring_summary.png)
+
+### Risk Category Distribution
+
+![Risk category distribution](images/04_risk_category_distribution.png)
+
+### Detailed Scored Table
+
+![Detailed scored table](images/05_sample_scored_table.png)
+
+### Batch Upload Preview
+
+![Batch upload preview](images/08_batch_upload_preview.png)
+
+### Input Schema and Interpretation
 
 ![Input schema and interpretation](images/10_input_schema_information.png)
 
+</details>
+
+## Model Artifacts
+
+| Artifact | Purpose |
+|---|---|
+| `models/final_credit_risk_ann_model.keras` | Primary ANN artifact used by the deployed application |
+| `models/best_credit_risk_ann_model.keras` | Best validation checkpoint retained for comparison and reproducibility |
+| `models/preprocessor.joblib` | Serialized preprocessing pipeline |
+| `models/preprocessing_schema.json` | Portable medians, scales, category order, and feature order |
+| `models/project_metadata.json` | Threshold, feature lists, seed, and input dimension |
+
+To verify whether the two `.keras` files are byte-for-byte identical on Windows:
+
+```bat
+certutil -hashfile "models\best_credit_risk_ann_model.keras" SHA256
+certutil -hashfile "models\final_credit_risk_ann_model.keras" SHA256
+```
+
+Matching hashes indicate that the best checkpoint and final saved model are the
+same artifact.
+
 ## Run Locally
+
+### 1. Open the project directory
 
 ```bash
 cd ann-deep-learning-projects/03-credit-risk-probability-scoring
-python -m venv .venv
 ```
 
-Windows:
+### 2. Create and activate a virtual environment
 
-```bash
+Windows Command Prompt:
+
+```bat
+py -3.12 -m venv .venv
 .venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app/streamlit_app.py
 ```
 
-macOS/Linux:
+macOS or Linux:
 
 ```bash
+python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app/streamlit_app.py
 ```
 
-Open the local URL printed by Streamlit, normally `http://localhost:8501`.
+### 3. Install dependencies
 
-## Retrain the Model
+For the supported dependency ranges:
 
-The included model is ready for the demo. To reproduce training on the synthetic dataset:
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+For the exact locally tested environment, generate a lock file after successful
+installation:
+
+```bash
+python -m pip freeze > requirements-lock.txt
+```
+
+Install development tools when needed:
+
+```bash
+python -m pip install -r requirements-dev.txt
+```
+
+### 4. Run tests
+
+```bash
+python -m pytest -q
+python -m compileall src app
+```
+
+### 5. Launch the supplied pretrained demo
+
+The trained ANN models, preprocessing artifacts, metadata, and sample CSV are
+already included.
+
+```bash
+python -m streamlit run app/streamlit_app.py
+```
+
+Open the local address displayed in the terminal, normally:
+
+```text
+http://localhost:8501
+```
+
+### 6. Optional: retrain the model
+
+To reproduce training on the deterministic synthetic dataset:
 
 ```bash
 python -m src.model_training
@@ -260,11 +395,13 @@ To train on a compatible CSV containing `default_flag`:
 python -m src.model_training --data path/to/training_data.csv
 ```
 
-The script writes model checkpoints to `models/` and training logs to `outputs/`.
+Training writes model checkpoints to `models/` and logs and evaluation outputs
+to `outputs/`.
 
 ## Deploy
 
-The application is deployed through Streamlit Community Cloud directly from the public ANN portfolio repository.
+The application is deployed through Streamlit Community Cloud directly from
+the public ANN portfolio repository.
 
 - **Repository:** `unit-mole/ann-deep-learning-projects`
 - **Branch:** `main`
@@ -273,9 +410,12 @@ The application is deployed through Streamlit Community Cloud directly from the 
 - **Live application:**  
   https://ann-deep-learning-projects-9p9vupmu9kbk5462v6hbkb.streamlit.app/
 
-The `app/requirements.txt` file contains the deployment dependency list beside the Streamlit entrypoint. This allows Community Cloud to resolve the environment reliably within the monorepo.
+The `app/requirements.txt` file contains the deployment dependency list beside
+the Streamlit entrypoint. This allows Community Cloud to resolve the
+environment reliably within the monorepo.
 
-See [`README_HOSTING.md`](README_HOSTING.md) for detailed deployment and maintenance instructions.
+See [`README_HOSTING.md`](README_HOSTING.md) for deployment and maintenance
+instructions.
 
 ## Project Structure
 
@@ -283,7 +423,8 @@ See [`README_HOSTING.md`](README_HOSTING.md) for detailed deployment and mainten
 ann-deep-learning-projects/
 ├── .github/
 │   └── workflows/
-│       └── credit-risk-ann-ci.yml
+│       ├── credit-risk-ann-ci.yml
+│       └── credit-risk-model-smoke.yml
 ├── 01-churn-classification/
 ├── 02-credit-card-fraud-detection/
 ├── 03-credit-risk-probability-scoring/
@@ -294,39 +435,11 @@ ann-deep-learning-projects/
 │   │   ├── README_data.md
 │   │   └── sample_input.csv
 │   ├── images/
-│   │   ├── 01_app_home.png
-│   │   ├── 02_sample_input_preview.png
-│   │   ├── 03_sample_scoring_summary.png
-│   │   ├── 04_risk_category_distribution.png
-│   │   ├── 05_sample_scored_table.png
-│   │   ├── 06_manual_low_risk_prediction.png
-│   │   ├── 07_manual_high_risk_prediction.png
-│   │   ├── 08_batch_upload_preview.png
-│   │   ├── 09_batch_scoring_results.png
-│   │   ├── 10_input_schema_information.png
-│   │   └── demo_screenshot.png
 │   ├── models/
-│   │   ├── final_credit_risk_ann_model.keras
-│   │   ├── best_credit_risk_ann_model.keras
-│   │   ├── preprocessor.joblib
-│   │   ├── preprocessing_schema.json
-│   │   └── project_metadata.json
 │   ├── notebooks/
-│   │   └── credit_risk_probability_scoring.ipynb
 │   ├── outputs/
 │   ├── src/
-│   │   ├── __init__.py
-│   │   ├── config.py
-│   │   ├── data_preprocessing.py
-│   │   ├── feature_engineering.py
-│   │   ├── model_training.py
-│   │   ├── model_evaluation.py
-│   │   ├── risk_scoring.py
-│   │   └── prediction_pipeline.py
 │   ├── tests/
-│   │   ├── conftest.py
-│   │   ├── test_preprocessing.py
-│   │   └── test_risk_scoring.py
 │   ├── .gitignore
 │   ├── .streamlit/
 │   │   └── config.toml
@@ -337,6 +450,7 @@ ann-deep-learning-projects/
 │   ├── README.md
 │   ├── README_HOSTING.md
 │   ├── requirements-dev.txt
+│   ├── requirements-lock.txt
 │   └── requirements.txt
 ├── .gitignore
 ├── LICENSE
@@ -344,29 +458,88 @@ ann-deep-learning-projects/
 └── README.md
 ```
 
+## Testing and CI
+
+Run lightweight unit tests:
+
+```bash
+python -m pytest -q
+```
+
+Check Python files for syntax errors:
+
+```bash
+python -m compileall app src tests
+```
+
+The standard CI workflow runs on relevant pushes and pull requests:
+
+```text
+.github/workflows/credit-risk-ann-ci.yml
+```
+
+The optional model smoke workflow installs deployment dependencies and verifies
+that the saved ANN and preprocessing artifacts can be loaded:
+
+```text
+.github/workflows/credit-risk-model-smoke.yml
+```
+
 ## Future Improvements
 
 - Validate on a public real-world dataset with a documented license.
-- Add probability calibration comparison using Platt scaling or isotonic regression.
+- Add probability calibration comparison using Platt scaling or isotonic
+  regression.
 - Optimize thresholds using expected loss and approval capacity.
 - Add segment fairness analysis and governance documentation.
-- Compare ANN performance with logistic regression, gradient boosting, and calibrated tree models.
+- Compare ANN performance with logistic regression, gradient boosting, and
+  calibrated tree models.
 - Add SHAP explanations with carefully designed, non-causal language.
 - Track drift, calibration decay, and stability over time.
 - Add model registry, API serving, and automated deployment tests.
 
 ## Skills Demonstrated
 
-Artificial neural networks, binary classification, probability scoring, imbalanced learning, preprocessing pipelines, feature engineering, threshold tuning, ROC/PR analysis, calibration, explainability, modular Python, Streamlit, testing, CI, Docker, model documentation, and responsible AI framing.
+- Artificial Neural Networks for tabular data
+- Binary classification and probability scoring
+- Imbalanced-learning strategies
+- Reproducible preprocessing pipelines
+- Feature engineering
+- Validation-based threshold tuning
+- ROC and precision-recall analysis
+- Probability calibration assessment
+- Explainability using permutation importance
+- Model persistence and reusable inference
+- Streamlit application development
+- Manual and batch scoring workflows
+- Unit testing and GitHub Actions
+- Deployment-ready ML engineering
+- Responsible AI and model-governance framing
 
 ## Portfolio Positioning
 
-**One-line description:** ANN-based credit risk engine that produces probability-of-default scores, risk bands, and review recommendations through an interactive Streamlit app.
+**One-line description:** ANN-based credit risk engine that produces
+probability-of-default scores, risk bands, and review recommendations through an
+interactive Streamlit application.
 
-**Pinned repository description:** End-to-end tabular deep-learning project with reproducible preprocessing, class-weighted ANN training, probability calibration metrics, threshold tuning, explainability, and deployable batch scoring.
+**Pinned repository description:** End-to-end tabular deep-learning project with
+reproducible preprocessing, class-weighted ANN training, probability calibration
+metrics, threshold tuning, explainability, and deployable batch scoring.
 
-This project supports a transition from Quality Data Scientist to broader Data Science / ML / AI roles by showing that the same strengths used in quality analytics—risk identification, structured root-cause thinking, metric interpretation, automation, and stakeholder-oriented decisions—can be applied to a governed predictive modeling workflow.
+This project supports a transition from Quality Data Scientist to broader Data
+Science / ML / AI roles by showing that the same strengths used in quality
+analytics—risk identification, structured root-cause thinking, metric
+interpretation, automation, and stakeholder-oriented decisions—can be applied
+to a governed predictive-modeling workflow.
 
 ## Responsible Use
 
-This repository is a portfolio demonstration. It is not validated for production underwriting and does not assess legal compliance, bias, protected classes, or adverse-action obligations.
+This repository is a portfolio demonstration. It is not validated for
+production underwriting and does not assess legal compliance, bias, protected
+classes, or adverse-action obligations.
+
+## Author
+
+**Anmol Tripathi**  
+Quality Data Scientist transitioning toward Data Science, Machine Learning,
+Applied AI, Analytics Engineering, and Quality Analytics roles.

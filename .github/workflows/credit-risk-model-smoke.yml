@@ -1,0 +1,53 @@
+name: Credit Risk Model Smoke Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1"
+
+jobs:
+  model-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    defaults:
+      run:
+        working-directory: 03-credit-risk-probability-scoring
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: |
+            03-credit-risk-probability-scoring/requirements.txt
+            03-credit-risk-probability-scoring/app/requirements.txt
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install deployment dependencies
+        run: python -m pip install -r app/requirements.txt
+
+      - name: Load model and preprocessing artifacts
+        run: >
+          python -c "from src.prediction_pipeline import load_model, load_preprocessor;
+          model = load_model();
+          preprocessor = load_preprocessor();
+          print('Model input:', model.input_shape);
+          print('Model output:', model.output_shape);
+          print('Preprocessor:', type(preprocessor).__name__)"
+
+      - name: Run sample scoring smoke test
+        run: >
+          python -c "import pandas as pd;
+          from src.prediction_pipeline import score_applicants;
+          frame = pd.read_csv('data/sample_input.csv');
+          scored = score_applicants(frame);
+          assert len(scored) == len(frame);
+          assert scored['risk_probability'].between(0, 1).all();
+          print(scored[['risk_probability', 'risk_category']].to_string(index=False))"
