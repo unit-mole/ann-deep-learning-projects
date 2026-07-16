@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](#)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-ANN-orange.svg)](#)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Demo-red.svg)](#)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live_Demo-FF4B4B.svg?logo=streamlit&logoColor=white)](https://ann-deep-learning-projects-satmbakncxmlo2mmct5gvu.streamlit.app/)
 [![CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/house-price-ann-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/house-price-ann-ci.yml)
 
 > A deployment-ready ANN regression project that estimates California census
@@ -12,7 +12,13 @@
 
 ## Live Demo
 
-**Streamlit app:** `ADD_DEPLOYED_APP_URL_HERE`
+[![Open in Streamlit](https://img.shields.io/badge/Open_Live_Application-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ann-deep-learning-projects-satmbakncxmlo2mmct5gvu.streamlit.app/)
+
+**Live application:** [Launch the House Price Prediction app](https://ann-deep-learning-projects-satmbakncxmlo2mmct5gvu.streamlit.app/)
+
+The deployed application supports individual predictions, batch CSV scoring,
+business-friendly price ranges and categories, model explainability, evaluation
+metrics, and downloadable prediction results.
 
 ## Business Problem
 
@@ -203,6 +209,42 @@ a SHAP value.
 
 ![Target distribution](outputs/price_distribution.png)
 
+## Application Preview
+
+### Home and Single-Property Prediction
+
+| Application home | Property input preview |
+|---|---|
+| ![Application home](images/01_app_home.png) | ![Single input preview](images/02_single_input_preview.png) |
+
+| Prediction result | Local sensitivity drivers |
+|---|---|
+| ![Single prediction result](images/03_single_prediction_result.png) | ![Local sensitivity drivers](images/04_local_sensitivity_drivers.png) |
+
+### Batch Prediction
+
+| Batch sample preview | Batch prediction results |
+|---|---|
+| ![Batch sample preview](images/05_batch_sample_preview.png) | ![Batch prediction results](images/06_batch_prediction_results.png) |
+
+<p align="center">
+  <img src="images/07_batch_prediction_charts.png"
+       alt="Batch prediction charts"
+       width="78%">
+</p>
+
+### Model Performance and Diagnostics
+
+| Model performance metrics | Model diagnostics |
+|---|---|
+| ![Model performance metrics](images/09_model_performance_metrics.png) | ![Model diagnostics](images/10_model_diagnostics.png) |
+
+<p align="center">
+  <img src="images/11_feature_importance_distribution.png"
+       alt="Feature importance and target distribution"
+       width="78%">
+</p>
+
 ## Streamlit Demo Features
 
 - Manual input for all eight model predictors
@@ -259,7 +301,16 @@ a SHAP value.
 │   ├── outlier_report.csv
 │   └── test_predictions_sample.csv
 ├── images/
-│   └── README.md
+│   ├── 01_app_home.png
+│   ├── 02_single_input_preview.png
+│   ├── 03_single_prediction_result.png
+│   ├── 04_local_sensitivity_drivers.png
+│   ├── 05_batch_sample_preview.png
+│   ├── 06_batch_prediction_results.png
+│   ├── 07_batch_prediction_charts.png
+│   ├── 09_model_performance_metrics.png
+│   ├── 10_model_diagnostics.png
+│   └── 11_feature_importance_distribution.png
 └── tests/
     └── test_project.py
 ```
@@ -275,10 +326,10 @@ The CI workflow belongs at the **monorepo root**:
 ```bat
 cd /d "C:\path\to\ann-deep-learning-projects\08-house-price-prediction"
 py -3.12 -m venv .venv
-.venv\Scripts\activate
+call ".venv\Scripts\activate.bat"
 python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app/streamlit_app.py
+python -m pip install -r requirements.txt
+python -m streamlit run app\streamlit_app.py
 ```
 
 Open the local Streamlit URL shown in the terminal.
@@ -295,25 +346,38 @@ variation may occur across TensorFlow versions and hardware.
 ## Run Tests
 
 ```bat
-pytest -q
+python -m pytest -q
 ```
 
 ## Deployment
 
+The application is deployed on Streamlit Community Cloud:
+
+**Public URL:** [House Price Prediction ANN](https://ann-deep-learning-projects-satmbakncxmlo2mmct5gvu.streamlit.app/)
+
 See [README_HOSTING.md](README_HOSTING.md) for Streamlit Community Cloud setup,
 required files, deployment testing, and troubleshooting.
 
-## Recommended Portfolio Screenshots
+## Portfolio Screenshot Inventory
 
-1. App landing page and scope statement
-2. Manual input form
-3. Single prediction with price, range, and category
-4. Local sensitivity drivers
-5. Batch input preview
-6. Batch output and predicted-price chart
-7. Download prediction button
-8. Model metrics and evaluation plots
-9. Live demo URL in the browser
+The repository includes the following application screenshots:
+
+| File | Coverage |
+|---|---|
+| `01_app_home.png` | Application landing page and navigation |
+| `02_single_input_preview.png` | Manual property-input interface |
+| `03_single_prediction_result.png` | Predicted value, empirical range, and category |
+| `04_local_sensitivity_drivers.png` | Local model-driver interpretation |
+| `05_batch_sample_preview.png` | Preloaded batch-input preview |
+| `06_batch_prediction_results.png` | Batch-scoring output table |
+| `07_batch_prediction_charts.png` | Predicted-price comparison and distribution |
+| `09_model_performance_metrics.png` | Held-out evaluation metrics and ANN summary |
+| `10_model_diagnostics.png` | Actual-versus-predicted and residual diagnostics |
+| `11_feature_importance_distribution.png` | Global feature importance and target distribution |
+
+The downloadable CSV and dataset-limitations features remain available in the
+application and documentation; separate screenshots were intentionally omitted
+to keep the portfolio gallery focused on the strongest recruiter-facing views.
 
 ## Skills Demonstrated
 
