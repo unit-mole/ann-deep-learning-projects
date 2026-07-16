@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import sys
 from pathlib import Path
@@ -22,7 +23,7 @@ from src.prediction_pipeline import DynamicPricingPipeline
 
 MODEL_DIR = PROJECT_ROOT / "models"
 SAMPLE_PATH = PROJECT_ROOT / "data" / "sample_input.csv"
-METRICS_PATH = PROJECT_ROOT / "outputs" / "model_metrics.json"
+METRICS_PATH = MODEL_DIR / "model_metrics.json"
 
 st.set_page_config(
     page_title="Dynamic Pricing Optimizer",
@@ -40,6 +41,22 @@ def load_pipeline() -> DynamicPricingPipeline:
 @st.cache_data
 def load_sample_data() -> pd.DataFrame:
     return pd.read_csv(SAMPLE_PATH)
+
+
+@st.cache_data
+def load_model_metrics() -> dict:
+    """Load evaluation metrics from the canonical saved-model artifact."""
+    with METRICS_PATH.open("r", encoding="utf-8") as metrics_file:
+        metrics = json.load(metrics_file)
+
+    required_regression_metrics = {"mae", "rmse", "r2", "mape_pct"}
+    regression_metrics = metrics.get("regression", {})
+    missing_metrics = required_regression_metrics.difference(regression_metrics)
+    if missing_metrics:
+        missing = ", ".join(sorted(missing_metrics))
+        raise ValueError(f"Missing regression metrics in {METRICS_PATH.name}: {missing}")
+
+    return metrics
 
 
 def money(value: float) -> str:
@@ -296,11 +313,21 @@ with tab_batch:
 
 with tab_about:
     st.subheader("Model architecture and validation")
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Demand MAE", "12.25 units")
-    m2.metric("Demand RMSE", "15.68 units")
-    m3.metric("Demand R²", "0.667")
-    m4.metric("Demand MAPE", "14.41%")
+    try:
+        model_metrics = load_model_metrics()
+        regression_metrics = model_metrics["regression"]
+        m1, m2, m3, m4 = st.columns(4)
+        m1.metric("Demand MAE", f'{float(regression_metrics["mae"]):.2f} units')
+        m2.metric("Demand RMSE", f'{float(regression_metrics["rmse"]):.2f} units')
+        m3.metric("Demand R²", f'{float(regression_metrics["r2"]):.3f}')
+        m4.metric("Demand MAPE", f'{float(regression_metrics["mape_pct"]):.2f}%')
+        st.caption(
+            f'Metrics loaded from `models/model_metrics.json` and reported on '
+            f'{int(model_metrics.get("test_rows", 0)):,} held-out rows.'
+        )
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
+        st.error(f"Model metrics could not be loaded: {exc}")
+
     st.markdown(
         """
         The production path predicts **demand at a proposed price**, rather than predicting an engineered optimal-price label.

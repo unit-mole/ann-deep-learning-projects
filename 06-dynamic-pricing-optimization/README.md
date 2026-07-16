@@ -308,8 +308,7 @@ The methodology page documents the ANN design, leakage-safe modeling approach, h
 │   ├── 07_download_output.png
 │   ├── 08_model_methodology.png
 │   ├── 09_actual_vs_predicted_demand.png
-│   ├── 10_grouped_permutation_importance.png
-│   └── README.md
+│   └── 10_grouped_permutation_importance.png
 ├── models/
 │   ├── dynamic_pricing_demand_ann.keras
 │   ├── dynamic_pricing_demand_state_ann.keras
@@ -320,13 +319,16 @@ The methodology page documents the ANN design, leakage-safe modeling approach, h
 │   └── dynamic_pricing_optimization.ipynb
 ├── outputs/
 │   ├── actual_vs_predicted_demand.png
-│   ├── residual_plot.png
-│   ├── price_vs_demand_curve.png
-│   ├── revenue_optimization_curve.png
-│   ├── optimized_price_distribution.png
+│   ├── example_optimized_output.csv
 │   ├── feature_importance.png
 │   ├── model_metrics.json
-│   └── example_optimized_output.csv
+│   ├── optimized_price_distribution.png
+│   ├── permutation_importance.csv
+│   ├── price_scenario_example.csv
+│   ├── price_vs_demand_curve.png
+│   ├── residual_plot.png
+│   ├── revenue_optimization_curve.png
+│   └── training_history.png
 ├── src/
 │   ├── constants.py
 │   ├── data_generation.py
