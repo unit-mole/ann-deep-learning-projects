@@ -26,7 +26,7 @@ This repository demonstrates how artificial neural networks can be applied to pr
 | 6 | [Dynamic Pricing Optimization System](06-dynamic-pricing-optimization/) | Demand forecasting and constrained price optimization | [Live Demo](https://ann-deep-learning-projects-tgcmwtdfyxorbrexrmbcin.streamlit.app/) |
 | 7 | [Handwritten Digit Recognition](07-handwritten-digit-recognition/) | Multi-class computer vision | [Live Demo](https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/) |
 | 8 | [House Price Prediction](08-house-price-prediction/) | ANN-based tabular regression and price estimation | [Live Demo](https://ann-deep-learning-projects-satmbakncxmlo2mmct5gvu.streamlit.app/) |
-| 9 | Multi-Output Prediction System | Multi-output learning | Planned |
+| 9 | [Multi-Output Prediction System](09-multi-output-prediction-system/) | Mixed-output ANN for churn, customer value, and engagement prediction | [Live Demo](https://ann-deep-learning-projects-5mvtt4spt9hwj28ytb8gze.streamlit.app/) |
 | 10 | Salary Prediction | Regression | Planned |
 | 11 | Tabular Deep Learning with Embeddings | Tabular deep learning | Planned |
 
