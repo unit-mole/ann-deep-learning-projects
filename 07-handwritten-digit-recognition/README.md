@@ -1,14 +1,15 @@
 # Handwritten Digit Recognition with an Artificial Neural Network
 
-[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.21-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.59-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Open_App-FF4B4B?logo=streamlit&logoColor=white)](https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/)
 [![CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/handwritten-digit-recognition-ci.yml/badge.svg)](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/handwritten-digit-recognition-ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A deployment-ready computer-vision portfolio project that classifies handwritten digits from 0 to 9 using a tuned dense artificial neural network, MNIST-aligned image preprocessing, and an interactive Streamlit interface.
 
-> **Live demo:** Replace this line after deployment with your Streamlit Community Cloud URL.
+> **Live application:** [Launch the Handwritten Digit Recognition demo](https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/)
 
 ## Project Snapshot
 
@@ -22,6 +23,53 @@ A deployment-ready computer-vision portfolio project that classifies handwritten
 | Correct test predictions | **9,824 / 10,000** |
 | Misclassified test images | **176** |
 | Trainable parameters | **377,290** |
+| Deployment | **Streamlit Community Cloud** |
+
+## Application Preview
+
+The deployed interface supports built-in MNIST examples and user-uploaded handwritten digit images. It displays the complete preprocessing flow, ranked predictions, class probabilities, and downloadable results.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="images/01_app_home.png" alt="Handwritten Digit Recognition application home page" width="100%">
+      <br><strong>Application home and model summary</strong>
+    </td>
+    <td width="50%" align="center">
+      <img src="images/02_sample_digit_7_preprocessing.png" alt="Sample digit preprocessing pipeline" width="100%">
+      <br><strong>Sample selection and preprocessing</strong>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="images/03_sample_digit_7_prediction.png" alt="Digit 7 prediction result" width="100%">
+      <br><strong>Predicted digit, confidence, and runner-up</strong>
+    </td>
+    <td width="50%" align="center">
+      <img src="images/04_sample_digit_7_probability_distribution.png" alt="Class probability distribution" width="100%">
+      <br><strong>Probability distribution across digits 0–9</strong>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="images/06_uploaded_digit_preprocessing.png" alt="Uploaded digit preprocessing" width="100%">
+      <br><strong>User-uploaded image preprocessing</strong>
+    </td>
+    <td width="50%" align="center">
+      <img src="images/07_uploaded_digit_prediction.png" alt="Uploaded digit prediction result" width="100%">
+      <br><strong>Prediction for a user-uploaded digit</strong>
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary><strong>Additional interface view: probability table and CSV download</strong></summary>
+
+<br>
+
+![Probability table and download option](images/05_probability_table_and_download.png)
+
+</details>
 
 ## Problem Statement
 
@@ -90,7 +138,7 @@ Real uploads often use black ink on a white page, unlike MNIST's white digit on 
 5. resizes it within a 20×20 content box while preserving aspect ratio;
 6. places the result on a 28×28 black canvas;
 7. centers the digit using its intensity centroid;
-8. normalizes and creates the model batch dimension.
+8. normalizes the pixels and creates the model batch dimension.
 
 This step is essential because the same digit can produce very different pixel vectors when its scale, centering, contrast, or polarity changes.
 
@@ -109,7 +157,11 @@ Training uses Adam, categorical cross-entropy, early stopping, and learning-rate
 
 ## Evaluation Results
 
-![Training curves](outputs/accuracy_loss_curve.png)
+### Training performance
+
+![Training accuracy and loss curves](outputs/accuracy_loss_curve.png)
+
+### Confusion matrix
 
 ![Confusion matrix](outputs/confusion_matrix.png)
 
@@ -127,77 +179,130 @@ These errors are visually plausible because handwritten digits can share strokes
 
 ### Correct predictions
 
-![Sample predictions](outputs/sample_predictions.png)
+![Sample correct predictions](outputs/sample_predictions.png)
 
 ### Misclassified examples
 
-![Misclassified digits](outputs/misclassified_digits.png)
+![Misclassified digit examples](outputs/misclassified_digits.png)
 
 A confusion matrix reveals which classes are confused with one another rather than reducing performance to a single accuracy number. Misclassified-image review helps identify ambiguous handwriting, unusual stroke geometry, and potential preprocessing failures.
 
 ## Streamlit Demo
 
-The app supports:
+The live application supports:
 
 - uploaded PNG, JPG, JPEG, or BMP images;
-- built-in MNIST samples;
+- built-in MNIST sample digits;
 - original, grayscale, and final 28×28 previews;
-- automatic black/white inversion;
+- automatic black/white background inversion;
 - predicted digit and confidence;
 - runner-up prediction;
 - probability table and interactive chart;
 - CSV download of class probabilities;
 - dynamic model metrics loaded from JSON.
 
+**Open the application:**  
+[https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/](https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/)
+
 Drawing support was intentionally not added because upload and sample modes avoid an additional canvas dependency and are more reliable for Community Cloud deployment.
 
 ## Run Locally
 
-From `07-handwritten-digit-recognition`:
+Clone the repository and open the project directory:
+
+```bat
+git clone https://github.com/unit-mole/ann-deep-learning-projects.git
+cd ann-deep-learning-projects\07-handwritten-digit-recognition
+```
+
+### Windows Command Prompt
+
+The explicit virtual-environment interpreter is used below to avoid global Python and `PATH` conflicts:
 
 ```bat
 python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run streamlit_app.py
+".venv\Scripts\python.exe" -m pip install --upgrade pip setuptools wheel
+".venv\Scripts\python.exe" -m pip install -r requirements.txt
+".venv\Scripts\python.exe" -m streamlit run streamlit_app.py
 ```
 
-Open the local URL displayed by Streamlit.
+Open the local URL displayed by Streamlit, normally:
+
+```text
+http://localhost:8501
+```
+
+### macOS / Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt
+python -m streamlit run streamlit_app.py
+```
+
+### Run automated tests
+
+On Windows:
+
+```bat
+".venv\Scripts\python.exe" -m pip install "pytest>=8,<10"
+".venv\Scripts\python.exe" -m pytest tests -v
+```
+
+Expected result:
+
+```text
+6 passed
+```
 
 ### Optional: retrain the ANN
 
 Use the saved best configuration:
 
 ```bat
-python -m src.model_training --epochs 30
+".venv\Scripts\python.exe" -m src.model_training --epochs 30
 ```
 
 Repeat the original three-candidate search, then train a fresh final model:
 
 ```bat
-python -m src.model_training --tune --epochs 30
+".venv\Scripts\python.exe" -m src.model_training --tune --epochs 30
 ```
 
 ### Regenerate evaluation outputs
 
 ```bat
-python -m src.model_evaluation
+".venv\Scripts\python.exe" -m src.model_evaluation
 ```
 
 MNIST downloads automatically the first time a training or evaluation command runs.
 
-## Deploy
+## Deployment
 
-Streamlit Community Cloud is recommended because it connects directly to GitHub and requires no separate API or container service for this lightweight app.
+The application is deployed on Streamlit Community Cloud:
 
-Use this monorepo entrypoint:
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/)
+
+Use this monorepo deployment entrypoint:
 
 ```text
 07-handwritten-digit-recognition/streamlit_app.py
 ```
 
-Select Python 3.12 in advanced settings. Full instructions are in [`README_HOSTING.md`](README_HOSTING.md).
+Deployment configuration:
+
+```text
+Repository: unit-mole/ann-deep-learning-projects
+Branch: main
+Python: 3.13
+Secrets: None required
+```
+
+The root-level `streamlit_app.py` is the intended Community Cloud entrypoint. The implementation remains modularized under `app/streamlit_app.py`.
+
+Full deployment and troubleshooting instructions are available in [`README_HOSTING.md`](README_HOSTING.md).
 
 ## Repository Structure
 
@@ -212,6 +317,13 @@ Select Python 3.12 in advanced settings. Full instructions are in [`README_HOSTI
 │   ├── sample_digits/
 │   └── README_data.md
 ├── images/
+│   ├── 01_app_home.png
+│   ├── 02_sample_digit_7_preprocessing.png
+│   ├── 03_sample_digit_7_prediction.png
+│   ├── 04_sample_digit_7_probability_distribution.png
+│   ├── 05_probability_table_and_download.png
+│   ├── 06_uploaded_digit_preprocessing.png
+│   ├── 07_uploaded_digit_prediction.png
 │   └── README.md
 ├── models/
 │   ├── best_params.json
@@ -237,8 +349,10 @@ Select Python 3.12 in advanced settings. Full instructions are in [`README_HOSTI
 │   └── prediction_pipeline.py
 ├── tests/
 ├── .gitignore
+├── FILE_MANIFEST.csv
 ├── IMPLEMENTATION_SUMMARY.md
 ├── LICENSE
+├── MODEL_CARD.md
 ├── PORTFOLIO_COPY.md
 ├── README.md
 ├── README_HOSTING.md
@@ -247,7 +361,11 @@ Select Python 3.12 in advanced settings. Full instructions are in [`README_HOSTI
 └── streamlit_app.py
 ```
 
-The monorepo package also includes `.github/workflows/handwritten-digit-recognition-ci.yml` at repository root.
+The monorepo also includes the CI workflow at:
+
+```text
+.github/workflows/handwritten-digit-recognition-ci.yml
+```
 
 ## Skills Demonstrated
 
@@ -279,7 +397,7 @@ The monorepo package also includes `.github/workflows/handwritten-digit-recognit
 
 ## Portfolio Positioning
 
-This project demonstrates the transition from a notebook experiment to a reusable ML product: the original trained model is preserved, preprocessing is productionized, evaluation is documented, tests and CI are added, and inference is exposed through a deployable application. It complements quality and business analytics projects with image-based deep learning and model-serving experience.
+This project demonstrates the transition from a notebook experiment to a reusable ML product: the original trained model is preserved, preprocessing is productionized, evaluation is documented, tests and CI are added, and inference is exposed through a deployed application. It complements quality and business analytics projects with image-based deep learning and model-serving experience.
 
 ## License
 
