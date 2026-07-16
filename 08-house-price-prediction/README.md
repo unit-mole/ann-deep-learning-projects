@@ -420,12 +420,6 @@ architecture summary.
 
 ![Model performance metrics](images/09_model_performance_metrics.png)
 
-### 9. Feature importance and target distribution
-
-The application displays the same global feature-importance and target-
-distribution outputs used in the documented evaluation workflow.
-
-![Feature importance and target distribution](images/11_feature_importance_distribution.png)
 
 ## Repository Structure
 
