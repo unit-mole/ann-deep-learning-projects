@@ -1,0 +1,11 @@
+# Core application
+streamlit>=1.40,<2
+tensorflow==2.21.0
+keras==3.15.0
+pandas>=2.2,<3.1
+numpy>=1.26,<3
+scikit-learn==1.8.0
+matplotlib>=3.8,<4
+
+# Development and CI
+pytest>=8,<10

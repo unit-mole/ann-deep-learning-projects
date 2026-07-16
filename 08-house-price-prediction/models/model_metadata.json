@@ -1,0 +1,188 @@
+{
+  "project_name": "House Price Prediction using Artificial Neural Networks",
+  "dataset_name": "California Housing",
+  "dataset_rows": 20640,
+  "feature_columns": [
+    "MedInc",
+    "HouseAge",
+    "AveRooms",
+    "AveBedrms",
+    "Population",
+    "AveOccup",
+    "Latitude",
+    "Longitude"
+  ],
+  "target_column": "SalePrice",
+  "target_unit": "USD_100000",
+  "target_multiplier": 100000,
+  "target_note": "SalePrice is the median house value for a California census block group, stored in units of $100,000.",
+  "model_scope": "Median block-group house value estimation; not an appraisal of an individual property.",
+  "split": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15,
+    "random_state": 42
+  },
+  "architecture": {
+    "input_features": 8,
+    "hidden_layers": [
+      128,
+      64
+    ],
+    "activations": [
+      "relu",
+      "relu"
+    ],
+    "dropout_rate": 0.2,
+    "output_units": 1,
+    "output_activation": "linear",
+    "loss": "mse",
+    "optimizer": "Adam",
+    "saved_learning_rate": 0.0005
+  },
+  "best_hyperparameters": {
+    "hidden_units": 128,
+    "dropout_rate": 0.2,
+    "learning_rate": 0.001,
+    "batch_size": 128
+  },
+  "metrics_target_units": {
+    "mae": 0.35034833183553044,
+    "rmse": 0.5116362244606975,
+    "r2": 0.8020346644937253,
+    "mape": 0.1938559903206487
+  },
+  "metrics_usd": {
+    "mae": 35034.83,
+    "rmse": 51163.62,
+    "mape_percent": 19.39
+  },
+  "prediction_interval": {
+    "method": "Symmetric empirical 80% absolute-error band on the held-out test set",
+    "half_width_target_units": 0.5259050564546031,
+    "half_width_usd": 52590.51,
+    "warning": "This is an empirical error band, not a calibrated probabilistic confidence interval."
+  },
+  "category_thresholds_target_units": {
+    "budget_upper": 1.193,
+    "mid_range_upper": 1.793,
+    "premium_upper": 2.646
+  },
+  "category_thresholds_usd": {
+    "budget_upper": 119300.0,
+    "mid_range_upper": 179300.0,
+    "premium_upper": 264600.0
+  },
+  "feature_statistics": {
+    "MedInc": {
+      "min": 0.4999,
+      "p01": 1.065323,
+      "p05": 1.6002100000000001,
+      "median": 3.5391,
+      "p95": 7.333584999999999,
+      "p99": 10.580466000000001,
+      "max": 15.0001,
+      "mean": 3.876891549003322,
+      "std": 1.9049084021720712
+    },
+    "HouseAge": {
+      "min": 1.0,
+      "p01": 4.0,
+      "p05": 8.0,
+      "median": 29.0,
+      "p95": 52.0,
+      "p99": 52.0,
+      "max": 52.0,
+      "mean": 28.575373754152825,
+      "std": 12.613633611636597
+    },
+    "AveRooms": {
+      "min": 0.8888888888888888,
+      "p01": 2.5693516598344184,
+      "p05": 3.436803800226619,
+      "median": 5.232422402159244,
+      "p95": 7.655814840499306,
+      "p99": 10.373212325626122,
+      "max": 141.9090909090909,
+      "mean": 5.43812463217832,
+      "std": 2.4535692914090212
+    },
+    "AveBedrms": {
+      "min": 0.3333333333333333,
+      "p01": 0.8698677057776495,
+      "p05": 0.9396061795618589,
+      "median": 1.0494920585808583,
+      "p95": 1.2774156578244613,
+      "p99": 2.148747956060549,
+      "max": 25.63636363636364,
+      "mean": 1.098033136521439,
+      "std": 0.44749798279181857
+    },
+    "Population": {
+      "min": 3.0,
+      "p01": 86.0,
+      "p05": 352.35,
+      "median": 1168.0,
+      "p95": 3281.6499999999996,
+      "p99": 5740.490000000022,
+      "max": 35682.0,
+      "mean": 1427.9273255813953,
+      "std": 1140.225189746138
+    },
+    "AveOccup": {
+      "min": 0.6923076923076923,
+      "p01": 1.5338493582077652,
+      "p05": 1.8677784568372806,
+      "median": 2.8171468572691767,
+      "p95": 4.327910280970625,
+      "p99": 5.402968109100169,
+      "max": 1243.3333333333333,
+      "mean": 3.119236496102192,
+      "std": 12.373635574417113
+    },
+    "Latitude": {
+      "min": 32.55,
+      "p01": 32.68,
+      "p05": 32.84,
+      "median": 34.27,
+      "p95": 38.97,
+      "p99": 40.63530000000001,
+      "max": 41.95,
+      "mean": 35.650669296788486,
+      "std": 2.1357421829670686
+    },
+    "Longitude": {
+      "min": -124.35,
+      "p01": -123.23,
+      "p05": -122.47,
+      "median": -118.51,
+      "p95": -117.08,
+      "p99": -116.32,
+      "max": -114.31,
+      "mean": -119.5841022978959,
+      "std": 2.0029302123758073
+    }
+  },
+  "feature_descriptions": {
+    "MedInc": "Median household income in the block group, expressed in tens of thousands of dollars.",
+    "HouseAge": "Median age of houses in the block group, in years.",
+    "AveRooms": "Average number of rooms per household.",
+    "AveBedrms": "Average number of bedrooms per household.",
+    "Population": "Block-group population.",
+    "AveOccup": "Average number of occupants per household.",
+    "Latitude": "Block-group latitude.",
+    "Longitude": "Block-group longitude."
+  },
+  "global_permutation_importance_rmse_increase": {
+    "Latitude": 0.7622596125191603,
+    "Longitude": 0.6952281848559765,
+    "MedInc": 0.5283667150582514,
+    "AveRooms": 0.3663656324053428,
+    "AveBedrms": 0.3565424436161325,
+    "AveOccup": 0.2039460371435135,
+    "HouseAge": 0.06057088034991866,
+    "Population": 0.015412538136727993
+  },
+  "outlier_policy": "Retain observations; report IQR diagnostics and avoid blind deletion because extremes can represent real geographic market segments.",
+  "target_ceiling_note": "The source dataset caps median house value at approximately $500,001, which limits learning at the highest end."
+}

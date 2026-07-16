@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Runtime and temporary outputs
+logs/
+tmp/
+*.log
+outputs/generated/
+data/uploads/
+app/.cache/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Keep the portfolio artifacts and approved project dataset tracked.
+!models/house_price_ann.keras
+!models/house_price_scaler.pkl
+!models/house_price_best_params.json
+!models/model_metadata.json
+!data/house_prices.csv
+!data/sample_input.csv
