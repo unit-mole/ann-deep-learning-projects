@@ -41,46 +41,113 @@ The portfolio is designed to demonstrate skills relevant to Data Science, Machin
 
 ---
 
-## Latest Completed Project
+## What the Portfolio Covers
 
-### [10 — Tabular Deep Learning with Embeddings](10-tabular-deep-learning-with-embeddings/)
+The ten projects are intentionally varied so that the repository demonstrates more than one type of neural-network problem.
 
-A multi-input Keras neural network that learns dense representations for categorical business variables, combines them with scaled numerical features, and produces a positive-outcome propensity score.
+### Customer and Business Analytics
 
-The project demonstrates:
+- **Churn Classification** identifies customers with an elevated likelihood of leaving.
+- **Customer Lifetime Value Forecasting** predicts future customer value and retention probability.
+- **Multi-Output Prediction System** produces churn, value, and engagement predictions through one shared neural network.
+- **Dynamic Pricing Optimization System** combines demand prediction with business-constrained price recommendations.
 
-- separate categorical and numerical model inputs;
-- trainable embedding layers for seven categorical features;
-- embedding and numerical feature concatenation;
-- leakage-aware preprocessing and saved inference artifacts;
-- safe handling of previously unseen categories;
-- class-weighted binary classification;
-- validation-based threshold analysis;
-- comparison with a Random Forest baseline;
-- PCA-based embedding visualization and permutation importance;
-- manual and batch prediction through Streamlit;
-- automated tests and GitHub Actions CI.
+These projects demonstrate how predictive models can support retention, prioritization, customer segmentation, revenue planning, and operational decision-making.
 
-[Open the live application](https://ann-deep-learning-projects-budbjucqqrtaar2bjin76u.streamlit.app/)
+### Risk, Screening, and Anomaly Detection
+
+- **Credit Card Fraud Detection** focuses on severe class imbalance and minority-event detection.
+- **Credit Risk Probability Scoring** generates both a predicted risk class and an interpretable probability score.
+- **Diabetes Risk Screening** demonstrates probability-based health-risk classification while clearly separating a portfolio prototype from clinical diagnosis.
+
+These projects emphasize recall, precision, F1-score, ROC-AUC, PR-AUC, threshold selection, probability interpretation, and responsible communication of risk-oriented model outputs.
+
+### Regression and Forecasting
+
+- **House Price Prediction** estimates continuous property values from structured attributes.
+- **Customer Lifetime Value Forecasting** predicts future monetary value.
+- **Dynamic Pricing Optimization System** forecasts demand and evaluates candidate pricing decisions.
+
+These projects demonstrate numerical preprocessing, continuous-output ANN design, MAE, RMSE, R², residual analysis, and business interpretation of regression errors.
+
+### Computer Vision
+
+- **Handwritten Digit Recognition** applies convolutional neural-network concepts to multi-class image classification.
+
+This project expands the portfolio beyond tabular data and demonstrates image preprocessing, class probabilities, confusion-matrix analysis, and interactive inference.
+
+### Advanced Tabular Deep Learning
+
+- **Tabular Deep Learning with Embeddings** learns dense representations of categorical features and combines them with scaled numerical inputs.
+- **Multi-Output Prediction System** uses shared representation learning across classification and regression targets.
+- **Customer Lifetime Value Forecasting** applies multi-task learning with categorical embeddings and separate prediction heads.
+
+These projects demonstrate more advanced ANN architectures than a standard sequential network, including the Keras Functional API, multiple inputs, embeddings, shared layers, multiple outputs, and reusable inference pipelines.
 
 ---
 
-## Portfolio Coverage
+## What the Repository Demonstrates
 
-The completed projects collectively demonstrate:
+### End-to-End Machine Learning Delivery
 
-- binary and multi-class classification;
-- regression and forecasting;
-- imbalanced-learning workflows;
-- probability scoring and threshold selection;
-- multi-task and multi-output neural networks;
-- customer analytics and risk-oriented modeling;
-- computer vision;
-- constrained optimization;
-- categorical embeddings for structured tabular data;
-- single-record and batch inference;
-- interactive application deployment;
-- automated testing and continuous integration.
+Every project is structured to move beyond notebook-only experimentation. The repository demonstrates:
+
+- business-problem definition;
+- reproducible data preparation;
+- feature engineering;
+- training, validation, and test separation;
+- model evaluation;
+- saved preprocessing and model artifacts;
+- reusable prediction pipelines;
+- manual and batch inference;
+- downloadable outputs;
+- local execution;
+- cloud deployment.
+
+### Model Evaluation Based on the Actual Problem
+
+The projects use evaluation metrics that match the task rather than relying on accuracy alone.
+
+Examples include:
+
+- precision, recall, F1, ROC-AUC, and PR-AUC for classification;
+- MAE, RMSE, R², and residual analysis for regression;
+- output-specific metrics for multi-task models;
+- confusion matrices and probability distributions;
+- threshold analysis for imbalanced and risk-oriented decisions;
+- baseline comparisons where they add meaningful context.
+
+### Reliable and Reusable Engineering
+
+The repository includes practices required for dependable inference:
+
+- preprocessing fitted on training data only;
+- consistent feature order between training and prediction;
+- saved scalers, imputers, encoders, and metadata;
+- safe handling of missing values and unseen categories;
+- modular source files rather than notebook-only logic;
+- automated tests for important prediction paths;
+- project-specific GitHub Actions workflows;
+- Streamlit deployment from the main repository branch.
+
+### Business Translation
+
+The applications do not stop at raw model outputs. Depending on the project, they provide:
+
+- risk levels;
+- prediction probabilities;
+- customer segments;
+- pricing recommendations;
+- value estimates;
+- business interpretations;
+- batch summaries;
+- downloadable scored datasets.
+
+This demonstrates the ability to translate technical predictions into information that can be understood and used by business stakeholders.
+
+### Responsible Model Communication
+
+Each project documents its intended scope and limitations. Synthetic or sample data is identified clearly, and the applications avoid presenting portfolio models as production-ready financial, medical, or operational decision systems.
 
 ---
 
@@ -117,32 +184,41 @@ ann-deep-learning-projects/
 └── README.md
 ```
 
-The exact contents vary by project, but the core goals remain consistent: reproducibility, modular code, deployable inference, automated testing, clear documentation, and responsible model communication.
+The exact files vary by project, but the standards remain consistent:
+
+- reproducible workflows;
+- modular code;
+- deployable inference;
+- automated validation;
+- clear documentation;
+- safe repository practices;
+- transparent model limitations.
 
 ---
 
-## Portfolio Positioning
+## Technical Coverage
 
-These projects are designed to show more than notebook-based experimentation. The portfolio emphasizes:
-
-- translating business problems into machine-learning solutions;
-- selecting evaluation metrics appropriate to the target and class distribution;
-- preventing data leakage and fitting preprocessing on training data only;
-- building reusable prediction pipelines;
-- combining technical outputs with business-friendly interpretations;
-- supporting manual and batch inference;
-- deploying interactive applications;
-- testing important code paths through CI;
-- comparing ANN models with appropriate baselines;
-- documenting model limitations transparently.
-
-The portfolio supports a transition from Quality Data Science into broader Data Science, Machine Learning, Applied AI, Analytics, and Analytics Engineering roles by demonstrating complete project delivery from problem framing through deployment.
+| Area | Demonstrated Through |
+|---|---|
+| Binary classification | Churn, fraud, credit risk, diabetes, tabular embeddings |
+| Multi-class classification | Handwritten digit recognition |
+| Regression | House price prediction, customer value forecasting |
+| Multi-task and multi-output learning | Customer lifetime value and multi-output prediction |
+| Imbalanced learning | Fraud detection, risk scoring, positive-outcome propensity |
+| Categorical embeddings | CLV forecasting and tabular deep learning |
+| Computer vision | Handwritten digit recognition |
+| Optimization | Dynamic pricing |
+| Probability scoring | Churn, credit risk, diabetes, fraud, tabular embeddings |
+| Manual inference | Interactive Streamlit input forms |
+| Batch inference | CSV upload, sample scoring, downloadable outputs |
+| Model deployment | Ten Streamlit Community Cloud applications |
+| Testing and CI/CD | pytest and project-specific GitHub Actions workflows |
 
 ---
 
 ## Core Skills Demonstrated
 
-`Artificial Neural Networks` · `TensorFlow` · `Keras` · `scikit-learn` · `Feature Engineering` · `Categorical Embeddings` · `Classification` · `Regression` · `Forecasting` · `Computer Vision` · `Multi-task Learning` · `Multi-output Learning` · `Class-Imbalance Handling` · `Threshold Analysis` · `Model Evaluation` · `Streamlit` · `Testing` · `GitHub Actions` · `CI/CD` · `Business Translation`
+`Artificial Neural Networks` · `TensorFlow` · `Keras` · `Keras Functional API` · `scikit-learn` · `pandas` · `Feature Engineering` · `Categorical Embeddings` · `Classification` · `Regression` · `Forecasting` · `Computer Vision` · `Multi-task Learning` · `Multi-output Learning` · `Class-Imbalance Handling` · `Threshold Analysis` · `Probability Scoring` · `Model Evaluation` · `Streamlit` · `Testing` · `GitHub Actions` · `CI/CD` · `Business Translation`
 
 ---
 
