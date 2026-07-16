@@ -37,8 +37,7 @@ The portfolio is designed to demonstrate skills relevant to Data Science, Machin
 | 7 | [Handwritten Digit Recognition](07-handwritten-digit-recognition/) | Multi-class computer vision | [Live Demo](https://ann-deep-learning-projects-gsnhfzexxframenzenm5rx.streamlit.app/) |
 | 8 | [House Price Prediction](08-house-price-prediction/) | ANN-based tabular regression and price estimation | [Live Demo](https://ann-deep-learning-projects-satmbakncxmlo2mmct5gvu.streamlit.app/) |
 | 9 | [Multi-Output Prediction System](09-multi-output-prediction-system/) | Mixed-output ANN for churn, customer value, and engagement prediction | [Live Demo](https://ann-deep-learning-projects-5mvtt4spt9hwj28ytb8gze.streamlit.app/) |
-| 10 | Salary Prediction | Regression | Planned |
-| 11 | Tabular Deep Learning with Embeddings | Tabular deep learning | Planned |
+| 10 | Tabular Deep Learning with Embeddings | Tabular deep learning | Planned |
 
 ---
 
