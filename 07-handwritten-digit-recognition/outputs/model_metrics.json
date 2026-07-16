@@ -1,0 +1,62 @@
+{
+  "project": "Handwritten Digit Recognition using Artificial Neural Networks",
+  "dataset": "MNIST",
+  "dataset_split": {
+    "train": 54000,
+    "validation": 6000,
+    "test": 10000
+  },
+  "model_type": "Dense feed-forward artificial neural network",
+  "architecture": [
+    {
+      "layer": "Input",
+      "units": 784,
+      "activation": null
+    },
+    {
+      "layer": "Dense",
+      "units": 384,
+      "activation": "relu"
+    },
+    {
+      "layer": "Dropout",
+      "rate": 0.2
+    },
+    {
+      "layer": "Dense",
+      "units": 192,
+      "activation": "relu"
+    },
+    {
+      "layer": "Dropout",
+      "rate": 0.2
+    },
+    {
+      "layer": "Dense",
+      "units": 10,
+      "activation": "softmax"
+    }
+  ],
+  "trainable_parameters": 377290,
+  "best_hyperparameters": {
+    "hidden_units": 384,
+    "dropout_rate": 0.2,
+    "learning_rate": 0.0005,
+    "batch_size": 256
+  },
+  "validation_accuracy": 0.9835,
+  "validation_loss": 0.0705,
+  "test_accuracy": 0.9824,
+  "test_loss": null,
+  "test_loss_note": "The original notebook recorded predictions and test accuracy but did not call model.evaluate on the test set. Run python -m src.model_evaluation to regenerate test loss.",
+  "macro_precision": 0.9824,
+  "macro_recall": 0.9823,
+  "macro_f1": 0.9823,
+  "weighted_precision": 0.9824,
+  "weighted_recall": 0.9824,
+  "weighted_f1": 0.9824,
+  "correct_predictions": 9824,
+  "misclassified_predictions": 176,
+  "model_sha256": "c33217c485ed1fd8e41d364bf94c0c16021c37c3a44287a13ad655d5051e0acf",
+  "source_run": "Metrics and plots were reconstructed from the executed uploaded notebook."
+}
