@@ -1,0 +1,9 @@
+streamlit>=1.50,<2.0
+keras==3.14.0
+tensorflow==2.20.0
+numpy>=1.26,<2.3
+pandas>=2.2,<3.0
+scikit-learn==1.8.0
+joblib>=1.4,<2.0
+matplotlib>=3.8,<4.0
+h5py>=3.11,<4.0

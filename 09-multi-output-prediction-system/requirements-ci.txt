@@ -1,0 +1,6 @@
+numpy>=1.26,<2.3
+pandas>=2.2,<3.0
+scikit-learn==1.8.0
+joblib>=1.4,<2.0
+h5py>=3.11,<4.0
+pytest>=8,<10

@@ -1,0 +1,37 @@
+{
+  "project_type": "mixed-output prediction",
+  "dataset": "synthetic customer analytics data",
+  "test_rows": 3000,
+  "positive_class_rate": 0.021666666666666667,
+  "decision_threshold_source": "selected on validation data by maximum F1",
+  "bundled_model_note": "The supplied model was adapted to remove the target-derived cluster input. Retraining code builds the same architecture without that leakage-prone feature.",
+  "threshold": 0.7800000000000001,
+  "churn": {
+    "accuracy": 0.9453333333333334,
+    "precision": 0.12213740458015267,
+    "recall": 0.24615384615384617,
+    "f1": 0.16326530612244897,
+    "roc_auc": 0.8189542654960031,
+    "pr_auc": 0.09191646425475287,
+    "confusion_matrix": [
+      [
+        2820,
+        115
+      ],
+      [
+        49,
+        16
+      ]
+    ]
+  },
+  "clv": {
+    "mae": 886.7510981947804,
+    "rmse": 1148.5656809494146,
+    "r2": 0.9042730830609708
+  },
+  "engagement": {
+    "mae": 5.301680714291587,
+    "rmse": 6.677856687159641,
+    "r2": 0.8057044178701307
+  }
+}

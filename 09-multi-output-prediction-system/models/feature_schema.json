@@ -1,0 +1,115 @@
+{
+  "raw_features": [
+    "age",
+    "tenure_months",
+    "monthly_income",
+    "monthly_spend",
+    "transactions_last_30d",
+    "avg_session_minutes",
+    "products_owned",
+    "complaints_last_6m",
+    "days_since_last_login",
+    "discount_usage_rate",
+    "support_tickets_last_90d",
+    "website_visits_last_30d",
+    "region",
+    "channel",
+    "plan_type",
+    "segment",
+    "device_type"
+  ],
+  "model_features": [
+    "age",
+    "tenure_months",
+    "monthly_income",
+    "monthly_spend",
+    "transactions_last_30d",
+    "avg_session_minutes",
+    "products_owned",
+    "complaints_last_6m",
+    "days_since_last_login",
+    "discount_usage_rate",
+    "support_tickets_last_90d",
+    "website_visits_last_30d",
+    "region",
+    "channel",
+    "plan_type",
+    "segment",
+    "device_type",
+    "tenure_cohort",
+    "spend_band"
+  ],
+  "numeric_features": [
+    "age",
+    "tenure_months",
+    "monthly_income",
+    "monthly_spend",
+    "transactions_last_30d",
+    "avg_session_minutes",
+    "products_owned",
+    "complaints_last_6m",
+    "days_since_last_login",
+    "discount_usage_rate",
+    "support_tickets_last_90d",
+    "website_visits_last_30d"
+  ],
+  "categorical_features": [
+    "region",
+    "channel",
+    "plan_type",
+    "segment",
+    "device_type"
+  ],
+  "allowed_values": {
+    "region": [
+      "North",
+      "South",
+      "East",
+      "West",
+      "Central"
+    ],
+    "channel": [
+      "Web",
+      "Mobile",
+      "Store",
+      "Partner"
+    ],
+    "plan_type": [
+      "Basic",
+      "Standard",
+      "Premium",
+      "Enterprise"
+    ],
+    "segment": [
+      "Budget",
+      "Growth",
+      "Loyal",
+      "HighValue"
+    ],
+    "device_type": [
+      "Android",
+      "iOS",
+      "Desktop",
+      "Tablet"
+    ]
+  },
+  "defaults": {
+    "age": 35,
+    "tenure_months": 24,
+    "monthly_income": 6500.0,
+    "monthly_spend": 420.0,
+    "transactions_last_30d": 8,
+    "avg_session_minutes": 24.0,
+    "products_owned": 3,
+    "complaints_last_6m": 1,
+    "days_since_last_login": 14,
+    "discount_usage_rate": 0.3,
+    "support_tickets_last_90d": 1,
+    "website_visits_last_30d": 14,
+    "region": "West",
+    "channel": "Mobile",
+    "plan_type": "Standard",
+    "segment": "Growth",
+    "device_type": "iOS"
+  }
+}

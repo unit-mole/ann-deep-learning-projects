@@ -1,0 +1,48 @@
+{
+  "clv_mean": 13983.5771484375,
+  "clv_std": 3700.002197265625,
+  "engagement_mean": 55.38557434082031,
+  "engagement_std": 14.885594367980957,
+  "churn_threshold": 0.7800000000000001,
+  "target_names": [
+    "churn",
+    "clv",
+    "engagement_score"
+  ],
+  "target_types": {
+    "churn": "binary_classification",
+    "clv": "regression",
+    "engagement_score": "regression"
+  },
+  "spend_bin_edges": [
+    -1000000000000.0,
+    297.56807532,
+    418.97146485,
+    540.362834,
+    1000000000000.0
+  ],
+  "spend_bin_labels": [
+    "Low",
+    "Mid-Low",
+    "Mid-High",
+    "High"
+  ],
+  "tenure_bin_edges": [
+    -1000000000000.0,
+    6,
+    12,
+    24,
+    48,
+    1000000000000.0
+  ],
+  "tenure_bin_labels": [
+    "0-6",
+    "7-12",
+    "13-24",
+    "25-48",
+    "49+"
+  ],
+  "model_input_dimension": 42,
+  "model_feature_count": 19,
+  "raw_feature_count": 17
+}

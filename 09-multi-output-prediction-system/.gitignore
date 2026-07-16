@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Generated training data and logs
+data/full_*.csv
+data/training_data.csv
+logs/
+*.log
+
+# Regenerated artifacts
+outputs/training_history.csv
+outputs/full_predictions.csv
