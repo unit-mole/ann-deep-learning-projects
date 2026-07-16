@@ -1,18 +1,28 @@
 # ANN Deep Learning Projects
 
-A structured portfolio of artificial neural network projects for tabular classification, regression, forecasting, computer vision, and multi-output prediction.
+A structured portfolio of artificial neural network projects covering tabular classification, regression, forecasting, computer vision, optimization, and mixed-output prediction.
+
+**Portfolio status:** 9 completed and deployed projects · 2 planned projects  
+**Repository owner:** [Anmol Tripathi](https://github.com/unit-mole)
+
+---
 
 ## Portfolio Objective
 
-This repository demonstrates how artificial neural networks can be applied to practical business and analytical problems. Each project is designed as a complete case study containing:
+This repository demonstrates how artificial neural networks can be applied to practical business and analytical problems. Each completed project is developed as an end-to-end case study containing:
 
-- A clearly defined business problem
-- Reproducible data preparation
-- ANN model development
-- Appropriate model evaluation
-- A deployable demonstration application
-- Testing, documentation, and deployment guidance
-- Honest discussion of limitations and future improvements
+- a clearly defined business problem;
+- reproducible data preparation and feature engineering;
+- ANN model development and task-appropriate evaluation;
+- saved inference artifacts and modular prediction code;
+- an interactive Streamlit demonstration;
+- automated tests and GitHub Actions CI;
+- deployment guidance;
+- an honest discussion of limitations and future improvements.
+
+The portfolio is designed to demonstrate skills relevant to Data Science, Machine Learning, Applied AI, Data Analytics, Quality Analytics, and Analytics Engineering roles.
+
+---
 
 ## Project Roadmap
 
@@ -30,33 +40,89 @@ This repository demonstrates how artificial neural networks can be applied to pr
 | 10 | Salary Prediction | Regression | Planned |
 | 11 | Tabular Deep Learning with Embeddings | Tabular deep learning | Planned |
 
+---
+
+## Latest Completed Project
+
+### [09 — Multi-Output Prediction System](09-multi-output-prediction-system/)
+
+A shared multi-head ANN that predicts customer churn probability, customer lifetime value, and engagement score in one inference workflow.
+
+The project demonstrates:
+
+- mixed-output learning with classification and regression heads;
+- shared representation learning;
+- leakage-safe preprocessing;
+- validation-based threshold selection;
+- manual and batch scoring;
+- downloadable predictions;
+- output-specific evaluation;
+- GitHub Actions CI and Streamlit deployment.
+
+[Open the live application](https://ann-deep-learning-projects-5mvtt4spt9hwj28ytb8gze.streamlit.app/)
+
+---
+
 ## Repository Convention
 
-Each project will use the following pattern where appropriate:
+The repository is organized as a monorepo. Each completed project generally follows this structure:
 
 ```text
-project-name/
-├── README.md
-├── app.py
-├── assets/
-├── data/
-├── docs/
-├── models/
-├── notebooks/
-├── scripts/
-├── src/
-├── tests/
-├── requirements.txt
-└── Dockerfile
+ann-deep-learning-projects/
+├── .github/
+│   └── workflows/
+│       └── project-specific-ci.yml
+│
+├── project-folder/
+│   ├── app/
+│   │   └── streamlit_app.py
+│   ├── data/
+│   │   ├── sample_input.csv
+│   │   └── README_data.md
+│   ├── images/
+│   ├── models/
+│   ├── notebooks/
+│   ├── outputs/
+│   ├── src/
+│   ├── tests/
+│   ├── .gitignore
+│   ├── README.md
+│   ├── README_HOSTING.md
+│   ├── requirements.txt
+│   ├── requirements-ci.txt
+│   └── streamlit_app.py
+│
+├── LICENSE
+└── README.md
 ```
+
+The exact contents vary by project, but the core goals remain consistent: reproducibility, modular code, deployable inference, testing, documentation, and responsible model communication.
+
+---
 
 ## Portfolio Positioning
 
-These projects are intended to show more than notebook-based experimentation. The portfolio emphasizes:
+These projects are designed to show more than notebook-based experimentation. The portfolio emphasizes:
 
-- Translating business problems into machine-learning solutions
-- Reproducible preprocessing and model training
-- Class-specific and business-relevant evaluation
-- Clean inference code
-- Interactive deployment
-- Responsible communication of model limitations
+- translating business problems into machine-learning solutions;
+- selecting evaluation metrics appropriate to the target and class distribution;
+- preventing data leakage and fitting preprocessing on training data only;
+- building reusable prediction pipelines;
+- combining technical outputs with business-friendly interpretations;
+- supporting manual and batch inference;
+- deploying interactive applications;
+- testing important code paths through CI;
+- documenting model limitations transparently.
+
+---
+
+## Core Skills Demonstrated
+
+`Artificial Neural Networks` · `TensorFlow` · `Keras` · `scikit-learn` · `Feature Engineering` · `Classification` · `Regression` · `Forecasting` · `Computer Vision` · `Multi-task Learning` · `Model Evaluation` · `Streamlit` · `Testing` · `CI/CD` · `Business Translation`
+
+---
+
+## Author
+
+**Anmol Tripathi**  
+Quality Data Scientist | Data Science | Machine Learning | Applied AI | Analytics

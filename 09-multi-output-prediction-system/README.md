@@ -9,12 +9,16 @@
 
 An end-to-end mixed-output customer analytics project that uses a shared Artificial Neural Network to predict **customer churn probability**, **customer lifetime value**, and **engagement score** simultaneously. The system combines reproducible preprocessing, shared representation learning, task-specific output heads, business-oriented scoring, batch inference, automated testing, and an interactive Streamlit application.
 
-**Status:** Portfolio-ready  
+**Status:** Portfolio-ready and deployed  
 **Live demo:** [Open the Multi-Output Prediction System](https://ann-deep-learning-projects-5mvtt4spt9hwj28ytb8gze.streamlit.app/)  
+**Project folder:** [View Project 09 on GitHub](https://github.com/unit-mole/ann-deep-learning-projects/tree/main/09-multi-output-prediction-system)  
+**CI workflow:** [Multi-Output ANN CI](https://github.com/unit-mole/ann-deep-learning-projects/actions/workflows/multi-output-ann-ci.yml)  
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ann-deep-learning-projects-5mvtt4spt9hwj28ytb8gze.streamlit.app/)  
 **Primary stack:** Python · TensorFlow · Keras · scikit-learn · pandas · Streamlit
 
 ---
+
+This project is the ninth completed application in the [ANN Deep Learning Projects portfolio](https://github.com/unit-mole/ann-deep-learning-projects).
 
 ## Business Problem
 
@@ -162,7 +166,7 @@ The project is therefore a **mixed-output prediction system**: one classificatio
 3. Create tenure-cohort and spend-band features.
 4. Split data into training, validation, and test sets.
 5. Fit imputers, scaler, and categorical encoder on training data only.
-6. transform the prepared features into a 42-dimensional model input.
+6. Transform the prepared features into a 42-dimensional model input.
 7. Learn a shared dense customer representation.
 8. Route the shared representation into three task-specific output heads.
 9. Select the churn decision threshold using validation F1.
@@ -306,7 +310,7 @@ The deployed application supports:
 09-multi-output-prediction-system/streamlit_app.py
 ```
 
-Changes pushed to relevant files on the `main` branch automatically trigger a Streamlit Community Cloud application update.
+Changes pushed to the relevant Project 09 files on the repository's `main` branch automatically trigger a Streamlit Community Cloud application update.
 
 See [README_HOSTING.md](README_HOSTING.md) for the deployment configuration and troubleshooting guidance.
 
