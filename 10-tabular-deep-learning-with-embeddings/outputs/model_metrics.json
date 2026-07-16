@@ -1,0 +1,112 @@
+{
+  "dataset": {
+    "rows": 25000,
+    "positive_rate": 0.36732,
+    "train_rows": 16000,
+    "validation_rows": 4000,
+    "test_rows": 5000
+  },
+  "embedding_ann": {
+    "validation_default": {
+      "threshold": 0.5,
+      "accuracy": 0.65725,
+      "precision": 0.529482551143201,
+      "recall": 0.5990469707283866,
+      "f1": 0.5621207282018524,
+      "roc_auc": 0.7084745480076997,
+      "pr_auc": 0.5751208860150752,
+      "log_loss": 0.6116389247704644,
+      "confusion_matrix": [
+        [
+          1749,
+          782
+        ],
+        [
+          589,
+          880
+        ]
+      ]
+    },
+    "validation_best_f1": {
+      "threshold": 0.34,
+      "accuracy": 0.565,
+      "precision": 0.4523390784382694,
+      "recall": 0.8754254594962559,
+      "f1": 0.5964749536178108,
+      "roc_auc": 0.7084745480076997,
+      "pr_auc": 0.5751208860150752,
+      "log_loss": 0.6116389247704644,
+      "confusion_matrix": [
+        [
+          974,
+          1557
+        ],
+        [
+          183,
+          1286
+        ]
+      ]
+    },
+    "test_default": {
+      "threshold": 0.5,
+      "accuracy": 0.6706,
+      "precision": 0.5436179981634527,
+      "recall": 0.6445291235710398,
+      "f1": 0.5897882938978829,
+      "roc_auc": 0.7293945147958902,
+      "pr_auc": 0.5982694170381985,
+      "log_loss": 0.5994151649732373,
+      "confusion_matrix": [
+        [
+          2169,
+          994
+        ],
+        [
+          653,
+          1184
+        ]
+      ]
+    }
+  },
+  "random_forest_baseline": {
+    "model": "RandomForest",
+    "accuracy": 0.6772,
+    "precision": 0.6755905511811023,
+    "recall": 0.2335329341317365,
+    "f1": 0.3470873786407767,
+    "roc_auc": 0.7224605197101557,
+    "log_loss": 0.5960944495283982
+  },
+  "model_parameter_count": 15649,
+  "embedding_shapes": {
+    "region": [
+      6,
+      4
+    ],
+    "education_level": [
+      5,
+      4
+    ],
+    "occupation": [
+      11,
+      5
+    ],
+    "channel": [
+      4,
+      3
+    ],
+    "device_type": [
+      3,
+      3
+    ],
+    "membership_tier": [
+      4,
+      3
+    ],
+    "product_category": [
+      7,
+      4
+    ]
+  },
+  "methodology_note": "Threshold selected on validation data; final test metrics reported once at threshold 0.50."
+}

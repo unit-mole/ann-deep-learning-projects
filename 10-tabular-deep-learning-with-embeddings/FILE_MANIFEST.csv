@@ -1,0 +1,52 @@
+path,purpose,size_bytes
+.github/workflows/tabular-embedding-ci.yml,GitHub Actions continuous-integration workflow,1002
+.gitignore,Project configuration or execution entrypoint,409
+.streamlit/config.toml,Streamlit interface configuration,181
+app/requirements.txt,Streamlit application or hosted dependency file,131
+app/streamlit_app.py,Streamlit application or hosted dependency file,9106
+data/README_data.md,Safe sample data or data documentation,1147
+data/sample_input.csv,Safe sample data or data documentation,1762
+images/README.md,Screenshot guidance or demo image,558
+models/feature_metadata.json,Saved model or preprocessing artifact,2252
+models/label_encoders.pkl,Saved model or preprocessing artifact,970
+models/numeric_imputer.pkl,Saved model or preprocessing artifact,681
+models/numeric_scaler.pkl,Saved model or preprocessing artifact,583
+models/tabular_embedding_ann.keras,Saved model or preprocessing artifact,303261
+notebooks/original_experiment_notebook.ipynb,Analytical notebook,900301
+notebooks/tabular_deep_learning_with_embeddings.ipynb,Analytical notebook,6362
+outputs/confusion_matrix.png,"Evaluation metric, prediction output, or generated visual",46439
+outputs/embedding_visualization.png,"Evaluation metric, prediction output, or generated visual",79292
+outputs/final_metrics_summary.csv,"Evaluation metric, prediction output, or generated visual",287
+outputs/model_architecture.png,"Evaluation metric, prediction output, or generated visual",183854
+outputs/model_comparison.png,"Evaluation metric, prediction output, or generated visual",55565
+outputs/model_metrics.json,"Evaluation metric, prediction output, or generated visual",2241
+outputs/occupation_embedding_pca.csv,"Evaluation metric, prediction output, or generated visual",382
+outputs/occupation_embedding_vectors.csv,"Evaluation metric, prediction output, or generated visual",780
+outputs/permutation_importance.csv,"Evaluation metric, prediction output, or generated visual",595
+outputs/permutation_importance.png,"Evaluation metric, prediction output, or generated visual",81230
+outputs/precision_recall_curve.png,"Evaluation metric, prediction output, or generated visual",53713
+outputs/roc_curve.png,"Evaluation metric, prediction output, or generated visual",58600
+outputs/sample_prediction_distribution.png,"Evaluation metric, prediction output, or generated visual",41113
+outputs/sample_predictions.csv,"Evaluation metric, prediction output, or generated visual",1965
+outputs/threshold_analysis.csv,"Evaluation metric, prediction output, or generated visual",5665
+outputs/training_curves.png,"Evaluation metric, prediction output, or generated visual",100961
+outputs/training_history.csv,"Evaluation metric, prediction output, or generated visual",2647
+PROJECT_REVIEW.md,Project documentation,3185
+README.md,Project documentation,13286
+README_HOSTING.md,Project documentation,4126
+REPOSITORY_INTEGRATION.md,Project documentation,921
+requirements.txt,Project configuration or execution entrypoint,24
+run_local.bat,Project configuration or execution entrypoint,188
+src/__init__.py,"Reusable training, preprocessing, evaluation, or inference module",72
+src/config.py,"Reusable training, preprocessing, evaluation, or inference module",704
+src/data_generation.py,"Reusable training, preprocessing, evaluation, or inference module",4317
+src/data_preprocessing.py,"Reusable training, preprocessing, evaluation, or inference module",2660
+src/embedding_analysis.py,"Reusable training, preprocessing, evaluation, or inference module",1950
+src/embedding_preprocessing.py,"Reusable training, preprocessing, evaluation, or inference module",3949
+src/feature_engineering.py,"Reusable training, preprocessing, evaluation, or inference module",926
+src/model_evaluation.py,"Reusable training, preprocessing, evaluation, or inference module",7454
+src/model_training.py,"Reusable training, preprocessing, evaluation, or inference module",5903
+src/prediction_pipeline.py,"Reusable training, preprocessing, evaluation, or inference module",3122
+tests/conftest.py,Automated test,168
+tests/test_preprocessing.py,Automated test,996
+train_model.py,Project configuration or execution entrypoint,11691

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Generated training data and logs
+data/raw/
+data/full_dataset.csv
+logs/
+tensorboard/
+checkpoints/
+
+# Alternative or temporary model artifacts
+models/*.h5
+models/*.tmp
+*.log

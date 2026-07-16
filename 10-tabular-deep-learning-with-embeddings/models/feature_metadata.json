@@ -1,0 +1,92 @@
+{
+  "project_name": "Tabular Deep Learning with Embeddings",
+  "task_type": "binary_classification",
+  "target_column": "target",
+  "target_description": "Synthetic positive business-outcome propensity",
+  "class_labels": {
+    "0": "Lower propensity",
+    "1": "Higher propensity"
+  },
+  "categorical_features": [
+    "region",
+    "education_level",
+    "occupation",
+    "channel",
+    "device_type",
+    "membership_tier",
+    "product_category"
+  ],
+  "numerical_features": [
+    "age",
+    "years_experience",
+    "monthly_sessions",
+    "avg_basket_value",
+    "days_since_last_activity",
+    "credit_utilization",
+    "income_estimate"
+  ],
+  "default_threshold": 0.5,
+  "validation_f1_threshold": 0.34,
+  "embedding_dimension_rule": "min(50, ceil(sqrt(vocabulary_size)) + 1)",
+  "encoder_strategy": "legacy_label_encoder_with_defined_fallback",
+  "unknown_category_policy": "Map unseen values to a documented fallback category and return a warning. Retraining code reserves a dedicated OOV index.",
+  "fallback_categories": {
+    "region": "Coastal",
+    "education_level": "Bachelors",
+    "occupation": "Sales",
+    "channel": "Web",
+    "device_type": "Mobile",
+    "membership_tier": "Bronze",
+    "product_category": "A"
+  },
+  "numeric_defaults": {
+    "age": 38,
+    "years_experience": 9.0,
+    "monthly_sessions": 18.0,
+    "avg_basket_value": 220.0,
+    "days_since_last_activity": 25.0,
+    "credit_utilization": 0.42,
+    "income_estimate": 62000.0
+  },
+  "numeric_ranges": {
+    "age": [
+      18,
+      75
+    ],
+    "years_experience": [
+      0,
+      40
+    ],
+    "monthly_sessions": [
+      1,
+      60
+    ],
+    "avg_basket_value": [
+      10,
+      1200
+    ],
+    "days_since_last_activity": [
+      0,
+      180
+    ],
+    "credit_utilization": [
+      0,
+      1
+    ],
+    "income_estimate": [
+      12000,
+      180000
+    ]
+  },
+  "model_file": "tabular_embedding_ann.keras",
+  "model_parameter_count": 15649,
+  "training_rows": 16000,
+  "validation_rows": 4000,
+  "test_rows": 5000,
+  "dataset_rows": 25000,
+  "dataset_source": "Deterministic synthetic generator included in src/data_generation.py",
+  "artifact_compatibility": {
+    "keras_version_saved": "3.14.0",
+    "scikit_learn_version_saved": "1.8.0"
+  }
+}
